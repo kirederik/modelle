@@ -47,7 +47,11 @@
           <a class="brand" href="#">Modelle</a>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
-              <li><%= link_to "Link1", "/path1"  %></li>
+              <% if !user_signed_in? %>
+                <li><%= link_to "Cadastrar-se", new_user_registration_path  %></li>
+              <% else %>
+                <li><%= link_to "Sair",destroy_user_session_path, :method => 'destroy'   %></li>
+              <% end %>
               <li><%= link_to "Link2", "/path2"  %></li>
               <li><%= link_to "Link3", "/path3"  %></li>
             </ul>
@@ -62,8 +66,8 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
+              <li><%= link_to "Funções", functions_path  %></li>
+              <li><%= link_to "Usuários", users_path  %></li>
               <li><%= link_to "Link3", "/path3"  %></li>
             </ul>
           </div><!--/.well -->

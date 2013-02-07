@@ -1,4 +1,16 @@
 Modelle::Application.routes.draw do
+  resources :functions
+
+
+  devise_for :users
+
+  resources :users
+
+
+  get "site/index"
+
+  root :to => "site#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

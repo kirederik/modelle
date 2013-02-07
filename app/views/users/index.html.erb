@@ -1,0 +1,55 @@
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Rg</th>
+    <th>Cpf</th>
+    <th>Dateofbirth</th>
+    <th>Sex</th>
+    <th>Hide date</th>
+    <th>Fire date</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Cep</th>
+    <th>Phone1</th>
+    <th>Phone2</th>
+    <th>Cel number</th>
+    <th>Email</th>
+    <th>Wage</th>
+    <th>Observations</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= user.rg %></td>
+    <td><%= user.cpf %></td>
+    <td><%= user.dateofbirth %></td>
+    <td><%= user.sex %></td>
+    <td><%= user.hide_date %></td>
+    <td><%= user.fire_date %></td>
+    <td><%= user.address %></td>
+    <td><%= user.city %></td>
+    <td><%= user.state %></td>
+    <td><%= user.cep %></td>
+    <td><%= user.phone1 %></td>
+    <td><%= user.phone2 %></td>
+    <td><%= user.cel_number %></td>
+    <td><%= user.email %></td>
+    <td><%= user.wage %></td>
+    <td><%= user.observations %></td>
+    <td><%= link_to 'Show', user %></td>
+    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User', new_user_path %>
