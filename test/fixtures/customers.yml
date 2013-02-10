@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  cpf_cnpj: MyString
+  municipal_number: MyString
+  suframa: MyString
+  tribute: MyString
+  addres: MyString
+  city: MyString
+  state: MyString
+  phone1: MyString
+  phone2: MyString
+  fax: MyString
+  mobile: MyString
+  email: MyString
+  belongs_to: 
+  observations: MyText
+
+two:
+  name: MyString
+  cpf_cnpj: MyString
+  municipal_number: MyString
+  suframa: MyString
+  tribute: MyString
+  addres: MyString
+  city: MyString
+  state: MyString
+  phone1: MyString
+  phone2: MyString
+  fax: MyString
+  mobile: MyString
+  email: MyString
+  belongs_to: 
+  observations: MyText

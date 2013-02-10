@@ -16,23 +16,6 @@
 
     <!-- For third-generation iPad with high-resolution Retina display: -->
     <!-- Size should be 144 x 144 pixels -->
-    <%= favicon_link_tag 'images/apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
-
-    <!-- For iPhone with high-resolution Retina display: -->
-    <!-- Size should be 114 x 114 pixels -->
-    <%= favicon_link_tag 'images/apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
-
-    <!-- For first- and second-generation iPad: -->
-    <!-- Size should be 72 x 72 pixels -->
-    <%= favicon_link_tag 'images/apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
-
-    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-    <!-- Size should be 57 x 57 pixels -->
-    <%= favicon_link_tag 'images/apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
-
-    <!-- For all other devices -->
-    <!-- Size should be 32 x 32 pixels -->
-    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
   </head>
   <body>
 
@@ -51,7 +34,7 @@
                 <li><%= link_to "Cadastrar-se", new_user_registration_path  %></li>
                 <li><%= link_to "Entrar", new_user_session_path  %></li>
               <% else %>
-                <li><%= link_to "Sair",destroy_user_session_path, :method => 'destroy'   %></li>
+                <li><%= link_to "Sair", destroy_user_session_path, :method => 'delete'   %></li>
               <% end %>
               
               <li><%= link_to "Link3", "/path3"  %></li>
@@ -69,7 +52,7 @@
               <li class="nav-header">Sidebar</li>
               <li><%= link_to "Funções", functions_path  %></li>
               <li><%= link_to "Usuários", users_path  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+              <li><%= link_to "Clientes", customers_path  %></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
@@ -80,7 +63,7 @@
       </div><!--/row-->
 
       <footer>
-        <p>&copy; Company 2012</p>
+        <p>&copy; Modelle 2013 & Powered By <a href="mailto:rhdeandrade@gmail.com">Raphael de Andrade</a> - <a href="mailto:kirederik@gmail.com">Derik Evangelista</a>  </p>
       </footer>
 
     </div> <!-- /container -->
