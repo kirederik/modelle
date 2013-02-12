@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Customer:</b>
+  <%= @customer_price.customer %>
+</p>
+
+<p>
+  <b>Product:</b>
+  <%= @customer_price.product %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @customer_price.price %>
+</p>
+
+
+<%= link_to 'Edit', edit_customer_price_path(@customer_price) %> |
+<%= link_to 'Back', customer_prices_path %>

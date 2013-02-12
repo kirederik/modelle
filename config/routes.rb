@@ -1,4 +1,13 @@
 Modelle::Application.routes.draw do
+  resources :customer_prices
+
+
+  resources :product_stocks
+
+
+  resources :products
+
+
   resources :customers
 
 

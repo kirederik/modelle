@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130210202806) do
+ActiveRecord::Schema.define(:version => 20130212192729) do
+
+  create_table "customer_prices", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.float    "price"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "customer_prices", ["product_id"], :name => "index_customer_prices_on_product_id"
+  add_index "customer_prices", ["user_id"], :name => "index_customer_prices_on_user_id"
 
   create_table "customers", :force => true do |t|
     t.string   "name"
@@ -34,6 +45,26 @@ ActiveRecord::Schema.define(:version => 20130210202806) do
   end
 
   create_table "functions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "functions_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "function_id"
+  end
+
+  create_table "product_stocks", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "quantity"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "product_stocks", ["product_id"], :name => "index_product_stocks_on_product_id"
+
+  create_table "products", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -81,10 +112,5 @@ ActiveRecord::Schema.define(:version => 20130210202806) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "users_functions", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "function_id"
-  end
 
 end

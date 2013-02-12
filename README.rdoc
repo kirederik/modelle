@@ -6,3 +6,4 @@
 2. Users
   Create Roles
 
+3. Criar email para enviar dados, como redefinição de senhas
