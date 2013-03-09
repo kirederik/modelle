@@ -15,7 +15,7 @@
     <th>Fax</th>
     <th>Mobile</th>
     <th>Email</th>
-    <th>Belongs to</th>
+    <th>User</th>
     <th>Observations</th>
     <th></th>
     <th></th>
@@ -37,7 +37,7 @@
     <td><%= customer.fax %></td>
     <td><%= customer.mobile %></td>
     <td><%= customer.email %></td>
-    <td><%= customer.belongs_to %></td>
+    <td><%= customer.user.name %></td>
     <td><%= customer.observations %></td>
     <td><%= link_to 'Show', customer %></td>
     <td><%= link_to 'Edit', edit_customer_path(customer) %></td>

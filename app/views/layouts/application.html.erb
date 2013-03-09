@@ -48,11 +48,14 @@
       <div class="row-fluid">
         <div class="span3">
           <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
+            <ul class="nav nav-list nav-stacked nav-pills ">
+              <li class="nav-header">Menu Rápido</li>
               <li><%= link_to "Funções", functions_path  %></li>
               <li><%= link_to "Usuários", users_path  %></li>
               <li><%= link_to "Clientes", customers_path  %></li>
+              <ul class="nav nav-list">
+                <li> <%= link_to "Pedidos", orders_path %></li>
+              </ul>
               <li><%= link_to "Produtos", products_path  %></li>
               <li><%= link_to "Estoque de Produtos", product_stocks_path  %></li>
               <li><%= link_to "Preço por Cliente", customer_prices_path  %></li>

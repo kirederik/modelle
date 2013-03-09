@@ -1,4 +1,10 @@
 Modelle::Application.routes.draw do
+  resources :orders
+
+
+  resources :order_statuses
+
+
   resources :customer_prices
 
 
