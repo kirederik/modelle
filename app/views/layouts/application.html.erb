@@ -13,6 +13,8 @@
     <![endif]-->
 
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "autocomplete-rails.js" %>
 
     <!-- For third-generation iPad with high-resolution Retina display: -->
     <!-- Size should be 144 x 144 pixels -->
@@ -27,11 +29,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/">Modelle</a>
+          <a class="brand" href="/"><%= image_tag "logo.png", width: '70', height: '40'%></a>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
               <% if !user_signed_in? %>
-                <li><%= link_to "Cadastrar-se", new_user_registration_path  %></li>
+                <li><%= link_to "Cadastrar", new_user_registration_path  %></li>
                 <li><%= link_to "Entrar", new_user_session_path  %></li>
               <% else %>
                 <li><%= link_to "Sair", destroy_user_session_path, :method => 'delete'   %></li>
@@ -46,7 +48,7 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span3">
+        <div class="span2">
           <div class="well sidebar-nav">
             <ul class="nav nav-list nav-stacked nav-pills ">
               <li class="nav-header">Menu Rápido</li>
@@ -62,7 +64,7 @@
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
-        <div class="span9">
+        <div class="span10">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>

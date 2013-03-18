@@ -1,4 +1,7 @@
 Modelle::Application.routes.draw do
+  resources :product_orders
+
+
   resources :orders
 
 
@@ -14,8 +17,9 @@ Modelle::Application.routes.draw do
   resources :products
 
 
-  resources :customers
-
+  resources :customers do
+    get :autocomplete_customer_name, :on => :collection
+  end
 
   resources :functions
 

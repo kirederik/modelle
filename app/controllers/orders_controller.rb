@@ -80,4 +80,9 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def create_order
+    puts "iei"
+    redirect_to customers_path
+  end
 end

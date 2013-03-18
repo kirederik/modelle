@@ -7,7 +7,7 @@ class CreateCustomerPrices < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :customer_prices, :user_id
+    add_index :customer_prices, :customer_id
     add_index :customer_prices, :product_id
   end
 end

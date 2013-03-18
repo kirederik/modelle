@@ -1,5 +1,11 @@
 <h1>Listing customers</h1>
 
+
+<%= form_tag "orders/new", :method => :get do %>
+    <%= autocomplete_field_tag 'address', '', autocomplete_customer_name_customers_path, :size => 75 %>
+    <%= submit_tag 'Save' %>
+<% end %>
+
 <table>
   <tr>
     <th>Name</th>
