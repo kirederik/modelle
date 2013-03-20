@@ -2,8 +2,9 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :customer %>
-    <%= f.association :user %>
+    <p>Cliente: <%= @order.customer.name %></p>
+    <%= f.input :customer_id, :as => :hidden, :input_html => {:value => @order.customer_id} %>
+    <%= f.input :user_id, :as => :hidden, :input_html => {:value => @order.user_id} %>
     <%= f.association :order_status %>
     <%= f.input :created_at %>
     <%= f.input :updated_at %>

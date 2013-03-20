@@ -2,7 +2,9 @@ Modelle::Application.routes.draw do
   resources :product_orders
 
 
-  resources :orders
+  resources :orders do
+    get :add_products
+  end
 
 
   resources :order_statuses

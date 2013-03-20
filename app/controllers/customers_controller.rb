@@ -2,7 +2,7 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
 
-  autocomplete :customer, :name
+  autocomplete :customer, :name, :extra_data => [:id]
 
   def index
     @customers = Customer.order("created_at").page(params[:page]).per(20)

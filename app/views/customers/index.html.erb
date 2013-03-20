@@ -2,8 +2,10 @@
 
 
 <%= form_tag "orders/new", :method => :get do %>
-    <%= autocomplete_field_tag 'address', '', autocomplete_customer_name_customers_path, :size => 75 %>
-    <%= submit_tag 'Save' %>
+    <%= autocomplete_field_tag 'address', '', autocomplete_customer_name_customers_path, :update_elements => {:id => '#customer_id' }
+%>
+    <%= hidden_field_tag "customer_id" %>
+    <%= submit_tag 'Criar Pedido', :class => "btn btn-primary"%>
 <% end %>
 
 <table>

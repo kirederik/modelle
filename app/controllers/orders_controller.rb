@@ -24,7 +24,11 @@ class OrdersController < ApplicationController
   # GET /orders/new
   # GET /orders/new.json
   def new
+    customer = Customer.find(params[:customer_id])
+
     @order = Order.new
+    @order.customer = customer
+    @order.user = current_user
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,9 +47,15 @@ class OrdersController < ApplicationController
     @order = Order.new(params[:order])
 
     respond_to do |format|
+      # if @order.save
+      #   format.html { redirect_to @order, notice: 'Order was successfully created.' }
+      #   format.json { render json: @order, status: :created, location: @order }
+      # else
+      #   format.html { render action: "new" }
+      #   format.json { render json: @order.errors, status: :unprocessable_entity }
+      # end
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render json: @order, status: :created, location: @order }
+        format.html { redirect_to order_add_products_path(@order) }
       else
         format.html { render action: "new" }
         format.json { render json: @order.errors, status: :unprocessable_entity }
@@ -81,8 +91,9 @@ class OrdersController < ApplicationController
     end
   end
 
-  def create_order
-    puts "iei"
-    redirect_to customers_path
+  
+  def add_products
+    @order = Order.find(params[:order_id])
   end
 end
+
