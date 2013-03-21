@@ -1,5 +1,13 @@
 <h1>New order</h1>
 
+<% if params[:notice] %>
+  <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4>Nota!</h4>
+    <%= params[:notice] %>
+  </div>
+<% end %>
+
 <%= render 'form' %>
 
 <%= link_to 'Back', orders_path %>

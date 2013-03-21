@@ -1,0 +1,9 @@
+<div class="products_fields">
+  <%= f.fields_for :product_orders do |product_order_form| %>
+    <p class="product_attributes">
+      <%= product_order_form.collection_select :product_id, Product.all, :id, :name %>
+      <%= product_order_form.number_field :quantity, :value => 1 %>
+      <%= link_to_function "remove", "remove_fields(this)" %>
+    </p>
+  <% end %>
+</div>

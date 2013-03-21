@@ -16,3 +16,30 @@
 //= require twitter/bootstrap
 //= require_tree .
 //= require autocomplete-rails
+
+function remove_fields(link) {
+  //$(link).previous("input[type=hidden]").value = "1";
+  //console.log($(link).parent());
+  $(link).parent().remove();
+}
+
+function add_fields(link) {
+  var product_attributes = $(".product_attributes").first().clone();
+  
+  var number_of_products = $("#number_products_type");
+
+  number_of_products.val(new Number(number_of_products.val()) + 1);
+
+  var select = $(product_attributes).children("select").first();
+  var input = $(product_attributes).children("input").first();
+
+  //console.log(select);
+  
+  select.attr("id", "order_product_orders_attributes_" + (new Number(number_of_products.val()) - 1) +  "_product_id");
+  select.attr("name", "order[product_orders_attributes][" + (new Number(number_of_products.val()) - 1) + "][product_id]")
+
+  input.attr("id", "order_product_orders_attributes_" + (new Number(number_of_products.val()) - 1) +  "_quantity");
+  input.attr("name", "order[product_orders_attributes][" + (new Number(number_of_products.val()) - 1) + "][quantity]")  
+
+  $(".products_fields").append(product_attributes);
+}

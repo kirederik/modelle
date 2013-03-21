@@ -9,18 +9,15 @@
     <%= f.input :created_at %>
     <%= f.input :updated_at %>
 
-    <% for product_order in @order.product_orders %>
-      <%= fields_for "order[product_order_attributes][]", product_order do |product_order_form| %>
-        <p>
-          <%= product_order_form.collection_select :product_id, Product.all, :id, :name %>
-          <%= product_order_form.number_field :quantity %>
-        </p>
-      <% end %>
-    <% end %>
+    <%= render "product_orders", :f => f %>
+
+    <p><%= link_to_function "Adicionar Produtos", "add_fields(this)" %></p>
 
   </div>
 
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
+
+  <input type="hidden" id="number_products_type" value="3"></input>
 <% end %>

@@ -46,21 +46,23 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     
-    created_at = [ params[:order]['created_at(1i)'], params[:order]['created_at(2i)'], params[:order]['created_at(3i)'] ].join("/")
-    created_at += " " + [params[:order]['created_at(4i)'], params[:order]['created_at(5i)']].join(":")
+    # created_at = [ params[:order]['created_at(1i)'], params[:order]['created_at(2i)'], params[:order]['created_at(3i)'] ].join("/")
+    # created_at += " " + [params[:order]['created_at(4i)'], params[:order]['created_at(5i)']].join(":")
 
-    updated_at = [ params[:order]['updated_at(1i)'], params[:order]['updated_at(2i)'], params[:order]['updated_at(3i)'] ].join("/")
-    updated_at += " " + [params[:order]['updated_at(4i)'], params[:order]['updated_at(5i)']].join(":")
+    # updated_at = [ params[:order]['updated_at(1i)'], params[:order]['updated_at(2i)'], params[:order]['updated_at(3i)'] ].join("/")
+    # updated_at += " " + [params[:order]['updated_at(4i)'], params[:order]['updated_at(5i)']].join(":")
 
-    @order = Order.new(created_at: created_at.to_time, updated_at: updated_at.to_time)
-    @order.customer_id = params[:order][:customer_id]
-    @order.user_id = params[:order][:user_id]
-    @order.order_status_id = params[:order][:order_status_id]
+    # @order = Order.new(created_at: created_at.to_time, updated_at: updated_at.to_time)
+    # @order.customer_id = params[:order][:customer_id]
+    # @order.user_id = params[:order][:user_id]
+    # @order.order_status_id = params[:order][:order_status_id]
     
-    date = [ params[:order]['created_at(1i)'], params[:order]['created_at(2i)'], params[:order]['created_at(3i)'] ].join("/")
-    date += " " + [params[:order]['created_at(4i)'], params[:order]['created_at(5i)']].join(":")
+    # date = [ params[:order]['created_at(1i)'], params[:order]['created_at(2i)'], params[:order]['created_at(3i)'] ].join("/")
+    # date += " " + [params[:order]['created_at(4i)'], params[:order]['created_at(5i)']].join(":")
 
-    puts date
+    # puts date
+
+    @order = Order.new(params[:order])
 
     respond_to do |format|
       # if @order.save
@@ -71,16 +73,16 @@ class OrdersController < ApplicationController
       # end
       if @order.save
 
-        params[:order][:product_order_attributes].each do |p|
-          product_order = ProductOrder.new(p)
-          product_order.order = @order
-          product_order.save
-        end
+        # params[:order][:product_order_attributes].each do |p|
+        #   product_order = ProductOrder.new(p)
+        #   product_order.order = @order
+        #   product_order.save
+        # end
 
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render json: @order, status: :created, location: @order }
       else
-        format.html { redirect_to action: "new", :customer_id => @order.customer_id }
+        format.html { redirect_to action: "new", :customer_id => @order.customer_id, notice: "Verique se todos os campos foram preenchidos" }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
