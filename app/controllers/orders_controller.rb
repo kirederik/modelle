@@ -30,6 +30,7 @@ class OrdersController < ApplicationController
     @order.customer = customer
     @order.user = current_user
 
+    3.times { @order.product_orders.build }
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @order }
@@ -44,20 +45,42 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(params[:order])
+    
+    created_at = [ params[:order]['created_at(1i)'], params[:order]['created_at(2i)'], params[:order]['created_at(3i)'] ].join("/")
+    created_at += " " + [params[:order]['created_at(4i)'], params[:order]['created_at(5i)']].join(":")
+
+    updated_at = [ params[:order]['updated_at(1i)'], params[:order]['updated_at(2i)'], params[:order]['updated_at(3i)'] ].join("/")
+    updated_at += " " + [params[:order]['updated_at(4i)'], params[:order]['updated_at(5i)']].join(":")
+
+    @order = Order.new(created_at: created_at.to_time, updated_at: updated_at.to_time)
+    @order.customer_id = params[:order][:customer_id]
+    @order.user_id = params[:order][:user_id]
+    @order.order_status_id = params[:order][:order_status_id]
+    
+    date = [ params[:order]['created_at(1i)'], params[:order]['created_at(2i)'], params[:order]['created_at(3i)'] ].join("/")
+    date += " " + [params[:order]['created_at(4i)'], params[:order]['created_at(5i)']].join(":")
+
+    puts date
 
     respond_to do |format|
       # if @order.save
-      #   format.html { redirect_to @order, notice: 'Order was successfully created.' }
-      #   format.json { render json: @order, status: :created, location: @order }
+      
       # else
       #   format.html { render action: "new" }
       #   format.json { render json: @order.errors, status: :unprocessable_entity }
       # end
       if @order.save
-        format.html { redirect_to order_add_products_path(@order) }
+
+        params[:order][:product_order_attributes].each do |p|
+          product_order = ProductOrder.new(p)
+          product_order.order = @order
+          product_order.save
+        end
+
+        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        format.json { render json: @order, status: :created, location: @order }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to action: "new", :customer_id => @order.customer_id }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
@@ -94,6 +117,8 @@ class OrdersController < ApplicationController
   
   def add_products
     @order = Order.find(params[:order_id])
+    @product_order = ProductOrder.new
+    @product_order.order = @order
   end
 end
 
