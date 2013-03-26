@@ -1,4 +1,13 @@
 Modelle::Application.routes.draw do
+  resources :customer_stocks
+
+
+  resources :feedstock_stocks
+
+
+  resources :feedstocks
+
+
   resources :product_orders
 
 

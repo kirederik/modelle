@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @feedstock.name %>
+</p>
+
+<p>
+  <b>Unity:</b>
+  <%= @feedstock.unity %>
+</p>
+
+
+<%= link_to 'Edit', edit_feedstock_path(@feedstock) %> |
+<%= link_to 'Back', feedstocks_path %>

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @customer_stock.user %>
+</p>
+
+<p>
+  <b>Product:</b>
+  <%= @customer_stock.product %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @customer_stock.quantity %>
+</p>
+
+
+<%= link_to 'Edit', edit_customer_stock_path(@customer_stock) %> |
+<%= link_to 'Back', customer_stocks_path %>

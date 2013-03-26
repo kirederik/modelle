@@ -24,16 +24,25 @@ class OrdersController < ApplicationController
   # GET /orders/new
   # GET /orders/new.json
   def new
-    customer = Customer.find(params[:customer_id])
 
-    @order = Order.new
-    @order.customer = customer
-    @order.user = current_user
+    if (params[:customer_id] == nil)
+      respond_to do |format|
+        format.html {redirect_to action: "index", controller: "customers" }
+      end
+    else
+        
+      customer = Customer.find(params[:customer_id])
 
-    3.times { @order.product_orders.build }
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @order }
+      @order = Order.new
+      @order.customer = customer
+      @order.user = current_user
+
+      3.times { @order.product_orders.build }
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @order }
+      end
+
     end
   end
 
@@ -46,22 +55,6 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     
-    # created_at = [ params[:order]['created_at(1i)'], params[:order]['created_at(2i)'], params[:order]['created_at(3i)'] ].join("/")
-    # created_at += " " + [params[:order]['created_at(4i)'], params[:order]['created_at(5i)']].join(":")
-
-    # updated_at = [ params[:order]['updated_at(1i)'], params[:order]['updated_at(2i)'], params[:order]['updated_at(3i)'] ].join("/")
-    # updated_at += " " + [params[:order]['updated_at(4i)'], params[:order]['updated_at(5i)']].join(":")
-
-    # @order = Order.new(created_at: created_at.to_time, updated_at: updated_at.to_time)
-    # @order.customer_id = params[:order][:customer_id]
-    # @order.user_id = params[:order][:user_id]
-    # @order.order_status_id = params[:order][:order_status_id]
-    
-    # date = [ params[:order]['created_at(1i)'], params[:order]['created_at(2i)'], params[:order]['created_at(3i)'] ].join("/")
-    # date += " " + [params[:order]['created_at(4i)'], params[:order]['created_at(5i)']].join(":")
-
-    # puts date
-
     @order = Order.new(params[:order])
 
     respond_to do |format|

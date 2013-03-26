@@ -1,0 +1,27 @@
+<h1>Listing customer_stocks</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @customer_stocks.each do |customer_stock| %>
+  <tr>
+    <td><%= customer_stock.user %></td>
+    <td><%= customer_stock.product %></td>
+    <td><%= customer_stock.quantity %></td>
+    <td><%= link_to 'Show', customer_stock %></td>
+    <td><%= link_to 'Edit', edit_customer_stock_path(customer_stock) %></td>
+    <td><%= link_to 'Destroy', customer_stock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Customer stock', new_customer_stock_path %>

@@ -3,7 +3,7 @@ connection: &connection
   database: modelle_development
   pool: 5
   username: raphael
-  host: localhost
+  #host: localhost
 
 development:
   <<: *connection

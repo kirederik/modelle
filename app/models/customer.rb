@@ -4,5 +4,5 @@ class Customer < ActiveRecord::Base
   
   belongs_to :user
 
-
+  validates_presence_of :cpf_cnpj, :name, :phone1, :addres
 end
