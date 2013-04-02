@@ -11,6 +11,7 @@
       <td><%= product_order.order.id %></td>
       <td><%= product_order.product.name %></td>
       <td><%= product_order.quantity %></td>
+      <td>Faltando: <%= product_order.product_order_out.quantity %> </td>
       <td><%= link_to 'Destroy', product_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>

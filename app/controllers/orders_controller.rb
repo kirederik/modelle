@@ -56,6 +56,22 @@ class OrdersController < ApplicationController
   def create
     
     @order = Order.new(params[:order])
+    has_all_products = true
+
+    @order.product_orders.each do |p| 
+      p_stock = ProductStock.where(product_id: p.product_id).first
+
+      if p_stock.quantity < p.quantity
+        has_all_products = false
+        product_missing = ProductOrderOut.new
+
+        product_missing.product_order = p
+        product_missing.quantity = (p_stock.quantity < p.quantity)
+
+        product_missing.save
+      end
+
+    end
 
     respond_to do |format|
       # if @order.save
@@ -64,15 +80,9 @@ class OrdersController < ApplicationController
       #   format.html { render action: "new" }
       #   format.json { render json: @order.errors, status: :unprocessable_entity }
       # end
+
       if @order.save
-
-        # params[:order][:product_order_attributes].each do |p|
-        #   product_order = ProductOrder.new(p)
-        #   product_order.order = @order
-        #   product_order.save
-        # end
-
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        format.html { redirect_to @order, notice: 'Pedido criado com sucesso.' }
         format.json { render json: @order, status: :created, location: @order }
       else
         format.html { redirect_to action: "new", :customer_id => @order.customer_id, notice: "Verique se todos os campos foram preenchidos" }
