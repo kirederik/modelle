@@ -58,30 +58,36 @@ class OrdersController < ApplicationController
     @order = Order.new(params[:order])
     has_all_products = true
 
-    @order.product_orders.each do |p| 
-      p_stock = ProductStock.where(product_id: p.product_id).first
+    puts @order.created_at
+    puts @order.updated_at
+    puts @order.order_status_id
+    puts @order.customer_id
+    puts @order.user_id
+    puts @order.product_orders
 
-      if p_stock.quantity < p.quantity
-        has_all_products = false
-        product_missing = ProductOrderOut.new
 
-        product_missing.product_order = p
-        product_missing.quantity = (p_stock.quantity < p.quantity)
+    puts @order.valid?
+    puts @order.errors.full_messages
 
-        product_missing.save
-      end
 
-    end
 
     respond_to do |format|
-      # if @order.save
-      
-      # else
-      #   format.html { render action: "new" }
-      #   format.json { render json: @order.errors, status: :unprocessable_entity }
-      # end
-
       if @order.save
+
+        @order.product_orders.each do |p| 
+          p_stock = ProductStock.where(product_id: p.product_id).first
+
+          if p_stock.quantity < p.quantity
+            has_all_products = false
+            product_missing = ProductOrderOut.new
+
+            product_missing.product_order = p
+            product_missing.quantity = (p.quantity - p_stock.quantity)
+
+            product_missing.save
+          end
+        end
+
         format.html { redirect_to @order, notice: 'Pedido criado com sucesso.' }
         format.json { render json: @order, status: :created, location: @order }
       else

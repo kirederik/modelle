@@ -3,6 +3,7 @@
     <th>Order</th>
     <th>Product</th>
     <th>Quantity</th>
+    <th>Status</th>
     <th></th>
   </tr>
 
@@ -11,7 +12,11 @@
       <td><%= product_order.order.id %></td>
       <td><%= product_order.product.name %></td>
       <td><%= product_order.quantity %></td>
-      <td>Faltando: <%= product_order.product_order_out.quantity %> </td>
+      <% if  product_order.product_order_out != nil %>
+        <td>Faltando: <%= product_order.product_order_out.quantity %> </td>
+      <% else %>
+        <td>Ok</td>
+      <% end %>
       <td><%= link_to 'Destroy', product_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
