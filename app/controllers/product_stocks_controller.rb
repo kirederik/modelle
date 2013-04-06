@@ -80,4 +80,19 @@ class ProductStocksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def remove_from_stock
+    product_order = ProductOrder.find(params[:product_order_id])
+    stock = ProductStock.where(product_id: product_order.product_id).first
+
+    # respond_to do |format|
+    #   format.html
+    # end
+
+    puts product_order.product.name
+    puts stock.quantity
+    respond_to do |format|
+      format.js
+    end
+  end
 end

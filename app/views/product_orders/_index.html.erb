@@ -4,6 +4,7 @@
     <th>Product</th>
     <th>Quantity</th>
     <th>Status</th>
+    <th>Ação</th>
     <th></th>
   </tr>
 
@@ -14,8 +15,10 @@
       <td><%= product_order.quantity %></td>
       <% if  product_order.product_order_out != nil %>
         <td>Faltando: <%= product_order.product_order_out.quantity %> </td>
+        <td><%= link_to 'Enviar produção estoque', product_stocks_remove_from_stock_path(product_order), remote: true %> </td>
       <% else %>
         <td>Ok</td>
+        <td><%= link_to 'Usar do estoque', product_stocks_remove_from_stock_path(product_order.product_id), remote: true %> </td>
       <% end %>
       <td><%= link_to 'Destroy', product_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
