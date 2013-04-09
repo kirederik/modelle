@@ -21,3 +21,7 @@
 
   <input type="hidden" id="number_products_type" value="3"></input>
 <% end %>
+
+<script type="text/javascript">
+  $("#number_products_type").val($(".products_fields").children().size() / 2);
+</script>

@@ -82,17 +82,24 @@ class ProductStocksController < ApplicationController
   end
 
   def remove_from_stock
-    product_order = ProductOrder.find(params[:product_order_id])
-    stock = ProductStock.where(product_id: product_order.product_id).first
+    @product_order = ProductOrder.find(params[:product_order_id])
+    @stock = ProductStock.where(product_id: @product_order.product_id).first
 
-    # respond_to do |format|
-    #   format.html
-    # end
+    if (@stock.quantity - @product_order.quantity) > 0
+      @stock.quantity = @stock.quantity - @product_order.quantity
+      @stock.save
 
-    puts product_order.product.name
-    puts stock.quantity
-    respond_to do |format|
-      format.js
+      @product_order.status = 'estoque'
+      @product_order.save
+
+      respond_to do |format|
+        format.js
+      end
+    else
+      respond_to do |format|
+        flash[:notice] = "Quantidade no estoque insuficiente"
+        format.js
+      end
     end
   end
 end

@@ -69,24 +69,8 @@ class OrdersController < ApplicationController
     puts @order.valid?
     puts @order.errors.full_messages
 
-
-
     respond_to do |format|
       if @order.save
-
-        @order.product_orders.each do |p| 
-          p_stock = ProductStock.where(product_id: p.product_id).first
-
-          if p_stock.quantity < p.quantity
-            has_all_products = false
-            product_missing = ProductOrderOut.new
-
-            product_missing.product_order = p
-            product_missing.quantity = (p.quantity - p_stock.quantity)
-
-            product_missing.save
-          end
-        end
 
         format.html { redirect_to @order, notice: 'Pedido criado com sucesso.' }
         format.json { render json: @order, status: :created, location: @order }

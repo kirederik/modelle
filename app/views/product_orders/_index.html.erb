@@ -1,3 +1,16 @@
+<div id="modal_update_stock" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Aviso</h3>
+  </div>
+  <div class="modal-body">
+    <p id="message"></p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">OK</button>
+  </div>
+</div>
+
 <table>
   <tr>
     <th>Order</th>
@@ -13,14 +26,22 @@
       <td><%= product_order.order.id %></td>
       <td><%= product_order.product.name %></td>
       <td><%= product_order.quantity %></td>
-      <% if  product_order.product_order_out != nil %>
-        <td>Faltando: <%= product_order.product_order_out.quantity %> </td>
-        <td><%= link_to 'Enviar produção estoque', product_stocks_remove_from_stock_path(product_order), remote: true %> </td>
+
+      <% if product_order.status ==  'producao'%>
+        <td><p>Enviado Produção</p></td>
+        <td></td>
+      <% elsif product_order.status ==  'estoque'%>
+        <td><p class="success">Utilizado estoque</p></td>
+        <td></td>
+      <% elsif product_order.products_missing == 0 %>
+        <td><p class="warm <%= product_order.id %>">Faltando: <%= product_order.products_missing %> </p></td>
+        <td><%= link_to 'Usar estoque', product_stocks_remove_from_stock_path(product_order), remote: true, method: :post, id: product_order.id, class: "btn btn-small" %> </td>
       <% else %>
-        <td>Ok</td>
-        <td><%= link_to 'Usar do estoque', product_stocks_remove_from_stock_path(product_order.product_id), remote: true %> </td>
+        <td><p class="warm <%= product_order.id %>">Faltando: <%= product_order.products_missing %> </p></td>
+        <td><%= link_to 'Enviar produção', product_stocks_remove_from_stock_path(product_order), remote: true, method: :post, id: product_order.id, class: "btn btn-small" %> </td>
       <% end %>
-      <td><%= link_to 'Destroy', product_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+      <td><%= link_to 'Destroy', product_order, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
     </tr>
   <% end %>
 </table>

@@ -12,3 +12,15 @@
  *= require jquery.ui.all
  *= require_tree .
  */
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+.warm {
+  color: rgb(163, 139, 13);
+}

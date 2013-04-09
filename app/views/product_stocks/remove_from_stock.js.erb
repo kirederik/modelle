@@ -1,1 +1,11 @@
-alert("Estoque Atualizado");
+
+<% if flash[:notice] %>
+  $('#message').html("<p class='error'><b><%= flash[:notice] %></b></p>")
+  <% flash[:notice] = nil # evitar ficar mensagem na seção %> 
+<% else %>
+  $('#message').html("<b><%= @stock.product.name %></b> Atualizado. Quantidade atual: <b><%= @stock.quantity %></b>")
+  $('#<%= @product_order.id %>').remove();
+  $('.warm <%= @product_order.id %>').html("<p class='success'>Utilizado estoque</p>");
+<% end %>
+
+$('#modal_update_stock').modal('toggle')
