@@ -1,0 +1,23 @@
+<h1>Listing production_statuses</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @production_statuses.each do |production_status| %>
+  <tr>
+    <td><%= production_status.name %></td>
+    <td><%= link_to 'Show', production_status %></td>
+    <td><%= link_to 'Edit', edit_production_status_path(production_status) %></td>
+    <td><%= link_to 'Destroy', production_status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Production status', new_production_status_path %>

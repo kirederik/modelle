@@ -85,7 +85,7 @@ class ProductStocksController < ApplicationController
     @product_order = ProductOrder.find(params[:product_order_id])
     @stock = ProductStock.where(product_id: @product_order.product_id).first
 
-    if (@stock.quantity - @product_order.quantity) > 0
+    if (@stock.quantity - @product_order.quantity) >= 0
       @stock.quantity = @stock.quantity - @product_order.quantity
       @stock.save
 

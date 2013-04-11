@@ -6,6 +6,7 @@ class ProductOrder < ActiveRecord::Base
   attr_accessible :quantity, :order_id, :product_id, :status
 
   validates_presence_of :quantity, :product_id
+  validates_numericality_of :quantity
 
   def products_missing
     

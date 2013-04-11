@@ -1,4 +1,10 @@
 Modelle::Application.routes.draw do
+  resources :production_items
+
+
+  resources :production_statuses
+
+
   resources :customer_stocks
 
 

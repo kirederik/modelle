@@ -1,0 +1,12 @@
+<%= simple_form_for(@production_item) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :production_status %>
+    <%= f.association :order %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
