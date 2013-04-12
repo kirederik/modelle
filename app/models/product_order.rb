@@ -12,11 +12,18 @@ class ProductOrder < ActiveRecord::Base
     
     p_stock = ProductStock.where(product_id: self.product_id).first
 
+
+    if p_stock == nil
+      return -1;
+    end
+
     if p_stock.quantity < self.quantity
       return (self.quantity - p_stock.quantity)
     else
       return 0
     end
+  
 
+    return 0
   end
 end

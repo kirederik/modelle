@@ -69,6 +69,17 @@ class OrdersController < ApplicationController
     puts @order.valid?
     puts @order.errors.full_messages
 
+    @order.product_orders.each do |po|
+      stock_item = ProductStock.where(product_id: po.product_id).first
+      if stock_item == nil
+        respond_to do |format|
+          format.html { redirect_to action: "new", :customer_id => @order.customer_id, notice: "O estoque ainda de alguns produtos ainda não foi criado, por favor certifique-se de que o estoque de todos or produtos estejam criados" }
+        end
+
+        return
+      end
+    end
+
     respond_to do |format|
       if @order.save
 
