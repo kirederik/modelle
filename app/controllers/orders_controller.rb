@@ -1,3 +1,4 @@
+#encoding: utf-8
 class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
@@ -75,7 +76,6 @@ class OrdersController < ApplicationController
         respond_to do |format|
           format.html { redirect_to action: "new", :customer_id => @order.customer_id, notice: "O estoque ainda de alguns produtos ainda não foi criado, por favor certifique-se de que o estoque de todos or produtos estejam criados" }
         end
-
         return
       end
     end
