@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(:version => 20130411025821) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "function_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
