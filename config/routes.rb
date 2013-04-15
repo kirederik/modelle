@@ -19,6 +19,7 @@ Modelle::Application.routes.draw do
 
   resources :orders do
     get :add_products
+    resources :production_items
   end
 
 
