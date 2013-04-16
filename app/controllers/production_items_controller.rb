@@ -25,6 +25,7 @@ class ProductionItemsController < ApplicationController
   # GET /production_items/new.json
   def new
     @production_item = ProductionItem.new
+    @production_item.order = Order.find(params[:order_id])
 
     respond_to do |format|
       format.html # new.html.erb

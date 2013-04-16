@@ -38,7 +38,7 @@
         <td><%= link_to 'Usar estoque', product_stocks_remove_from_stock_path(product_order), remote: true, method: :post, id: product_order.id, class: "btn btn-small" %> </td>
       <% else %>
         <td><p class="warm <%= product_order.id %>">Faltando: <%= product_order.products_missing %> </p></td>
-        <td><%= link_to 'Enviar produção', product_stocks_remove_from_stock_path(product_order), remote: true, method: :post, id: product_order.id, class: "btn btn-small" %> </td>
+        <td><%= link_to 'Enviar produção', new_order_production_item_path(@order), class: "btn btn-small" %> </td>
       <% end %>
 
       <td><%= link_to 'Destroy', product_order, method: :delete, data: { confirm: 'Tem certeza?' } %></td>

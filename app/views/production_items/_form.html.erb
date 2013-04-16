@@ -2,8 +2,13 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :production_status %>
-    <%= f.association :order %>
+    <h3>Pedido/Lote: <%= @production_item.order.id %></h3>
+    <%= f.input :order_id, :as => :hidden %>
+    <%= f.association :production_status, :include_blank => false %>
+
+    <% @production_item.order.product_orders.each do |po| %>
+      <p><%= po.product.name %> Quantidade: <%= po.quantity %></p>
+    <% end %>
   </div>
 
   <div class="form-actions">

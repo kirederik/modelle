@@ -1,9 +1,12 @@
 connection: &connection
   adapter: postgresql
+  encoding: unicode
   database: modelle_development
   pool: 5
   username: raphael
 #  host: localhost
+
+development:
 
 development:
   <<: *connection

@@ -21,61 +21,63 @@
   </head>
   <body>
 
-    <div class="navbar navbar-fluid-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="/"><%= image_tag "logo.png", width: '70', height: '40'%></a>
-          <div class="container-fluid nav-collapse">
-            <ul class="nav">
-              <% if !user_signed_in? %>
-                <li><%= link_to "Cadastrar", new_user_registration_path  %></li>
-                <li><%= link_to "Entrar", new_user_session_path  %></li>
-              <% else %>
-                <li><%= link_to "Sair", destroy_user_session_path, :method => 'delete'   %></li>
-              <% end %>
-            </ul>
-          </div><!--/.nav-collapse -->
+    <div class="wrapper">
+      
+      <div class="navbar navbar-fluid-top">
+        <div class="navbar-inner">
+          <div class="container-fluid">
+            <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="/"><%= image_tag "logo.png", width: '70', height: '40'%></a>
+            <div class="container-fluid nav-collapse">
+              <ul class="nav">
+                <% if !user_signed_in? %>
+                  <li><%= link_to "Cadastrar", new_user_registration_path  %></li>
+                  <li><%= link_to "Entrar", new_user_session_path  %></li>
+                <% else %>
+                  <li><%= link_to "Sair", destroy_user_session_path, :method => 'delete'   %></li>
+                <% end %>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span2">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list nav-stacked nav-pills ">
-              <li class="nav-header">Menu Rápido</li>
-              <li><%= link_to "Funções", functions_path  %></li>
-              <li><%= link_to "Usuários", users_path  %></li>
-              <li><%= link_to "Novo pedido de Cliente", customers_path  %></li>
-              <ul class="nav nav-list">
-                <li> <%= link_to "Pedidos", orders_path %></li>
-                <li> <%= link_to "Estoque do cliente", customer_stocks_path %></li>
+      <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="span2">
+            <div class="well sidebar-nav">
+              <ul class="nav nav-list nav-stacked nav-pills ">
+                <li class="nav-header">Menu Rápido</li>
+                <li><%= link_to "Funções", functions_path  %></li>
+                <li><%= link_to "Usuários", users_path  %></li>
+                <li><%= link_to "Novo pedido de Cliente", customers_path  %></li>
+                <ul class="nav nav-list">
+                  <li> <%= link_to "Pedidos", orders_path %></li>
+                  <li> <%= link_to "Estoque do cliente", customer_stocks_path %></li>
+                </ul>
+                <li><%= link_to "Produtos", products_path  %></li>
+                <li><%= link_to "Estoque de Produtos", product_stocks_path  %></li>
+                <li><%= link_to "Preço por Cliente", customer_prices_path  %></li>
+                <li><%= link_to "Matéria Prima", feedstocks_path  %></li>
+                <li><%= link_to "Estoque de Matéria Prima", feedstock_stocks_path  %></li>
               </ul>
-              <li><%= link_to "Produtos", products_path  %></li>
-              <li><%= link_to "Estoque de Produtos", product_stocks_path  %></li>
-              <li><%= link_to "Preço por Cliente", customer_prices_path  %></li>
-              <li><%= link_to "Matéria Prima", feedstocks_path  %></li>
-              <li><%= link_to "Estoque de Matéria Prima", feedstock_stocks_path  %></li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-        <div class="span10">
-          <%= bootstrap_flash %>
-          <%= yield %>
-        </div>
-      </div><!--/row-->
-
-      <footer>
-        <p>&copy; Modelle 2013 & Powered By <a href="mailto:rhdeandrade@gmail.com">Raphael de Andrade</a> - <a href="mailto:kirederik@gmail.com">Derik Evangelista</a>  </p>
-      </footer>
-
+            </div><!--/.well -->
+          </div><!--/span-->
+          <div class="span10">
+            <%= bootstrap_flash %>
+            <%= yield %>
+          </div>
+        </div><!--/row-->
+      </div>
+      <div class="push"></div>
     </div> <!-- /container -->
+    <div class="footer">
+      <p>&copy; Modelle 2013 & Powered By <a href="mailto:rhdeandrade@gmail.com">Raphael de Andrade</a> - <a href="mailto:kirederik@gmail.com">Derik Evangelista</a>  </p>
+    </div>
 
     <!-- Javascripts
     ================================================== -->

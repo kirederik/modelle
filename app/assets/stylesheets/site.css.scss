@@ -1,3 +1,33 @@
 // Place all the styles related to the Site controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+$footerHeight: 50px;
+
+* {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+.wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -1 * $footerHeight;
+}
+.footer, .push {
+	height: $footerHeight;
+	text-align: center;
+}
+
+a {
+	&:visited {
+		color: black;
+	}
+	&:hover {
+		background-color: transparent;
+		color: blue;
+	}
+}

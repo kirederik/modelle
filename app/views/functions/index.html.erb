@@ -1,22 +1,31 @@
-<h1>Listing functions</h1>
+<h1>Lista de Funções</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @functions.each do |function| %>
-  <tr>
-    <td><%= function.name %></td>
-    <td><%= link_to 'Show', function %></td>
-    <td><%= link_to 'Edit', edit_function_path(function) %></td>
-    <td><%= link_to 'Destroy', function, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+<div class="row-fluid">
+    
+<div class="span4">
+    <table class="table table-stripped table-hover">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            <% @functions.each do |function| %>
+                <tr>
+                    <td><%= function.name %></td>
+                    <td>
+                        <%= icon_link_to function, {class: "icon-eye-open"} %>
+                        <%= icon_link_to edit_function_path(function), {class: "icon-pencil"} %>
+                        <%= icon_link_to function, {class: "icon-remove"},{method: :delete, data: { confirm: 'Are you sure?' }} %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+</div>
 
 <br />
 

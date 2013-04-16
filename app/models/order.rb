@@ -4,6 +4,7 @@ class Order < ActiveRecord::Base
   belongs_to :order_status
 
   has_many :product_orders, :dependent => :destroy
+  has_many :production_items
   
   attr_accessible :created_at, :updated_at, :order_status_id, :customer_id, :user_id, :product_orders_attributes
   
