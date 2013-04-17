@@ -36,10 +36,14 @@ function add_fields(link) {
   //console.log(select);
   
   select.attr("id", "order_product_orders_attributes_" + (new Number(number_of_products.val()) - 1) +  "_product_id");
-  select.attr("name", "order[product_orders_attributes][" + (new Number(number_of_products.val()) - 1) + "][product_id]")
+  select.attr("name", "order[product_orders_attributes][" + (new Number(number_of_products.val()) - 1) + "][product_id]");
+
+  select.removeAttr("disabled");
 
   input.attr("id", "order_product_orders_attributes_" + (new Number(number_of_products.val()) - 1) +  "_quantity");
-  input.attr("name", "order[product_orders_attributes][" + (new Number(number_of_products.val()) - 1) + "][quantity]")  
+  input.attr("name", "order[product_orders_attributes][" + (new Number(number_of_products.val()) - 1) + "][quantity]");
+
+  input.removeAttr("disabled");
 
   $(".products_fields").append(product_attributes);
 }

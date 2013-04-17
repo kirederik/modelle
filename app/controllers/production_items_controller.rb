@@ -25,7 +25,24 @@ class ProductionItemsController < ApplicationController
   # GET /production_items/new.json
   def new
     @production_item = ProductionItem.new
-    @production_item.order = Order.find(params[:order_id])
+
+    if params[:order_id]
+      order = Order.find(params[:order_id])
+      @production_item.order = order
+
+      order.product_orders.each do |po|
+        if po.products_missing != 0 && po.status == nil 
+          @production_item.product_order_outs.build
+          @production_item.product_order_outs.last.quantity = po.quantity
+          @production_item.product_order_outs.last.product = po.product
+        end
+      end
+    end
+
+    @production_item.product_order_outs.each do |po|
+      puts po.quantity
+      puts po.product.name
+    end
 
     respond_to do |format|
       format.html # new.html.erb

@@ -11,8 +11,6 @@ class ProductOrder < ActiveRecord::Base
   def products_missing
     
     p_stock = ProductStock.where(product_id: self.product_id).first
-
-
     if p_stock == nil
       return -1;
     end
@@ -22,8 +20,7 @@ class ProductOrder < ActiveRecord::Base
     else
       return 0
     end
-  
-
+    
     return 0
   end
 end
