@@ -6,12 +6,18 @@
     <%= f.input :order_id, :as => :hidden %>
     <%= f.association :production_status, :include_blank => false %>
 
+    <h3>Produtos</h3>
     <% @production_item.product_order_outs.each do |po| %>
       <%= f.fields_for :product_order_outs, po do |product_form| %>
         <p class="product_order_outs_attributes">
-          <%= product_form.number_field :quantity %>
-          <%= product_form.number_field :product_id %>
-          <%= link_to_function "remove", "remove_fields(this)" %>
+          <b>Produto: </b>
+          <%= po.product.name %>
+          <%= product_form.hidden_field :product_id %>
+          
+          <b>Quantidade: </b>
+          <%= product_form.hidden_field :quantity %>
+          <%= po.quantity %>
+          <%= link_to_function "remove", "remove_fields(this)", :class => "btn btn-danger btn-small" %>
         </p>
       <% end %>
     <% end %>
