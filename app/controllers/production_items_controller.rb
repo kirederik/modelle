@@ -62,6 +62,15 @@ class ProductionItemsController < ApplicationController
 
     respond_to do |format|
       if @production_item.save
+
+        @production_item.product_order_outs.each do |po| 
+          product_orders = ProductOrder.where(order_id: @production_item.order_id, product_id: po.product_id)
+
+          product_orders.each do |p|
+            p.status = 'producao'
+            p.save
+          end
+        end
         format.html { redirect_to @production_item, notice: 'Production item was successfully created.' }
         format.json { render json: @production_item, status: :created, location: @production_item }
       else

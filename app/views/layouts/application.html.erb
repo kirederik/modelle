@@ -56,9 +56,14 @@
                 <li><%= link_to "Usuários", users_path  %></li>
                 <li><%= link_to "Novo pedido de Cliente", customers_path  %></li>
                 <ul class="nav nav-list">
-                  <li> <%= link_to "Pedidos", orders_path %></li>
-                  <li> <%= link_to "Estoque do cliente", customer_stocks_path %></li>
+                  <li> <%= link_to "- Pedidos", orders_path %></li>
+                  <li> <%= link_to "- Estoque do cliente", customer_stocks_path %></li>
                 </ul>
+                
+                <li>Produção</li>
+                  <ul class="nav nav-list">
+                    <li><%= link_to "- Fila de produção", production_items_path %></li>
+                  </ul>
                 <li><%= link_to "Produtos", products_path  %></li>
                 <li><%= link_to "Estoque de Produtos", product_stocks_path  %></li>
                 <li><%= link_to "Preço por Cliente", customer_prices_path  %></li>
