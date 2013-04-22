@@ -27,9 +27,9 @@
       <td><%= product_order.product.name %></td>
       <td><%= product_order.quantity %></td>
 
-      <% if product_order.status ==  'producao'%>
-        <td><p>Enviado Produção</p></td>
-        <td></td>
+      <% if product_order.status == 'producao'%>
+        <td><p class="warm">Enviado Produção</p></td>
+        <td><%= link_to "Ver andamento", "#", class: "btn btn-small" %></td>
       <% elsif product_order.status ==  'estoque'%>
         <td><p class="success">Utilizado estoque</p></td>
         <td></td>

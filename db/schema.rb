@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130417025240) do
+ActiveRecord::Schema.define(:version => 20130422175023) do
 
   create_table "customer_prices", :force => true do |t|
     t.integer  "customer_id"
@@ -98,16 +98,24 @@ ActiveRecord::Schema.define(:version => 20130417025240) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "order_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "orders", :force => true do |t|
     t.integer  "customer_id"
     t.integer  "user_id"
     t.integer  "order_status_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.integer  "order_type_id"
   end
 
   add_index "orders", ["customer_id"], :name => "index_orders_on_customer_id"
   add_index "orders", ["order_status_id"], :name => "index_orders_on_order_status_id"
+  add_index "orders", ["order_type_id"], :name => "index_orders_on_order_type_id", :unique => true
   add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
 
   create_table "product_order_outs", :force => true do |t|
