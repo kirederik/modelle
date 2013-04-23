@@ -1,13 +1,13 @@
-<h1>Listing customer_stocks</h1>
+<h1 class="page-header">Realizando acertos no estoque</h1>
 
 <div class="row-fluid">
   
   <table class="table table-hover span12">
   <thead>
     <tr>
-      <th>Customer</th>
-      <th>Product</th>
-      <th>Quantity</th>
+      <th>Cliente</th>
+      <th>Produto</th>
+      <th>Quantidade</th>
       <th></th>
       <th></th>
       <th></th>
@@ -19,13 +19,10 @@
         <td><%= customer_stock.customer.name %></td>
         <td><%= customer_stock.product.name %></td>
         <td><%= customer_stock.quantity %></td>
-        <td><%= link_to 'Show', customer_stock %></td>
-        <td><%= link_to 'Edit', edit_customer_stock_path(customer_stock) %></td>
-        <td><%= link_to 'Destroy', customer_stock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Acertar', customer_stocks_reckoning_path(customer_stock) %></td>
       </tr>
     <% end %></tbody>
   </table>
 </div>
 
 
-<p><%= link_to 'New Customer stock', new_customer_stock_path %></p>

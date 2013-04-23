@@ -58,6 +58,10 @@
                 <ul class="nav nav-list">
                   <li> <%= link_to "- Pedidos", orders_path %></li>
                   <li> <%= link_to "- Estoque do cliente", customer_stocks_path %></li>
+                  <ul class="nav nav-list">
+                    <li> <%= link_to "+ Acertos", customer_stocks__reckoning_list_path %></li>
+                    <li> <%= link_to "+ Devoluções", customer_stocks_path %></li>
+                  </ul>
                 </ul>
                 
                 <li>Produção</li>

@@ -10,6 +10,24 @@ class CustomerStocksController < ApplicationController
     end
   end
 
+  def reckoning
+    @customer_stocks = CustomerStock.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @customer_stocks }
+    end
+  end
+
+  def doReckoning
+    @customer_stock = CustomerStock.find(params[:id])
+    @customer_price = CustomerPrice.where('customer_id = ? AND product_id = ?', @customer_stock.customer_id, @customer_stock.product_id)[0]
+    respond_to do |format|
+      format.html { render "reckoning_update.html.erb"}
+      format.json { render json: @customer_stock }
+    end
+  end
+
   # GET /customer_stocks/1
   # GET /customer_stocks/1.json
   def show

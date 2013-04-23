@@ -10,6 +10,7 @@ class CustomerPricesController < ApplicationController
     end
   end
 
+
   # GET /customer_prices/1
   # GET /customer_prices/1.json
   def show
