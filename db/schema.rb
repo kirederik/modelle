@@ -21,19 +21,19 @@ ActiveRecord::Schema.define(:version => 20130423010128) do
     t.datetime "updated_at",  :null => false
   end
 
-  add_index "customer_prices", ["customer_id"], :name => "index_customer_prices_on_user_id"
+  add_index "customer_prices", ["customer_id"], :name => "index_customer_prices_on_customer_id"
   add_index "customer_prices", ["product_id"], :name => "index_customer_prices_on_product_id"
 
   create_table "customer_stocks", :force => true do |t|
-    t.integer  "customer_id"
+    t.integer  "user_id"
     t.integer  "product_id"
     t.integer  "quantity"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "customer_stocks", ["customer_id"], :name => "index_customer_stocks_on_customer_id"
   add_index "customer_stocks", ["product_id"], :name => "index_customer_stocks_on_product_id"
+  add_index "customer_stocks", ["user_id"], :name => "index_customer_stocks_on_user_id"
 
   create_table "customers", :force => true do |t|
     t.string   "name"
@@ -184,16 +184,6 @@ ActiveRecord::Schema.define(:version => 20130423010128) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  create_table "user_functions", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "function_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "user_functions", ["function_id"], :name => "index_user_functions_on_function_id"
-  add_index "user_functions", ["user_id"], :name => "index_user_functions_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

@@ -26,8 +26,9 @@ class OrdersController < ApplicationController
   # GET /orders/new.json
   def new
 
-    if (params[:customer_id] == nil)
+    if (params[:customer_id] == nil || params[:customer_id] == "")
       respond_to do |format|
+        flash[:notice] = "Selecione um cliente antes de prosseguir"
         format.html {redirect_to action: "index", controller: "customers" }
       end
     else

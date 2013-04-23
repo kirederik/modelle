@@ -2,8 +2,11 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :product, :include_blank => false %>
-    <%= f.association :feedstock %>
+    <p><b>Produto: </b>
+      <%= @feedstock_by_product.product.name %> 
+    </p>
+    <%= f.input :product, :as => :hidden %>
+    <%= f.association :feedstock,  as: :check_boxes%>
 
     <%= f.input :quantity %>
   </div>
