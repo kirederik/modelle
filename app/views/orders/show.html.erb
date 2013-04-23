@@ -11,6 +11,11 @@
 </p>
 
 <p>
+  <b>Tipo de Pedido:</b>
+  <%= @order.order_type.name unless @order.order_type == nil %>
+</p>
+
+<p>
   <b>Status:</b>
   <%= @order.order_status.name %>
 </p>
@@ -27,6 +32,8 @@
 
 <%= render "product_orders/index", :product_orders => @order.product_orders %>
 
+<%= link_to 'Enviar produção', new_order_production_item_path(@order), class: "btn btn-primary" %> 
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+
+<%= link_to 'Editar', edit_order_path(@order), class: "btn" %> |
+<%= link_to 'Pedidos', orders_path, class: "btn" %>

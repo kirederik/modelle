@@ -1,0 +1,3 @@
+<% @production_item.product_order_outs.each do |po| %>
+  <p><b>Produto: </b> <%= po.product.name %> <b>Quantidade:</b> <%= po.quantity %></p>  
+<% end %>

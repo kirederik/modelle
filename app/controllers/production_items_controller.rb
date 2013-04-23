@@ -1,3 +1,4 @@
+#encoding: utf-8
 class ProductionItemsController < ApplicationController
   # GET /production_items
   # GET /production_items.json
@@ -31,7 +32,7 @@ class ProductionItemsController < ApplicationController
       @production_item.order = order
 
       order.product_orders.each do |po|
-        if po.products_missing != 0 && po.status == nil 
+        if po.status == nil 
           @production_item.product_order_outs.build
           @production_item.product_order_outs.last.quantity = po.quantity
           @production_item.product_order_outs.last.product = po.product
@@ -39,14 +40,14 @@ class ProductionItemsController < ApplicationController
       end
     end
 
-    @production_item.product_order_outs.each do |po|
-      puts po.quantity
-      puts po.product.name
-    end
-
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @production_item }
+      if @production_item.product_order_outs.size == 0
+        flash[:alert] = 'Todos or produtos deste pedido já foram processados.'
+        format.html { redirect_to order_path(@production_item.order) }
+      else
+        format.html # new.html.erb
+        format.json { render json: @production_item }
+      end
     end
   end
 
