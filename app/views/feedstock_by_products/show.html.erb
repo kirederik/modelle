@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Feedstock:</b>
+  <%= @feedstock_by_product.feedstock %>
+</p>
+
+<p>
+  <b>Product:</b>
+  <%= @feedstock_by_product.product %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @feedstock_by_product.quantity %>
+</p>
+
+
+<%= link_to 'Edit', edit_feedstock_by_product_path(@feedstock_by_product) %> |
+<%= link_to 'Back', feedstock_by_products_path %>

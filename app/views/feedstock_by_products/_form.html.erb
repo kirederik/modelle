@@ -1,0 +1,14 @@
+<%= simple_form_for(@feedstock_by_product) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :product, :include_blank => false %>
+    <%= f.association :feedstock %>
+
+    <%= f.input :quantity %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -4,6 +4,8 @@ connection: &connection
   database: modelle_development
   pool: 5
   username: derik
+#  username: raphael
+#  host: localhost
 
 
 development:

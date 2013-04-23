@@ -11,6 +11,5 @@ class Order < ActiveRecord::Base
   
   accepts_nested_attributes_for :product_orders
 
-  validates_presence_of :created_at, :updated_at, :customer_id, :order_status_id, :user_id
-
+  validates_presence_of :created_at, :updated_at, :customer_id, :order_status_id, :user_id, :order_type_id
 end
