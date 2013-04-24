@@ -1,5 +1,23 @@
-<h1>New feedstock_by_product</h1>
+<h3>Matéria prima de: <%= @feedstock_by_product.product.name %></h3>
 
-<%= render 'form' %>
+<%= form_tag '/products/' + @feedstock_by_product.product_id.to_s + '/feedstock_by_products', :method => :post do %>
+  <%= hidden_field_tag 'product_id',  @feedstock_by_product.product_id %>
+  <% Feedstock.all.each do |f|%>
+    <div class="row-fluid">
+      <div class="span2">
+        <%= label_tag "feedstock_id_#{f.id}", f.name %>
+      </div>
+      <div class="span1">
+        <%= check_box_tag 'feedstock[][feedstock_id]', f.id, false,:id => "feedstock_id_#{f.id}" %>
+      </div>
+      <div class="span9">
+        <%= number_field_tag 'feedstock[][quantity]', nil, min: 0, :class => "input-small" %> 
+        <%= f.unity %>
+      </div>
+    </div>
+  <% end %>
 
-<%= link_to 'Back', feedstock_by_products_path %>
+  <%= submit_tag "Salvar", :class => "btn btn-primary" %>
+<% end %>
+
+<%= link_to 'Back', product_feedstock_by_products_path %>

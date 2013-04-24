@@ -40,8 +40,8 @@ Modelle::Application.routes.draw do
 
   #resources :feedstock_by_products
 
-  get "feedstock_by_products" => "feedstock_by_products#index", :as => "feedstock_by_products"
-  get "feedstock_by_products/new" => "feedstock_by_products#new", :as => "new_feedstock_by_products"
+  # get "feedstock_by_products" => "feedstock_by_products#index", :as => "feedstock_by_products"
+  # get "feedstock_by_products/new" => "feedstock_by_products#new", :as => "new_feedstock_by_products"
 
   resources :products do
     resources :feedstock_by_products

@@ -1,9 +1,8 @@
-<h1>Listing feedstock_by_products</h1>
+<h3>Matéria prima: <%= Product.find(params[:product_id]).name %></h3>
 
 <table>
   <tr>
     <th>Feedstock</th>
-    <th>Product</th>
     <th>Quantity</th>
     <th></th>
     <th></th>
@@ -12,16 +11,15 @@
 
 <% @feedstock_by_products.each do |feedstock_by_product| %>
   <tr>
-    <td><%= feedstock_by_product.feedstock %></td>
-    <td><%= feedstock_by_product.product %></td>
+    <td><%= feedstock_by_product.feedstock.name %></td>
     <td><%= feedstock_by_product.quantity %></td>
-    <td><%= link_to 'Show', feedstock_by_product %></td>
-    <td><%= link_to 'Edit', edit_feedstock_by_product_path(feedstock_by_product) %></td>
-    <td><%= link_to 'Destroy', feedstock_by_product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', product_feedstock_by_product_path(feedstock_by_product.product_id, feedstock_by_product.id) %></td>
+    <td><%= link_to 'Edit', "#" %></td>
+    <td></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'Cadastrar Matéria Prima por Produto', feedstock_by_products_choose_product_path %>
+<%= link_to 'Cadastrar Matéria Prima por Produto', new_product_feedstock_by_product_path %>
