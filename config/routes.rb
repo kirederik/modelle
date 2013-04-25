@@ -20,7 +20,6 @@ Modelle::Application.routes.draw do
 
 
   resources :orders do
-    get :add_products
     resources :production_items
   end
 
@@ -36,13 +35,12 @@ Modelle::Application.routes.draw do
   #Atualiza estoque
   post "product_stocks/:product_order_id/remove_from_stock" => "product_stocks#remove_from_stock", :as => "product_stocks_remove_from_stock"
 
-  get "feedstock_by_products/choose_product" => "feedstock_by_products#choose_product", :as => "feedstock_by_products_choose_product"
-
   #resources :feedstock_by_products
 
   # get "feedstock_by_products" => "feedstock_by_products#index", :as => "feedstock_by_products"
   # get "feedstock_by_products/new" => "feedstock_by_products#new", :as => "new_feedstock_by_products"
 
+  put "feedstock_by_products/:id" => "feedstock_by_products#update", :as => "feedstock_by_product"
   resources :products do
     resources :feedstock_by_products
   end

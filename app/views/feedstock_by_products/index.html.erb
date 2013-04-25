@@ -14,7 +14,7 @@
     <td><%= feedstock_by_product.feedstock.name %></td>
     <td><%= feedstock_by_product.quantity %></td>
     <td><%= link_to 'Show', product_feedstock_by_product_path(feedstock_by_product.product_id, feedstock_by_product.id) %></td>
-    <td><%= link_to 'Edit', "#" %></td>
+    <td><%= link_to 'Edit', edit_product_feedstock_by_product_path(feedstock_by_product.product_id, feedstock_by_product.id) %></td>
     <td></td>
   </tr>
 <% end %>

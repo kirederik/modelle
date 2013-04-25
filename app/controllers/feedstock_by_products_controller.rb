@@ -1,3 +1,4 @@
+#encoding: utf-8
 class FeedstockByProductsController < ApplicationController
   # GET /feedstock_by_products
   # GET /feedstock_by_products.json
@@ -33,6 +34,14 @@ class FeedstockByProductsController < ApplicationController
     product = Product.find(params[:product_id])
     @feedstock_by_product.product = product
 
+    @feedstocks = Feedstock.all(order: 'name')
+
+    feedstock_by_products = FeedstockByProduct.where(product_id: params[:product_id])
+
+    feedstock_by_products.each do |f|
+      @feedstocks.delete(f.feedstock)
+    end
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @feedstock_by_product }
@@ -48,9 +57,8 @@ class FeedstockByProductsController < ApplicationController
   # POST /feedstock_by_products.json
   def create
     
-
     params[:feedstock].each do |f|
-      if (f[:feedstock_id])
+      if (f[:feedstock_id] && f[:quantity] != "")
         feedstock = FeedstockByProduct.new
         feedstock.product_id = params[:product_id]
         feedstock.feedstock_id = f[:feedstock_id]
@@ -62,7 +70,7 @@ class FeedstockByProductsController < ApplicationController
     @feedstock_by_product = FeedstockByProduct.new(params[:feedstock_by_product])
 
     respond_to do |format|
-      format.html { redirect_to @feedstock_by_product, notice: 'Feedstock by product was successfully created.' }
+      format.html { redirect_to product_feedstock_by_products_path(params[:product_id]) }
       #format.json { render json: @feedstock_by_product, status: :created, location: @feedstock_by_product }    
     end
   end
@@ -74,10 +82,11 @@ class FeedstockByProductsController < ApplicationController
 
     respond_to do |format|
       if @feedstock_by_product.update_attributes(params[:feedstock_by_product])
-        format.html { redirect_to @feedstock_by_product, notice: 'Feedstock by product was successfully updated.' }
+        format.html { redirect_to product_feedstock_by_products_path(@feedstock_by_product.product_id), notice: 'Feedstock by product was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        flash[:error] = "Quantidade não pode ser 0."
+        format.html { redirect_to edit_product_feedstock_by_product_path(@feedstock_by_product.product_id, @feedstock_by_product.id) }
         format.json { render json: @feedstock_by_product.errors, status: :unprocessable_entity }
       end
     end
@@ -93,9 +102,6 @@ class FeedstockByProductsController < ApplicationController
       format.html { redirect_to feedstock_by_products_url }
       format.json { head :no_content }
     end
-  end
-
-  def choose_product
   end
 end
 

@@ -2,10 +2,10 @@
 
 <%= form_tag '/products/' + @feedstock_by_product.product_id.to_s + '/feedstock_by_products', :method => :post do %>
   <%= hidden_field_tag 'product_id',  @feedstock_by_product.product_id %>
-  <% Feedstock.all.each do |f|%>
+  <% @feedstocks.each do |f|%>
     <div class="row-fluid">
       <div class="span2">
-        <%= label_tag "feedstock_id_#{f.id}", f.name %>
+        <%= label_tag "feedstock_id_#{f.id}", f.name, :class => "feedstock_by_product" %>
       </div>
       <div class="span1">
         <%= check_box_tag 'feedstock[][feedstock_id]', f.id, false,:id => "feedstock_id_#{f.id}" %>

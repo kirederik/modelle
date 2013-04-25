@@ -5,8 +5,11 @@
     <p><b>Produto: </b>
       <%= @feedstock_by_product.product.name %> 
     </p>
-    <%= f.input :product, :as => :hidden %>
-    <%= f.association :feedstock,  as: :check_boxes%>
+    <p><b>Matéria Prima: </b>
+      <%= @feedstock_by_product.feedstock.name %> 
+    </p>
+    <%= f.input :product_id, :as => :hidden %>
+    <%= f.input :feedstock_id,  :as => :hidden %>
 
     <%= f.input :quantity %>
   </div>

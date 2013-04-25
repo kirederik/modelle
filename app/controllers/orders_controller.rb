@@ -60,16 +60,6 @@ class OrdersController < ApplicationController
     @order = Order.new(params[:order])
     has_all_products = true
 
-    puts @order.created_at
-    puts @order.updated_at
-    puts @order.order_status_id
-    puts @order.customer_id
-    puts @order.user_id
-    puts @order.product_orders
-
-
-    puts @order.valid?
-    puts @order.errors.full_messages
 
     @order.product_orders.each do |po|
       stock_item = ProductStock.where(product_id: po.product_id).first
@@ -119,13 +109,6 @@ class OrdersController < ApplicationController
       format.html { redirect_to orders_url }
       format.json { head :no_content }
     end
-  end
-
-  
-  def add_products
-    @order = Order.find(params[:order_id])
-    @product_order = ProductOrder.new
-    @product_order.order = @order
   end
 end
 
