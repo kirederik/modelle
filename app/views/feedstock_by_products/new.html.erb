@@ -11,7 +11,7 @@
         <%= check_box_tag 'feedstock[][feedstock_id]', f.id, false,:id => "feedstock_id_#{f.id}" %>
       </div>
       <div class="span9">
-        <%= number_field_tag 'feedstock[][quantity]', nil, min: 0, :class => "input-small" %> 
+        <%= number_field_tag 'feedstock[][quantity]', nil, min: 0, :class => "input-small", :step => 0.1 %> 
         <%= f.unity %>
       </div>
     </div>

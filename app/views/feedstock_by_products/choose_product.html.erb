@@ -1,4 +1,0 @@
-<%= form_tag new_feedstock_by_products_path, method: :get do %>
-  <%= select_tag "product_id", options_from_collection_for_select(Product.all, "id", "name") %>
-  <%= submit_tag "Enviar", :class => "btn btn-primary" %>
-<% end %>

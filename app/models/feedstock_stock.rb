@@ -4,4 +4,5 @@ class FeedstockStock < ActiveRecord::Base
 
   validates_presence_of :quantity, :feedstock_id
   validates_numericality_of :quantity
+  validates_uniqueness_of :feedstock_id
 end
