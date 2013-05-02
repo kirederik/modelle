@@ -1,5 +1,10 @@
 <h1>Listing production_items</h1>
 
+<%= form_tag production_items_path, :class => "form-search", :method => :get do %>
+  <legend>Vizualizar: </legend>
+  <%= select_tag "production_status_id", options_from_collection_for_select(ProductionStatus.all, "id", "name"), :class => "input-medium search-query" %>
+  <%= submit_tag "Filtrar", :class => "btn btn-primary" %>
+<% end %>
 <table>
   <tr>
     <th>Production status</th>

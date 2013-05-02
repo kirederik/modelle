@@ -41,6 +41,7 @@ Modelle::Application.routes.draw do
   # get "feedstock_by_products/new" => "feedstock_by_products#new", :as => "new_feedstock_by_products"
 
   put "feedstock_by_products/:id" => "feedstock_by_products#update", :as => "feedstock_by_product"
+  delete "feedstock_by_products/:id" => "feedstock_by_products#destroy", :as => "destroy_feedstock_by_product"
   resources :products do
     resources :feedstock_by_products
   end

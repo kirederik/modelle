@@ -3,7 +3,11 @@ class ProductionItemsController < ApplicationController
   # GET /production_items
   # GET /production_items.json
   def index
-    @production_items = ProductionItem.all
+    if params[:production_status_id]
+      @production_items = ProductionItem.where(production_status_id: params[:production_status_id])  
+    else
+      @production_items = ProductionItem.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -65,11 +69,18 @@ class ProductionItemsController < ApplicationController
       if @production_item.save
 
         @production_item.product_order_outs.each do |po| 
-          product_orders = ProductOrder.where(order_id: @production_item.order_id, product_id: po.product_id)
+          if po.product.verify_feedstock == []
+            flash[:error] = "Não há matéria-prima para produzir todos os produtos"
+            format.html { render action: "new" }
+            format.json { render json: @production_item.errors, status: :unprocessable_entity }
 
-          product_orders.each do |p|
-            p.status = 'producao'
-            p.save
+          else
+            product_orders = ProductOrder.where(order_id: @production_item.order_id, product_id: po.product_id)
+
+            product_orders.each do |p|
+              p.status = 'producao'
+              p.save
+            end
           end
         end
         format.html { redirect_to @production_item, notice: 'Production item was successfully created.' }

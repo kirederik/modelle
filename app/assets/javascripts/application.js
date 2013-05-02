@@ -17,9 +17,12 @@
 //= require_tree .
 //= require autocomplete-rails
 
+var a;
+
 function remove_fields(link) {
   //$(link).previous("input[type=hidden]").value = "1";
   //console.log($(link).parent());
+  
   $(link).parent().remove();
 }
 

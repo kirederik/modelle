@@ -5,7 +5,7 @@ connection: &connection
   pool: 5
 #  username: derik
   username: raphael
-#  host: localhost
+  host: localhost
 
 
 development:

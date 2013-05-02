@@ -96,10 +96,11 @@ class FeedstockByProductsController < ApplicationController
   # DELETE /feedstock_by_products/1.json
   def destroy
     @feedstock_by_product = FeedstockByProduct.find(params[:id])
+    product_id = @feedstock_by_product.product_id
     @feedstock_by_product.destroy
 
     respond_to do |format|
-      format.html { redirect_to feedstock_by_products_url }
+      format.html { redirect_to product_feedstock_by_products_path(product_id) }
       format.json { head :no_content }
     end
   end
