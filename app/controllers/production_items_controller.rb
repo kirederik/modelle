@@ -97,6 +97,17 @@ class ProductionItemsController < ApplicationController
   def update
     @production_item = ProductionItem.find(params[:id])
 
+    production_status = ProductionStatus.find(params[:production_item][:production_status_id])
+    if production_status.name == "Estoque" && @production_item.production_status.name != "Estoque"
+      @production_item.product_order_outs.each do |p|
+        stock = ProductStock.where(product_id: p.product_id).first
+        if stock 
+          stock.quantity += p.quantity
+          stock.save
+        end
+      end
+    end
+
     respond_to do |format|
       if @production_item.update_attributes(params[:production_item])
         format.html { redirect_to @production_item, notice: 'Production item was successfully updated.' }

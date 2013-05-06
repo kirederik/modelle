@@ -1,3 +1,5 @@
+<%= render "information" %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -13,5 +15,25 @@
 <%= render "index" %>
 
 
-<%= link_to 'Edit', edit_production_item_path(@production_item) %> |
-<%= link_to 'Back', production_items_path %>
+<% if @production_item.production_status.name != "Estoque" %>
+  <%= simple_form_for(@production_item) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <h3>Pedido/Lote: <%= @production_item.order.id %></h3>
+      <%= f.input :order_id, :as => :hidden %>
+      <%= f.association :production_status, :include_blank => false %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, data: { confirm: 'Atualizar Lote?' }, :class => "btn btn-primary" %>
+    </div>
+  <% end %>
+<% end %>
+
+
+<%= form_tag production_items_path, :method => :get do %>
+  <%= hidden_field_tag "production_status_id", @production_item.production_status_id %> 
+  <%= submit_tag "Voltar", :class => "btn btn-small" %>
+<% end %>
+
