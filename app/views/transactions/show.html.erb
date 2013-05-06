@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Customer stock:</b>
+  <%= @transaction.customer_stock %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @transaction.quantity %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @transaction.value %>
+</p>
+
+<p>
+  <b>Is devolution:</b>
+  <%= @transaction.is_devolution %>
+</p>
+
+<p>
+  <b>Create at:</b>
+  <%= @transaction.create_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>

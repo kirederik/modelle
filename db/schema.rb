@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130501154005) do
+ActiveRecord::Schema.define(:version => 20130505220512) do
 
   create_table "customer_prices", :force => true do |t|
     t.integer  "customer_id"
@@ -25,15 +25,15 @@ ActiveRecord::Schema.define(:version => 20130501154005) do
   add_index "customer_prices", ["product_id"], :name => "index_customer_prices_on_product_id"
 
   create_table "customer_stocks", :force => true do |t|
-    t.integer  "user_id"
+    t.integer  "customer_id"
     t.integer  "product_id"
     t.integer  "quantity"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
+  add_index "customer_stocks", ["customer_id"], :name => "index_customer_stocks_on_customer_id"
   add_index "customer_stocks", ["product_id"], :name => "index_customer_stocks_on_product_id"
-  add_index "customer_stocks", ["user_id"], :name => "index_customer_stocks_on_user_id"
 
   create_table "customers", :force => true do |t|
     t.string   "name"
@@ -184,6 +184,18 @@ ActiveRecord::Schema.define(:version => 20130501154005) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "transactions", :force => true do |t|
+    t.integer  "customer_stock_id"
+    t.integer  "quantity"
+    t.integer  "value"
+    t.boolean  "is_devolution"
+    t.datetime "create_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "transactions", ["customer_stock_id"], :name => "index_transactions_on_customer_stock_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

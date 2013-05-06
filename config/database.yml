@@ -3,9 +3,9 @@ connection: &connection
   encoding: unicode
   database: modelle_development
   pool: 5
-#  username: derik
-  username: raphael
-  host: localhost
+  username: derik
+  # username: raphael
+  # host: localhost
 
 
 development:

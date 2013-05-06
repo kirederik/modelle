@@ -1,0 +1,15 @@
+<%= simple_form_for(@transaction) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :customer_stock %>
+    <%= f.input :quantity %>
+    <%= f.input :value %>
+    <%= f.input :is_devolution %>
+    <%= f.input :create_at %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

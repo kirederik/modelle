@@ -12,8 +12,8 @@
 
 <% @customer_prices.each do |customer_price| %>
   <tr>
-    <td><%= customer_price.customer %></td>
-    <td><%= customer_price.product %></td>
+    <td><%= customer_price.customer.name %></td>
+    <td><%= customer_price.product.name %></td>
     <td><%= customer_price.price %></td>
     <td><%= link_to 'Show', customer_price %></td>
     <td><%= link_to 'Edit', edit_customer_price_path(customer_price) %></td>

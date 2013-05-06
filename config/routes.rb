@@ -1,11 +1,14 @@
 Modelle::Application.routes.draw do
+  resources :transactions
+
+
   resources :production_items
 
 
   resources :production_statuses
 
 
-  get "customer_stocks/reckoning" => "customer_stocks#reckoning", :as =>"customer_stocks__reckoning_list"
+  get "customer_stocks/reckoning" => "customer_stocks#reckoning", :as =>"customer_stocks_reckoning_list"
   get "customer_stocks/:id/reckoning" => "customer_stocks#doReckoning", :as =>"customer_stocks_reckoning"
   resources :customer_stocks
 

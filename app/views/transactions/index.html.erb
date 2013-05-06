@@ -1,0 +1,41 @@
+<h1>Lista de Transações</h1>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Produto</th>
+          <th>Quantidade</th>
+          <th>Valor obtido</th>
+          <th>Tipo de Transação</th>
+          <th>Data</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @transactions.each do |transaction| %>
+              <tr>
+                <td><%= transaction.customer_stock.customer.name %></td>
+                <td><%= transaction.customer_stock.product.name %></td>
+                <td><%= transaction.quantity %></td>
+                <td><%= transaction.value %></td>
+                <td>
+                    <% if transaction.is_devolution %>
+                        <p>Devolução</p>
+                    <% else %>
+                        <p>Acerto</p> 
+                    <% end %>
+                </td>
+                <td><%= transaction.created_at %></td>
+                <td><%= link_to 'Show', transaction %></td>
+                <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
+                <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<br />
+
