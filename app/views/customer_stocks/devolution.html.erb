@@ -1,0 +1,28 @@
+<h1 class="page-header">Realizando devoluções no estoque</h1>
+
+<div class="row-fluid">
+  
+  <table class="table table-hover span12">
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Produto</th>
+      <th>Quantidade</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  
+  <tbody><% @customer_stocks.each do |customer_stock| %>
+      <tr>
+        <td><%= customer_stock.customer.name %></td>
+        <td><%= customer_stock.product.name %></td>
+        <td><%= customer_stock.quantity %></td>
+        <td><%= link_to 'Devolver', customer_stocks_devolution_path(customer_stock) %></td>
+      </tr>
+    <% end %></tbody>
+  </table>
+</div>
+
+

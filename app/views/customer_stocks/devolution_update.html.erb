@@ -1,0 +1,30 @@
+<p>
+  <b>Customer:</b>
+  <%= @customer_stock.customer.name %>
+</p>
+
+<p>
+  <b>Product:</b>
+  <%= @customer_stock.product.name %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @customer_stock.quantity %>
+</p>
+
+<%= simple_form_for(@transaction) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :customer_stock_id, :as => :hidden, :input_html => {:value => @customer_stock.id} %>
+    <%= f.input :value, :as => :hidden, :input_html => {:value => @customer_price.price} %>
+    <%= f.input :is_devolution, :as => :hidden, :input_html => {:value => true} %>
+    <%= f.input :quantity, :input_html => { :max => @customer_stock.quantity } %>
+  </div>
+  <div class="form-actions">
+  	<%= f.button :submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', customer_stocks_path %>
