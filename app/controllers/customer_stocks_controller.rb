@@ -11,7 +11,7 @@ class CustomerStocksController < ApplicationController
   end
 
   def reckoning
-    @customer_stocks = CustomerStock.all
+    @customer_stocks = CustomerStock.where('quantity > 0')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -28,6 +28,29 @@ class CustomerStocksController < ApplicationController
         format.html { redirect_to customer_stocks_reckoning_list_path, :notice => "Cadastre o custo deste produto para este cliente"}            
       else
         format.html { render "reckoning_update.html.erb"}
+        format.json { render json: @customer_stock }
+      end
+    end
+  end
+
+  def devolution
+    @customer_stocks = CustomerStock.where('quantity > 0')
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @customer_stocks }
+    end
+  end
+
+  def doDevolution
+    @customer_stock = CustomerStock.find(params[:id])
+    @customer_price = CustomerPrice.where('customer_id = ? AND product_id = ?', @customer_stock.customer_id, @customer_stock.product_id)[0]
+    @transaction = Transaction.new
+    respond_to do |format|
+      if !@customer_price
+        format.html { redirect_to customer_stocks_reckoning_list_path, :notice => "Cadastre o custo deste produto para este cliente"}            
+      else
+        format.html { render "devolution_update.html.erb"}
         format.json { render json: @customer_stock }
       end
     end

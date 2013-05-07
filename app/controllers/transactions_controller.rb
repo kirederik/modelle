@@ -42,13 +42,22 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(params[:transaction])
     @customer_stock = CustomerStock.find(@transaction.customer_stock_id)
-    @transaction.value = @transaction.value * @transaction.quantity
+    if @transaction.is_devolution 
+      @transaction.value = 0
+    else
+      @transaction.value = @transaction.value * @transaction.quantity
+    end
     respond_to do |format|
       if @transaction.quantity < 0 or @customer_stock.quantity < @transaction.quantity
           format.html { redirect_to customer_stocks_reckoning_path(@customer_stock.id), notice: 'A quantidade de itens deve ser menor que a do estoque.' }
       else
         if @transaction.save
             @customer_stock.update_attributes(:quantity => @customer_stock.quantity - @transaction.quantity)
+            if @transaction.is_devolution
+              product = Product.find(@customer_stock.product.id)
+              pr_stock = ProductStock.where('product_id = ?', product.id)[0]
+              pr_stock.update_attributes(:quantity => pr_stock.quantity + @transaction.quantity)
+            end
             format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
             format.json { render json: @transaction, status: :created, location: @transaction }
         else
