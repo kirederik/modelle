@@ -85,6 +85,7 @@ class ProductStocksController < ApplicationController
     @product_order = ProductOrder.find(params[:product_order_id])
     @stock = ProductStock.where(product_id: @product_order.product_id).first
 
+
     if (@stock.quantity - @product_order.quantity) >= 0
       @stock.quantity = @stock.quantity - @product_order.quantity
       @stock.save
@@ -93,12 +94,13 @@ class ProductStocksController < ApplicationController
       @product_order.save
 
       respond_to do |format|
-        format.js
+        flash[:notice] = "#{@stock.product.name} Atualizado. Quantidade atual: #{@stock.quantity}"
+        format.html { redirect_to @product_order.order }
       end
     else
       respond_to do |format|
         flash[:notice] = "Quantidade no estoque insuficiente"
-        format.js
+        format.html { redirect_to @product_order.order }
       end
     end
   end

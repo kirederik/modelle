@@ -27,21 +27,28 @@
       <td><%= product_order.product.name %></td>
       <td><%= product_order.quantity %></td>
 
-      <% if product_order.status == 'producao'%>
-        <td><p class="warm">Enviado Produção</p></td>
-        <td><%= link_to "Ver andamento", "#", class: "btn btn-small" %></td>
-      <% elsif product_order.status ==  'estoque'%>
-        <td><p class="success">Utilizado estoque</p></td>
+      <% if product_order.status == 'estoque'%>
+        <td>
+          <p class="success">Utilizado estoque</p>
+        </td>
+
         <td></td>
       <% elsif product_order.products_missing == 0 %>
-        <td><p class="warm <%= product_order.id %>">Faltando: <%= product_order.products_missing %> </p></td>
-        <td><%= link_to 'Usar estoque', product_stocks_remove_from_stock_path(product_order), remote: true, method: :post, id: product_order.id, class: "btn btn-small" %> 
+        <td>
+          <p class="success <%= product_order.id %>">Faltando: <%= product_order.products_missing %> </p>
+          <% if product_order.status == 'producao'%>
+            <p class="success <%= product_order.id %>">Já enviado produção</p>    
+          <% end %>
+        </td>
+        <td><%= link_to 'Usar estoque', product_stocks_remove_from_stock_path(product_order), id: product_order.id, class: "btn btn-small" %> 
          </td>
+       <% elsif product_order.status == 'producao'%>
+        <td><p class="warm">Enviado Produção</p></td>
+        <td><%= link_to "Ver andamento", "#", class: "btn btn-small" %></td>
       <% else %>
         <td><p class="warm <%= product_order.id %>">Faltando: <%= product_order.products_missing %> </p></td>
         <td></td>
       <% end %>
-
       <td><%= link_to 'Destroy', product_order, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
     </tr>
   <% end %>
