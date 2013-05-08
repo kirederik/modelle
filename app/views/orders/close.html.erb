@@ -1,0 +1,5 @@
+<%= @order.order_status.name == "estoque" %>
+
+<% @order.product_orders.each do |p| %>
+	<%= p.quantity %>
+<% end %>

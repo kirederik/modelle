@@ -7,10 +7,12 @@ Modelle::Application.routes.draw do
 
   resources :production_statuses
 
-
+  resources :customer_stocks
   get "customer_stocks/reckoning" => "customer_stocks#reckoning", :as =>"customer_stocks_reckoning_list"
   get "customer_stocks/:id/reckoning" => "customer_stocks#doReckoning", :as =>"customer_stocks_reckoning"
-  resources :customer_stocks
+  get "customer_stocks/devolution" => "customer_stocks#devolution", :as =>"customer_stocks_devolution_list"
+  get "customer_stocks/:id/devolution" => "customer_stocks#doDevolution", :as =>"customer_stocks_devolution"
+  
 
 
   resources :feedstock_stocks
@@ -25,6 +27,8 @@ Modelle::Application.routes.draw do
   resources :orders do
     resources :production_items
   end
+  get "order/:id/close" => "orders#close", :as =>"order_close"
+
 
 
   resources :order_statuses
