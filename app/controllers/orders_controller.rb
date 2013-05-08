@@ -53,6 +53,61 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+  def close
+    @order = Order.find(params[:id])
+    if @order.order_status.name.include? "Fechado"
+      respond_to do |format| 
+        flash[:notice] = "Pedido já fechado" 
+        format.html { redirect_to action: "index" }
+      end
+    else 
+      pro_ors = @order.product_orders
+      finished = true
+
+      # Verifica se existe algum produto que não está com o status adequado para fechar o pedido
+      pro_ors.each do |po| 
+        puts po.status
+        if po.status != "estoque" and po.status != "produzido"
+          finished = false
+          break
+        end
+      end
+
+      if not finished
+        # Caso exista, não pode finalizar ainda
+        respond_to do |format| 
+          flash[:error] = "Pedido ainda não pode ser fechado por que existem produtos a serem produzidos. Certifique-se!" 
+          format.html { redirect_to @order }
+        end
+      else
+        if @order.order_type.name == "Normal"
+          status = OrderStatus.where('name = ?', "Fechado")[0]
+          @order.update_attributes(:order_status_id => status.id)
+        else
+          status = OrderStatus.where('name = ?', "Fechado - Enviado Cliente")[0]
+          @order.update_attributes(:order_status_id => status.id)
+          
+          pro_ors.each do |po| 
+            cus_stock = CustomerStock.where('customer_id = ? and product_id = ?', @order.customer.id, po.product_id)[0]
+            if cus_stock == nil
+              CustomerStock.new(
+                customer_id: @order.customer_id, 
+                product_id: po.product_id, 
+                quantity: po.quantity
+              ).save
+            else
+              cus_stock.update_attributes(:quantity => cus_stock.quantity + po.quantity)
+            end
+          end
+        end
+        respond_to do |format| 
+          flash[:notice] = "Pedido fechado com sucesso" 
+          format.html { redirect_to action: "index" }
+        end
+      end
+    end
+  end
+
   # POST /orders
   # POST /orders.json
   def create
