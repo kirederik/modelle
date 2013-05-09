@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   #has_many :user_functions
   #has_many :functions, :through => :user_functions
-  has_and_belongs_to_many :functions
+  belongs_to :function
 
 
   def has_function?(function_sym)

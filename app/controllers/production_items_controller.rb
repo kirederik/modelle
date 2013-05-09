@@ -64,25 +64,31 @@ class ProductionItemsController < ApplicationController
   # POST /production_items.json
   def create
     @production_item = ProductionItem.new(params[:production_item])
+    have_feedstock = true
 
     respond_to do |format|
-      if @production_item.save
-
-        @production_item.product_order_outs.each do |po| 
-          if po.product.verify_feedstock == []
-            flash[:error] = "Não há matéria-prima para produzir todos os produtos"
-            format.html { render action: "new" }
-            format.json { render json: @production_item.errors, status: :unprocessable_entity }
-
-          else
-            product_orders = ProductOrder.where(order_id: @production_item.order_id, product_id: po.product_id)
-
-            product_orders.each do |p|
-              p.status = 'producao'
-              p.save
-            end
-          end
+      @production_item.product_order_outs.each do |po| 
+        if po.product.verify_feedstock != []
+          flash[:error] = "Não há matéria-prima para produzir todos os produtos"
+          have_feedstock = false
         end
+      end
+      puts "já passou"
+
+      if !have_feedstock
+        
+        format.html { render action: "new" }
+        format.json { render json: @production_item.errors, status: :unprocessable_entity }
+
+      elsif @production_item.save
+
+        product_orders = ProductOrder.where(order_id: @production_item.order_id, product_id: po.product_id)
+
+        product_orders.each do |p|
+          p.status = 'producao'
+          p.save
+        end
+
         format.html { redirect_to @production_item, notice: 'Production item was successfully created.' }
         format.json { render json: @production_item, status: :created, location: @production_item }
       else

@@ -12,8 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :function %><br />
     <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.fields_for @user.functions do |form| %>
+
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :rg %><br />
@@ -71,6 +77,16 @@
     <%= f.label :email %><br />
     <%= f.text_field :email %>
   </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+
   <div class="field">
     <%= f.label :wage %><br />
     <%= f.text_field :wage %>
