@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130505220512) do
+ActiveRecord::Schema.define(:version => 20130510135849) do
 
   create_table "customer_prices", :force => true do |t|
     t.integer  "customer_id"
@@ -25,15 +25,15 @@ ActiveRecord::Schema.define(:version => 20130505220512) do
   add_index "customer_prices", ["product_id"], :name => "index_customer_prices_on_product_id"
 
   create_table "customer_stocks", :force => true do |t|
-    t.integer  "customer_id"
+    t.integer  "user_id"
     t.integer  "product_id"
     t.integer  "quantity"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "customer_stocks", ["customer_id"], :name => "index_customer_stocks_on_customer_id"
   add_index "customer_stocks", ["product_id"], :name => "index_customer_stocks_on_product_id"
+  add_index "customer_stocks", ["user_id"], :name => "index_customer_stocks_on_user_id"
 
   create_table "customers", :force => true do |t|
     t.string   "name"
@@ -109,8 +109,7 @@ ActiveRecord::Schema.define(:version => 20130505220512) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "order_types", :id => false, :force => true do |t|
-    t.integer  "id",         :null => false
+  create_table "order_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -226,6 +225,7 @@ ActiveRecord::Schema.define(:version => 20130505220512) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "function_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
