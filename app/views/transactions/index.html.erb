@@ -1,4 +1,19 @@
-<h1>Lista de Transações</h1>
+<%= form_tag "transactions/report", :class => "form-search", :method => :get do %>
+    <legend>Procure o cliente pelo nome</legend>
+    <%= autocomplete_field_tag 'customer', '', autocomplete_customer_name_customers_path, :update_elements => {:id => '#customer_id' }, :class => "input-xlarge search-query", :placeholder => "Nome do cliente" %>
+    <%= hidden_field_tag "customer_id" %>
+     <%= label_tag(:type, "Tipo:") %>
+     <%= select_tag(:type, options_for_select([['Todas', 0], ['Acerto', 1], ['Devolução', 2]], 0), :class => "input-small" ) %>
+     <%= label_tag(:type, "Inicio:") %>
+    <%= text_field_tag :startdate, nil, :class => "input-small" %>
+     <%= label_tag(:type, "Fim:") %>
+    <%= text_field_tag :enddate, nil, :class => "input-small"  %>
+
+    <%= submit_tag 'Filtrar', :class => "btn btn-primary"%>
+<% end %>
+
+
+<h2>Lista das Últimas Transações</h2>
 
 <table class="table table-hover">
     <thead>

@@ -50,3 +50,8 @@ function add_fields(link) {
 
   $(".products_fields").append(product_attributes);
 }
+
+$(function() {
+  $("#startdate").datepicker();
+  $("#enddate").datepicker();
+});

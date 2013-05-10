@@ -37,6 +37,33 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
   end
 
+  def report
+    if params[:customer_id] == ""
+      respond_to do |format|
+        format.html { redirect_to :action => "index", :notice => "Informe o cliente"}
+      end
+    else
+      if params[:type] == "0"
+      # CustomerStock.joins(:customer).where('customer_id = ?', params[:customer_id])
+      # @transactions = Transaction.where("customer_id = ?", params[:customer_id])
+        @transactions = Transaction.joins(:customer_stock => :customer).where('customer_id = ?', params[:customer_id])
+      else
+        devol = 'false'
+        if params[:type] == "2"
+          devol = 'true'
+        end
+        # @transactions = Transaction.where("customer_id = ? and is_devolution = ?", params[:customer_id], devol);
+        @transactions = Transaction.joins(:customer_stock => :customer).where('customer_id = ? and is_devolution = ?', params[:customer_id], devol)
+
+      end
+      @customer_stocks = CustomerStock.joins(:customer).where('customer_id = ?', params[:customer_id])
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @transactions }
+      end
+    end
+  end
+
   # POST /transactions
   # POST /transactions.json
   def create
@@ -56,7 +83,15 @@ class TransactionsController < ApplicationController
             if @transaction.is_devolution
               product = Product.find(@customer_stock.product.id)
               pr_stock = ProductStock.where('product_id = ?', product.id)[0]
-              pr_stock.update_attributes(:quantity => pr_stock.quantity + @transaction.quantity)
+              if pr_stock == nil
+                ProductStock.new(
+                  customer_id: @order.customer_id, 
+                  product_id: po.product_id, 
+                  quantity: po.quantity
+                ).save
+              else 
+                pr_stock.update_attributes(:quantity => pr_stock.quantity + @transaction.quantity)
+              end
             end
             format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
             format.json { render json: @transaction, status: :created, location: @transaction }
