@@ -19,4 +19,4 @@ test:
 
 production:
   adapter: postgresql
-  url: ENV['HEROKU_POSTGRESQL_YELLOW_URL']
+  url: ENV['DATABASE_URL']
