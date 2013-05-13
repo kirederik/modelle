@@ -1,17 +1,17 @@
 Modelle::Application.routes.draw do
+  get "transactions/report" => "transactions#report", :as => "transactions_report"
   resources :transactions
-
 
   resources :production_items
 
 
   resources :production_statuses
 
-  resources :customer_stocks
   get "customer_stocks/reckoning" => "customer_stocks#reckoning", :as =>"customer_stocks_reckoning_list"
-  get "customer_stocks/:id/reckoning" => "customer_stocks#doReckoning", :as =>"customer_stocks_reckoning"
   get "customer_stocks/devolution" => "customer_stocks#devolution", :as =>"customer_stocks_devolution_list"
+  get "customer_stocks/:id/reckoning" => "customer_stocks#doReckoning", :as =>"customer_stocks_reckoning"
   get "customer_stocks/:id/devolution" => "customer_stocks#doDevolution", :as =>"customer_stocks_devolution"
+  resources :customer_stocks
   
 
 

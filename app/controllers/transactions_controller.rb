@@ -37,6 +37,21 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
   end
 
+  def report
+    if params[:customer_id] == ""
+      respond_to do |format|
+        format.html { redirect_to :action => "index", :notice => "Informe o cliente"}
+      end
+    else
+      @transactions = Transaction.searchReport(params[:customer_id], params[:type], params[:startdate], params[:enddate])
+      @customer_stocks = CustomerStock.joins(:customer).where('customer_id = ?', params[:customer_id])
+      respond_to do |format|
+        format.html # report.html.erb
+        format.json { render json: @transactions }
+      end
+    end
+  end
+
   # POST /transactions
   # POST /transactions.json
   def create
@@ -56,7 +71,15 @@ class TransactionsController < ApplicationController
             if @transaction.is_devolution
               product = Product.find(@customer_stock.product.id)
               pr_stock = ProductStock.where('product_id = ?', product.id)[0]
-              pr_stock.update_attributes(:quantity => pr_stock.quantity + @transaction.quantity)
+              if pr_stock == nil
+                ProductStock.new(
+                  customer_id: @order.customer_id, 
+                  product_id: po.product_id, 
+                  quantity: po.quantity
+                ).save
+              else 
+                pr_stock.update_attributes(:quantity => pr_stock.quantity + @transaction.quantity)
+              end
             end
             format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
             format.json { render json: @transaction, status: :created, location: @transaction }
