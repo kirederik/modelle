@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :address, :cel_number, :cep, :city, :cpf, :dateofbirth, :fire_date, :hide_date, :name, :observations, :phone1, :phone2, :rg, :sex, :state, :wage
   attr_accessible :function_ids
 
-  validates_presence_of :name, :fire_date, :cpf, :rg, :sex, :wage, :dateofbirth
+  validates_presence_of :name, :hire_date, :cpf, :rg, :sex, :wage, :dateofbirth
 
   #has_many :user_functions
   #has_many :functions, :through => :user_functions
