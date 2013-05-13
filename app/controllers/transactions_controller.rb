@@ -43,22 +43,10 @@ class TransactionsController < ApplicationController
         format.html { redirect_to :action => "index", :notice => "Informe o cliente"}
       end
     else
-      if params[:type] == "0"
-      # CustomerStock.joins(:customer).where('customer_id = ?', params[:customer_id])
-      # @transactions = Transaction.where("customer_id = ?", params[:customer_id])
-        @transactions = Transaction.joins(:customer_stock => :customer).where('customer_id = ?', params[:customer_id])
-      else
-        devol = 'false'
-        if params[:type] == "2"
-          devol = 'true'
-        end
-        # @transactions = Transaction.where("customer_id = ? and is_devolution = ?", params[:customer_id], devol);
-        @transactions = Transaction.joins(:customer_stock => :customer).where('customer_id = ? and is_devolution = ?', params[:customer_id], devol)
-
-      end
+      @transactions = Transaction.searchReport(params[:customer_id], params[:type], params[:startdate], params[:enddate])
       @customer_stocks = CustomerStock.joins(:customer).where('customer_id = ?', params[:customer_id])
       respond_to do |format|
-        format.html # index.html.erb
+        format.html # report.html.erb
         format.json { render json: @transactions }
       end
     end

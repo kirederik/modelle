@@ -52,6 +52,10 @@ function add_fields(link) {
 }
 
 $(function() {
-  $("#startdate").datepicker();
-  $("#enddate").datepicker();
+  $("#startdate").datepicker({
+    dateFormat: "dd/mm/yy"
+  });
+  $("#enddate").datepicker({
+    dateFormat: "dd/mm/yy"
+  });
 });
