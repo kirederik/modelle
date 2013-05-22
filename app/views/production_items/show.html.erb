@@ -3,13 +3,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Production status:</b>
+  <b>Status:</b>
   <%= @production_item.production_status.name %>
 </p>
 
 <p>
-  <b>Order:</b>
+  <b>Pedido:</b>
   <%= @production_item.order.id %>
+</p>
+
+<p>
+  <b>Lote:</b>
+  <%= @production_item.id %>
 </p>
 
 <%= render "index" %>
@@ -20,7 +25,7 @@
     <%= f.error_notification %>
 
     <div class="form-inputs">
-      <h3>Pedido/Lote: <%= @production_item.order.id %></h3>
+      <h3>Pedido: <%= @production_item.order.id %></h3>
       <%= f.input :order_id, :as => :hidden %>
       <%= f.association :production_status, :include_blank => false %>
     </div>
