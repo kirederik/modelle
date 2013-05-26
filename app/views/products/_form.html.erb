@@ -2,7 +2,17 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
+    <%= f.input :product_base_id, :as => :hidden %>
+
+    <div class="control-group string required">
+      <label class="string optional control-label" for="product_nome">* Nome</label>
+      <div class="controls">
+        <div class="input-prepend">
+          <span class="add-on"><%= @product.product_base.name %></span>
+          <%= text_field_tag :name, @product.name, :id => "product_name", :name => "product[name]" %>
+        </div>
+      </div>
+    </div>
     <%= f.input :color %>
     <%= f.input :size %>
     <%= f.input :line %>

@@ -1,3 +1,4 @@
+#encoding: utf-8
 class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
@@ -25,10 +26,17 @@ class ProductsController < ApplicationController
   # GET /products/new.json
   def new
     @product = Product.new
+    @product.product_base_id = params[:product_basis_id]
 
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @product }
+      if params[:product_basis_id]
+        format.html # new.html.erb
+        format.json { render json: @product }
+      else
+        flash[:error] = "Você não pode fazer isso!"
+        format.html { redirect_to product_bases_path }# new.html.erb
+        format.json { render json: @product }
+      end
     end
   end
 

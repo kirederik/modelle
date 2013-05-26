@@ -1,8 +1,9 @@
 #encoding: utf-8
 class Product < ActiveRecord::Base
-  attr_accessible :name, :color, :line, :size, :description
+  attr_accessible :name, :color, :line, :size, :description, :product_base_id
 
   has_many :product_orders
+  belongs_to :product_base
   
   validates_presence_of :name
 

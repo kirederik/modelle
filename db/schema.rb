@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130521172332) do
+ActiveRecord::Schema.define(:version => 20130526204910) do
 
   create_table "customer_prices", :force => true do |t|
     t.integer  "customer_id"
@@ -25,15 +25,15 @@ ActiveRecord::Schema.define(:version => 20130521172332) do
   add_index "customer_prices", ["product_id"], :name => "index_customer_prices_on_product_id"
 
   create_table "customer_stocks", :force => true do |t|
-    t.integer  "user_id"
+    t.integer  "customer_id"
     t.integer  "product_id"
     t.integer  "quantity"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
+  add_index "customer_stocks", ["customer_id"], :name => "index_customer_stocks_on_customer_id"
   add_index "customer_stocks", ["product_id"], :name => "index_customer_stocks_on_product_id"
-  add_index "customer_stocks", ["user_id"], :name => "index_customer_stocks_on_user_id"
 
   create_table "customers", :force => true do |t|
     t.string   "name"
@@ -129,6 +129,12 @@ ActiveRecord::Schema.define(:version => 20130521172332) do
   add_index "orders", ["order_type_id"], :name => "index_orders_on_order_type_id"
   add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
 
+  create_table "product_bases", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "product_order_outs", :force => true do |t|
     t.integer  "product_order_id"
     t.integer  "quantity"
@@ -181,12 +187,13 @@ ActiveRecord::Schema.define(:version => 20130521172332) do
 
   create_table "products", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "color"
     t.string   "size"
     t.integer  "line"
     t.string   "description"
+    t.integer  "product_base_id"
   end
 
   create_table "transactions", :force => true do |t|
@@ -229,7 +236,6 @@ ActiveRecord::Schema.define(:version => 20130521172332) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "function_id"
     t.string   "login"
   end
 
