@@ -35,7 +35,7 @@
                 <td><%= transaction.customer_stock.customer.name %></td>
                 <td><%= transaction.customer_stock.product.name %></td>
                 <td><%= transaction.quantity %></td>
-                <td><%= transaction.value %></td>
+                <td><%= number_to_currency(transaction.value) %></td>
                 <td>
                     <% if transaction.is_devolution %>
                         <p>Devolução</p>

@@ -1,23 +1,60 @@
-<h1>Listing product_bases</h1>
+<div class="page-header">
+  <h1>Listas de produto</h1>
+</div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="accordion" id="accordion">
+  <% @product_bases.each do |product_base| %>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a href="#product_<%= product_base.id %>" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion">
+          <span class="collapselink code"><%= product_base.code %>:</span><span class="collapselink name"><%= product_base.name %></span><span class="collapselink price">Preço: <%= number_to_currency(product_base.price) %></span>
+        </a>
+      </div>
+      <div id="product_<%= product_base.id %>" class="accordion-body collapse">
+        <div class="accordion-inner">
+          <% if !product_base.products.empty? %>
+            <h5>Variações</h5>
+            <table class="table table-hover">
+              <thead>
+                <th>Nome</th>
+                <th>Tamanho</th>
+                <th>Cor</th>
+                <th>Linha</th>
+                <th>Descrição</th>
+              </thead>
+              <tbody>
+                <% product_base.products.each do |product| %>
+                  <tr>
+                    <td><%= product.name %></td>
+                    <td><%= product.size %></td>
+                    <td><%= product.color %></td>
+                    <td><%= product.line %></td>
+                    <td><%= product.description %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <div class="novariation">
+              <p>Nenhuma variação cadastrada para este produto</p>
+            </div>
+            <hr>
+          <% end %>
+          <p class="new-var">
+            <%= link_to raw('Criar Variação'), new_product_basis_product_path(product_base), :class => "link" %>
+          </p>
+          <div class="form-actions">
+            <%= link_to raw('<i class="icon-eye-open"></i> Visualizar'), product_base, :class => 'btn' %>
+            <span class="divider"></span>
+            <%= link_to raw('<i class="icon-pencil"></i> Editar'), edit_product_basis_path(product_base),  :class => 'btn' %>
+            <span class="divider"></span>
+            <%= link_to raw('<i class="icon-remove"></i> Remover'), product_base, method: :delete, data: { confirm: 'Tem certeza?' },  :class => 'btn' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-<% @product_bases.each do |product_basis| %>
-  <tr>
-    <td><%= product_basis.name %></td>
-    <td><%= link_to 'Show', product_basis %></td>
-    <td><%= link_to 'Edit', edit_product_basis_path(product_basis) %></td>
-    <td><%= link_to 'Destroy', product_basis, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Product base', new_product_basis_path %>
+<br>
+<%= link_to 'Novo produto base', new_product_basis_path, :class => "link" %>

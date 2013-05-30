@@ -1,3 +1,4 @@
+<% price = @customer_stock.product.product_base.price * ( 1 - @customer_stock.customer.discount/100) %>
 <p>
   <b>Customer:</b>
   <%= @customer_stock.customer.name %>
@@ -18,7 +19,7 @@
 
   <div class="form-inputs">
     <%= f.input :customer_stock_id, :as => :hidden, :input_html => {:value => @customer_stock.id} %>
-    <%= f.input :value, :as => :hidden, :input_html => {:value => @customer_price.price} %>
+    <%= f.input :value, :as => :hidden, :input_html => {:value => price} %>
     <%= f.input :is_devolution, :as => :hidden, :input_html => {:value => true} %>
     <%= f.input :quantity, :input_html => { :max => @customer_stock.quantity } %>
   </div>
