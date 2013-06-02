@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
         format.html # new.html.erb
         format.json { render json: @product }
       else
-        flash[:error] = "Você não pode fazer isso!"
+        flash[:warn] = "Escolha o produto base para criar um novo produto!"
         format.html { redirect_to product_bases_path }# new.html.erb
         format.json { render json: @product }
       end
@@ -49,6 +49,7 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(params[:product])
+    @product.name = @product.product_base.name +  " " +  @product.name
 
     respond_to do |format|
       if @product.save

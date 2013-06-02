@@ -1,5 +1,5 @@
 <%= form_tag production_items_path, :class => "form-search", :method => :get do %>
-  <legend>Vizualizar: </legend>
+  <legend>Visualizar: </legend>
   <%= select_tag "production_status_id",  options_for_select(ProductionStatus.all.collect{ |u| [u.name, u.id]}, :selected => params[:production_status_id]), :class => "input-medium search-query" %>
   <%= submit_tag "Filtrar", :class => "btn btn-primary" %>
 <% end %>

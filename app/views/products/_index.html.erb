@@ -1,5 +1,3 @@
-<h1>Todos os produtos</h1>
-
 <table>
   <tr>
     <th>Nome</th>
@@ -13,7 +11,7 @@
     <th></th>
   </tr>
 
-<% @products.each do |product| %>
+<% products.each do |product| %>
   <tr>
     <td><%= product.name %></td>
     <td><%= product.size %></td>
@@ -28,6 +26,4 @@
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Product', new_product_path %>
+<br>

@@ -1,14 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b>Nome:</b>
   <%= @product.name %>
-  <%= @product.color %>
-  <%= @product.size %>
-  <%= @product.line %>
-  <%= @product.description %>
 </p>
 
+<p>
+  <b>Cor:</b>
+  <%= @product.color %>
+</p>
+
+<p>
+  <b>Tamanho:</b>
+  <%= @product.size %>
+</p>
+
+<p>
+  <b>Linha:</b>
+  <%= @product.line %>
+</p>
+
+<p>
+  <b>Descrição:</b>
+  <%= @product.description %>
+</p>
 
 <%= link_to 'Editar', edit_product_path(@product) %> |
 <%= link_to 'Novo produto', new_product_path %>

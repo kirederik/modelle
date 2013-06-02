@@ -5,6 +5,8 @@
   <%= @product_basis.name %>
 </p>
 
+<%= render "products/index", :products => @product_basis.products %>
+
 <%= link_to 'Criar Variações', new_product_basis_product_path(@product_basis), :class => "btn btn-primary" %>
 <%= link_to 'Editar', edit_product_basis_path(@product_basis), :class => "btn" %> |
 <%= link_to 'Todos os produtos', product_bases_path, :class => "btn" %>

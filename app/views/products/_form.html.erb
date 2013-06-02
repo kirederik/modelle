@@ -15,7 +15,7 @@
     </div>
     <%= f.input :color %>
     <%= f.input :size %>
-    <%= f.input :line %>
+    <%= f.input :line, :as => :select, :collection => 1..2 %>
     <%= f.input :description %>
   </div>
 
