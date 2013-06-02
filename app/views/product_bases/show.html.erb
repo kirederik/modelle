@@ -1,12 +1,49 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @product_basis.name %>
-</p>
+<div class="page-header">
+	<h3><%= @product_basis.code + ': ' + @product_basis.name %></h3>
+</div>
 
-<%= render "products/index", :products => @product_basis.products %>
+<div class="page-header">
+	<p>
+	Preço atual: <%= number_to_currency(@product_basis.price) %>
+	<span class="divider"></span><%= link_to 'Editar este produto', edit_product_basis_path(@product_basis), :class => "link" %>
+	</p>
+</div>
 
-<%= link_to 'Criar Variações', new_product_basis_product_path(@product_basis), :class => "btn btn-primary" %>
-<%= link_to 'Editar', edit_product_basis_path(@product_basis), :class => "btn" %> |
-<%= link_to 'Todos os produtos', product_bases_path, :class => "btn" %>
+<div class="row-fluid">
+	
+	<div class="span4">
+		<h4>Variações</h4>
+	</div>
+
+	<div class="span8">
+		
+			<%= link_to raw('<i class="icon-plus"></i>  Criar Variação'), new_product_basis_product_path(@product_basis), :class => "btn" %>
+		</p>
+	</div>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <th>Nome</th>
+    <th>Tamanho</th>
+    <th>Cor</th>
+    <th>Linha</th>
+    <th>Descrição</th>
+  </thead>
+  <tbody>
+    <% @product_basis.products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.size %></td>
+        <td><%= product.color %></td>
+        <td><%= product.line %></td>
+        <td><%= product.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><%= link_to 'Voltar para todos os produtos', product_bases_path, :class => "link" %>
+	</p>

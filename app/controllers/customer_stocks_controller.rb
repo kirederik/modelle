@@ -21,10 +21,9 @@ class CustomerStocksController < ApplicationController
 
   def doReckoning
     @customer_stock = CustomerStock.find(params[:id])
-    @customer_price = CustomerPrice.where('customer_id = ? AND product_id = ?', @customer_stock.customer_id, @customer_stock.product_id)[0]
     @transaction = Transaction.new
     respond_to do |format|
-      if !@customer_price
+      if !@customer_stock.product.product_base.price
         format.html { redirect_to customer_stocks_reckoning_list_path, :notice => "Cadastre o custo deste produto para este cliente"}            
       else
         format.html { render "reckoning_update.html.erb"}
@@ -44,15 +43,10 @@ class CustomerStocksController < ApplicationController
 
   def doDevolution
     @customer_stock = CustomerStock.find(params[:id])
-    @customer_price = CustomerPrice.where('customer_id = ? AND product_id = ?', @customer_stock.customer_id, @customer_stock.product_id)[0]
     @transaction = Transaction.new
     respond_to do |format|
-      if !@customer_price
-        format.html { redirect_to customer_stocks_reckoning_list_path, :notice => "Cadastre o custo deste produto para este cliente"}            
-      else
-        format.html { render "devolution_update.html.erb"}
-        format.json { render json: @customer_stock }
-      end
+      format.html { render "devolution_update.html.erb"}
+      format.json { render json: @customer_stock }
     end
   end
 

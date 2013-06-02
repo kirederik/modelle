@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130526204910) do
+ActiveRecord::Schema.define(:version => 20130530204003) do
 
   create_table "customer_prices", :force => true do |t|
     t.integer  "customer_id"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20130526204910) do
     t.text     "observations"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.float    "discount"
   end
 
   create_table "events", :force => true do |t|
@@ -133,6 +134,8 @@ ActiveRecord::Schema.define(:version => 20130526204910) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.float    "price"
+    t.string   "code"
   end
 
   create_table "product_order_outs", :force => true do |t|
@@ -199,7 +202,7 @@ ActiveRecord::Schema.define(:version => 20130526204910) do
   create_table "transactions", :force => true do |t|
     t.integer  "customer_stock_id"
     t.integer  "quantity"
-    t.integer  "value"
+    t.float    "value"
     t.boolean  "is_devolution"
     t.datetime "create_at"
     t.datetime "created_at",        :null => false

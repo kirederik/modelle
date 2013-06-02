@@ -1,3 +1,46 @@
 // Place all the styles related to the ProductBases controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.code {
+	width: 100px;
+}
+
+.price {
+	width: 200px;
+}
+
+.name {
+	width: 300px;
+	text-align: left;
+}
+
+.collapselink {
+	display: inline-block;
+}
+
+a:visited {
+	&.btn {
+		&.btn-info, &.btn-primary {
+			color: white;
+		}
+	}
+	&.link {
+		color: #0088cc;
+	}
+	
+}
+
+.link {
+	color: #0088cc;
+}
+
+.divider {
+	border-right: 1px black solid;
+	height: 15px;
+	margin: 0px 10px;
+}
+
+.accordion-inner {
+	padding: 20px;
+}

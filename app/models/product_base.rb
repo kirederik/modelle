@@ -1,8 +1,7 @@
 class ProductBase < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :code, :price
   
   has_many :products, dependent: :destroy
 
-  validates_presence_of :name
-
+  validates_presence_of :name, :code
 end
