@@ -1,0 +1,27 @@
+<h1>Estoque Das Filiais</h1>
+
+<table>
+  <tr>
+    <th>Filial</th>
+    <th>Produto</th>
+    <th>Quantidade</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @filial_stocks.each do |filial_stock| %>
+  <tr>
+    <td><%= filial_stock.filial %></td>
+    <td><%= filial_stock.product %></td>
+    <td><%= filial_stock.quantity %></td>
+    <td><%= link_to 'Ver', filial_stock %></td>
+    <td><%= link_to 'Editar', edit_filial_stock_path(filial_stock) %></td>
+    <td><%= link_to 'Apagar', filial_stock, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Adicionar ao estoque', new_filial_stock_path %>

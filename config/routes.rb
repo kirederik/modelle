@@ -1,4 +1,7 @@
 Modelle::Application.routes.draw do
+  resources :filial_stocks
+
+
   resources :product_bases do
     resources :products
   end

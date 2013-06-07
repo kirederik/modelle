@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130530204003) do
+ActiveRecord::Schema.define(:version => 20130607011642) do
 
   create_table "customer_prices", :force => true do |t|
     t.integer  "customer_id"
@@ -93,6 +93,23 @@ ActiveRecord::Schema.define(:version => 20130530204003) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "filial_stocks", :force => true do |t|
+    t.integer  "filial_id"
+    t.integer  "product_id"
+    t.integer  "quantity"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "filial_stocks", ["filial_id"], :name => "index_filial_stocks_on_filial_id"
+  add_index "filial_stocks", ["product_id"], :name => "index_filial_stocks_on_product_id"
+
+  create_table "filials", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "functions", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -103,6 +120,18 @@ ActiveRecord::Schema.define(:version => 20130530204003) do
     t.integer "user_id"
     t.integer "function_id"
   end
+
+  create_table "manage_filial_stocks", :force => true do |t|
+    t.integer  "quantity"
+    t.integer  "product_id"
+    t.integer  "filial_id"
+    t.string   "type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "manage_filial_stocks", ["filial_id"], :name => "index_manage_filial_stocks_on_filial_id"
+  add_index "manage_filial_stocks", ["product_id"], :name => "index_manage_filial_stocks_on_product_id"
 
   create_table "order_statuses", :force => true do |t|
     t.string   "name"

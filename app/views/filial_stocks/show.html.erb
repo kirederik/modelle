@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Filial:</b>
+  <%= @filial_stock.filial %>
+</p>
+
+<p>
+  <b>Produto:</b>
+  <%= @filial_stock.product %>
+</p>
+
+<p>
+  <b>Quantidade:</b>
+  <%= @filial_stock.quantity %>
+</p>
+
+
+<%= link_to 'Editar', edit_filial_stock_path(@filial_stock) %> |
+<%= link_to 'Voltar', filial_stocks_path %>
