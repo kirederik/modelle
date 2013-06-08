@@ -1,3 +1,4 @@
+#encoding: utf-8
 class FilialStocksController < ApplicationController
   # GET /filial_stocks
   # GET /filial_stocks.json
@@ -40,15 +41,57 @@ class FilialStocksController < ApplicationController
   # POST /filial_stocks
   # POST /filial_stocks.json
   def create
-    @filial_stock = FilialStock.new(params[:filial_stock])
+
+    manage_filial_stock = ManageFilialStock.new
+
+    manage_filial_stock.product_id = params[:filial_stock][:product_id]
+    manage_filial_stock.filial_id = params[:filial_stock][:filial_id]
+    manage_filial_stock.quantity = params[:filial_stock][:quantity]
+    manage_filial_stock.type = params[:filial_stock][:type]
+
+    puts params[:filial_stock][:type]
+
+    @filial_stock = FilialStock.where(product_id: manage_filial_stock.product_id, filial_id: manage_filial_stock.filial_id).first
+
+
+    puts manage_filial_stock.attr_ok?
+
+    error = false
+    if @filial_stock == nil && manage_filial_stock.attr_ok?
+
+      @filial_stock = FilialStock.new
+      @filial_stock.product = manage_filial_stock.product
+      @filial_stock.filial = manage_filial_stock.filial
+      @filial_stock.quantity = manage_filial_stock.quantity
+
+      manage_filial_stock.save
+
+      @filial_stock.save
+      
+    elsif manage_filial_stock.attr_ok?
+      @filial_stock.quantity = @filial_stock.quantity + manage_filial_stock.quantity
+      manage_filial_stock.save
+      @filial_stock.save
+    else
+      flash[:error] = "Preencha todos os campos"
+      error = true
+    end
+
+    #@filial_stock = FilialStock.new(params[:filial_stock])
 
     respond_to do |format|
-      if @filial_stock.save
-        format.html { redirect_to @filial_stock, notice: 'Filial stock was successfully created.' }
-        format.json { render json: @filial_stock, status: :created, location: @filial_stock }
-      else
+      # if @filial_stock.save
+      #   format.html { redirect_to @filial_stock, notice: 'Filial stock was successfully created.' }
+      #   format.json { render json: @filial_stock, status: :created, location: @filial_stock }
+      # else
+      #   format.html { render action: "new" }
+      #   format.json { render json: @filial_stock.errors, status: :unprocessable_entity }
+      # end
+      if error
+        @filial_stock = FilialStock.new
         format.html { render action: "new" }
-        format.json { render json: @filial_stock.errors, status: :unprocessable_entity }
+      else
+        format.html { redirect_to filial_stocks_path, notice: "Estoque Atualizado!" }
       end
     end
   end
