@@ -7,6 +7,10 @@ class Product < ActiveRecord::Base
   
   validates_presence_of :name
 
+  def name_with_informations
+    "#{name} #{color} #{size}"
+  end
+
   def verify_feedstock
     status = []
     feedstocks = FeedstockByProduct.where(product_id: self.id)

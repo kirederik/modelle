@@ -205,3 +205,30 @@ pt_BR:
   activerecord:
     errors:
       <<: *errors
+    models:
+      user: Usuário
+      customer: Cliente
+      order: Pedido
+      product_stock: Estoque de Produtos
+    attributes:
+      customer:
+        name: Nome
+        cpf_cnpj: CPF/CNPJ
+        municipal_number: Incrição Municipal
+        tribute: Tributação
+        addres: Endereço
+        city: Cidade
+        state: Estado
+        phone1: Telefone 1
+        phone2: Telefone 2
+        mobile: Celular
+        discount: Desconto
+        observations: Observações
+      order:
+        order_type: Tipo de Pedido
+        created_at: Data de Criação        
+        updated_at: Data de Atualização
+        order_status: Estado do Pedido
+      product_stock:
+        product: Produto
+        quantity: Quantidade

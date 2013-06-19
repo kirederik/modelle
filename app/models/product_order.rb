@@ -23,4 +23,5 @@ class ProductOrder < ActiveRecord::Base
     
     return 0
   end
+
 end

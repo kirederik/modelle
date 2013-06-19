@@ -9,23 +9,23 @@
 
 
 <h2>Todos os cliente</h2>
-<table>
+<table class="table table-striped table-hover">
   <tr>
-    <th>Name</th>
-    <th>Cpf cnpj</th>
-    <th>Municipal number</th>
+    <th>Nome</th>
+    <th>CPF/CNPJ</th>
+    <th>Incrição municipal</th>
     <th>Suframa</th>
-    <th>Tribute</th>
-    <th>Addres</th>
-    <th>City</th>
-    <th>State</th>
-    <th>Phone1</th>
-    <th>Phone2</th>
+    <th>Tributação</th>
+    <th>Endereço</th>
+    <th>Cidade</th>
+    <th>Estado</th>
+    <th>Telefone 1</th>
+    <th>Telefone 2</th>
     <th>Fax</th>
-    <th>Mobile</th>
+    <th>Celular</th>
     <th>Email</th>
-    <th>User</th>
-    <th>Observations</th>
+    <th>Criador (Usuário)</th>
+    <th>Observações</th>
     <th></th>
     <th></th>
     <th></th>
@@ -48,13 +48,13 @@
     <td><%= customer.email %></td>
     <td><%= customer.user.name %></td>
     <td><%= customer.observations %></td>
-    <td><%= link_to 'Show', customer %></td>
-    <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-    <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Ver', customer %></td>
+    <td><%= link_to 'Editar', edit_customer_path(customer) %></td>
+    <td><%= link_to 'Apagar', customer, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Customer', new_customer_path %>
+<%= link_to 'Cadastrar Cliente', new_customer_path, :class => "btn" %>

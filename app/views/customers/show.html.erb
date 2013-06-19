@@ -1,17 +1,17 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b>Nome:</b>
   <%= @customer.name %>
 </p>
 
 <p>
-  <b>Cpf cnpj:</b>
+  <b>CPF/CNPJ:</b>
   <%= @customer.cpf_cnpj %>
 </p>
 
 <p>
-  <b>Municipal number:</b>
+  <b>Inscrição municipal:</b>
   <%= @customer.municipal_number %>
 </p>
 
@@ -21,32 +21,32 @@
 </p>
 
 <p>
-  <b>Tribute:</b>
+  <b>Tributação:</b>
   <%= @customer.tribute %>
 </p>
 
 <p>
-  <b>Addres:</b>
+  <b>Endereço:</b>
   <%= @customer.addres %>
 </p>
 
 <p>
-  <b>City:</b>
+  <b>Cidade:</b>
   <%= @customer.city %>
 </p>
 
 <p>
-  <b>State:</b>
+  <b>Estado:</b>
   <%= @customer.state %>
 </p>
 
 <p>
-  <b>Phone1:</b>
+  <b>Telefone 2:</b>
   <%= @customer.phone1 %>
 </p>
 
 <p>
-  <b>Phone2:</b>
+  <b>Telefone 2:</b>
   <%= @customer.phone2 %>
 </p>
 
@@ -56,7 +56,7 @@
 </p>
 
 <p>
-  <b>Mobile:</b>
+  <b>Celular:</b>
   <%= @customer.mobile %>
 </p>
 
@@ -71,7 +71,7 @@
 </p>
 
 <p>
-  <b>Observations:</b>
+  <b>Observações:</b>
   <%= @customer.observations %>
 </p>
 
@@ -81,4 +81,4 @@
 </p>
 
 
-<%= link_to 'Edit', edit_customer_path(@customer) %>
+<%= link_to 'Editar', edit_customer_path(@customer), class: "btn" %>

@@ -1,25 +1,26 @@
-<h1>Listing product_stocks</h1>
-
-<table>
+<h1>Estoque de Produtos</h1>
+<legend></legend>
+<table class="table table-striped table-hover">
   <tr>
-    <th>Product</th>
-    <th>Quantity</th>
+    <th>Produto</th>
+    <th>Quantidade</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
 <% @product_stocks.each do |product_stock| %>
+  <% p = product_stock.product %>
   <tr>
-    <td><%= product_stock.product.name %></td>
+    <td><%= product_stock.product.name + " " +  p.color +  " " + p.size %></td>
     <td><%= product_stock.quantity %></td>
-    <td><%= link_to 'Show', product_stock %></td>
-    <td><%= link_to 'Edit', edit_product_stock_path(product_stock) %></td>
-    <td><%= link_to 'Destroy', product_stock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Ver', product_stock %></td>
+    <td><%= link_to 'Editar', edit_product_stock_path(product_stock) %></td>
+    <td><%= link_to 'Apagar', product_stock, method: :delete, data: { confirm: 'Tem Certeza?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Product stock', new_product_stock_path %>
+<%= link_to 'Adicionar item ao estoque', new_product_stock_path, class: "btn" %>

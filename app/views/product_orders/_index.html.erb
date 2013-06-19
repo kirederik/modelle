@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<table>
+<table class="table table-striped table-hover">
   <tr>
     <th>Order</th>
     <th>Product</th>
@@ -24,7 +24,7 @@
   <% product_orders.each do |product_order| %>
     <tr>
       <td><%= product_order.order.id %></td>
-      <td><%= product_order.product.name %></td>
+      <td><%= product_order.product.name_with_informations %></td>
       <td><%= product_order.quantity %></td>
 
       <% if product_order.status == 'estoque'%>
@@ -49,7 +49,7 @@
         <td><p class="warm <%= product_order.id %>">Faltando: <%= product_order.products_missing %> </p></td>
         <td></td>
       <% end %>
-      <td><%= link_to 'Destroy', product_order, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+      <td><%= link_to 'Apagar', product_order, method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn btn-danger" %></td>
     </tr>
   <% end %>
 </table>
