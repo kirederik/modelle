@@ -44,7 +44,7 @@ class FeedstocksController < ApplicationController
 
     respond_to do |format|
       if @feedstock.save
-        format.html { redirect_to @feedstock, notice: 'Feedstock was successfully created.' }
+        format.html { redirect_to @feedstock, notice: 'Estoque criado.' }
         format.json { render json: @feedstock, status: :created, location: @feedstock }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class FeedstocksController < ApplicationController
 
     respond_to do |format|
       if @feedstock.update_attributes(params[:feedstock])
-        format.html { redirect_to @feedstock, notice: 'Feedstock was successfully updated.' }
+        format.html { redirect_to @feedstock, notice: 'Estoque atualizado.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

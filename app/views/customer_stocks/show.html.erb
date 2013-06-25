@@ -1,20 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Customer:</b>
+  <b>Cliente:</b>
   <%= @customer_stock.customer.name %>
 </p>
 
 <p>
-  <b>Product:</b>
+  <b>Produto:</b>
   <%= @customer_stock.product.name %>
 </p>
 
 <p>
-  <b>Quantity:</b>
+  <b>Quantidade:</b>
   <%= @customer_stock.quantity %>
 </p>
 
 
-<%= link_to 'Edit', edit_customer_stock_path(@customer_stock) %> |
-<%= link_to 'Back', customer_stocks_path %>
+<%= link_to 'Editar', edit_customer_stock_path(@customer_stock), class: "link" %> |
+<%= link_to 'Estoque', customer_stocks_path, class: "link" %>

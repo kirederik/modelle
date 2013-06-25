@@ -1,3 +1,4 @@
+#encoding: utf-8
 class FunctionsController < ApplicationController
   # GET /functions
   # GET /functions.json
@@ -44,7 +45,7 @@ class FunctionsController < ApplicationController
 
     respond_to do |format|
       if @function.save
-        format.html { redirect_to @function, notice: 'Function was successfully created.' }
+        format.html { redirect_to @function, notice: 'Nova função criada com sucesso.' }
         format.json { render json: @function, status: :created, location: @function }
       else
         format.html { render action: "new" }
@@ -60,7 +61,7 @@ class FunctionsController < ApplicationController
 
     respond_to do |format|
       if @function.update_attributes(params[:function])
-        format.html { redirect_to @function, notice: 'Function was successfully updated.' }
+        format.html { redirect_to @function, notice: 'Função atualizada.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
