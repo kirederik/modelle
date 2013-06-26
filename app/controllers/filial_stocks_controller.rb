@@ -3,8 +3,13 @@ class FilialStocksController < ApplicationController
   # GET /filial_stocks
   # GET /filial_stocks.json
   def index
-    @filial_stocks = FilialStock.all
-
+    @filial_stocks = nil
+    if params[:filial_id]
+      @filial_stocks = FilialStock.where(filial_id: params[:filial_id])
+    else
+      @filial_stocks = FilialStock.all
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @filial_stocks }

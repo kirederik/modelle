@@ -212,6 +212,8 @@ pt_BR:
       product_stock: Estoque de Produtos
       product_base: Produto Base
       customer_stock: Estoque de clientes
+      user: Funcionário
+      production_item: Fila de Produção
     attributes:
       customer:
         name: Nome
@@ -242,3 +244,24 @@ pt_BR:
         customer: Cliente
         product: Produto
         quantity: Quantidade
+      user:
+        name: Nome
+        rg: RG
+        cpf: CPF
+        hide_date: Data de Contratação
+        fire_date: Data de Demissão
+        address: Endereço
+        city: Cidade
+        state: Estado
+        cep: CEP
+        phone1: Telefone 1
+        phone2: Telefone 2
+        cel_number: Celular
+        email: Email
+        wage: Salário
+        observations: Observações
+        login: Login
+        dateofbirth: Data de Nascimento
+      production_item:
+        production_status: Status
+        order: Pedido

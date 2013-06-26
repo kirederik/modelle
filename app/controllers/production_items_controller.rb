@@ -73,7 +73,6 @@ class ProductionItemsController < ApplicationController
           have_feedstock = false
         end
       end
-      puts "já passou"
 
       if !have_feedstock
         
@@ -82,14 +81,16 @@ class ProductionItemsController < ApplicationController
 
       elsif @production_item.save
 
-        product_orders = ProductOrder.where(order_id: @production_item.order_id, product_id: po.product_id)
+        @production_item.product_order_outs.each do |po| 
+          product_orders = ProductOrder.where(order_id: @production_item.order_id, product_id: po.product_id)
 
-        product_orders.each do |p|
-          p.status = 'producao'
-          p.save
+          product_orders.each do |p|
+            p.status = 'producao'
+            p.save
+          end
         end
 
-        format.html { redirect_to @production_item, notice: 'Production item was successfully created.' }
+        format.html { redirect_to @production_item, notice: 'Enviado a produção com sucesso.' }
         format.json { render json: @production_item, status: :created, location: @production_item }
       else
         format.html { render action: "new" }
@@ -116,7 +117,7 @@ class ProductionItemsController < ApplicationController
 
     respond_to do |format|
       if @production_item.update_attributes(params[:production_item])
-        format.html { redirect_to @production_item, notice: 'Production item was successfully updated.' }
+        format.html { redirect_to @production_item, notice: 'Atualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

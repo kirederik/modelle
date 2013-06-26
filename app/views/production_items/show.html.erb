@@ -1,7 +1,5 @@
 <%= render "information" %>
-
-<p id="notice"><%= notice %></p>
-
+<legend><strong>Item em produção:</strong> Resumo</legend>
 <p>
   <b>Status:</b>
   <%= @production_item.production_status.name %>
@@ -21,6 +19,7 @@
 
 
 <% if @production_item.production_status.name != "Estoque" %>
+  <legend>Ações</legend>
   <%= simple_form_for(@production_item) do |f| %>
     <%= f.error_notification %>
 

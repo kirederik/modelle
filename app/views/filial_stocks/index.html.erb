@@ -1,6 +1,15 @@
 <h1>Estoque Das Filiais</h1>
 
-<table>
+
+<%= form_tag filial_stocks_path, :class => "form-search", :method => :get do %>
+  <legend>Filtrar por Filial</legend>
+  <%= select_tag "filial_id",  options_for_select(Filial.all.collect{ |u| [u.name, u.id]}), :class => "input-medium search-query" %>
+  <%= submit_tag "Filtrar", :class => "btn btn-primary" %>
+<% end %>
+
+
+
+<table class="table table-striped table-hover">
   <tr>
     <th>Filial</th>
     <th>Produto</th>
@@ -13,7 +22,7 @@
 <% @filial_stocks.each do |filial_stock| %>
   <tr>
     <td><%= filial_stock.filial.name %></td>
-    <td><%= filial_stock.product.name %></td>
+    <td><%= filial_stock.product.name_with_informations %></td>
     <td><%= filial_stock.quantity %></td>
     <td><%= link_to 'Ver', filial_stock %></td>
     <td><%= link_to 'Editar', edit_filial_stock_path(filial_stock) %></td>
