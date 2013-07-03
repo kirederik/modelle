@@ -125,9 +125,9 @@ ActiveRecord::Schema.define(:version => 20130607011642) do
     t.integer  "quantity"
     t.integer  "product_id"
     t.integer  "filial_id"
-    t.string   "type"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "action_type"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "manage_filial_stocks", ["filial_id"], :name => "index_manage_filial_stocks_on_filial_id"

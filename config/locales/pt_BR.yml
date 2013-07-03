@@ -215,6 +215,7 @@ pt_BR:
       user: Funcionário
       production_item: Fila de Produção
       product: Produto
+      filial_stock: Estoque Das Filiais
     attributes:
       customer:
         name: Nome
@@ -272,3 +273,7 @@ pt_BR:
         size: Tamanho
         linha: Linha
         description: Descrição
+      filial_stock:
+        quantity: Quantidade
+        filial: Filial
+        product: Produto

@@ -1,6 +1,18 @@
 <h1>Editar Estoque das Filiais</h1>
 
-<%= render 'form' %>
+<%= simple_form_for(@filial_stock) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :filial, :include_blank => false %>
+    <%= f.association :product, :include_blank => false, label_method: :name_with_informations, class: "input-xlarge" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
 
 <%= link_to 'Ver', @filial_stock %> |
 <%= link_to 'Voltar', filial_stocks_path %>

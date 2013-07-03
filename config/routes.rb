@@ -1,5 +1,7 @@
 Modelle::Application.routes.draw do
-  resources :filial_stocks
+  resources :filial_stocks do
+    get :remove_from_stock
+  end
 
 
   resources :product_bases do

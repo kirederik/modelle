@@ -52,14 +52,11 @@ class FilialStocksController < ApplicationController
     manage_filial_stock.product_id = params[:filial_stock][:product_id]
     manage_filial_stock.filial_id = params[:filial_stock][:filial_id]
     manage_filial_stock.quantity = params[:filial_stock][:quantity]
-    manage_filial_stock.type = params[:filial_stock][:type]
+    manage_filial_stock.action_type = params[:filial_stock][:action_type]
 
-    puts params[:filial_stock][:type]
 
     @filial_stock = FilialStock.where(product_id: manage_filial_stock.product_id, filial_id: manage_filial_stock.filial_id).first
 
-
-    puts manage_filial_stock.attr_ok?
 
     error = false
     if @filial_stock == nil && manage_filial_stock.attr_ok?
@@ -106,13 +103,28 @@ class FilialStocksController < ApplicationController
   def update
     @filial_stock = FilialStock.find(params[:id])
 
+    if (params[:filial_stock][:action_type] == "remove")
+      @filial_stock.quantity = @filial_stock.quantity - params[:filial_stock][:quantity].to_i
+
+      manage_filial_stock = ManageFilialStock.new
+
+      manage_filial_stock.product_id = @filial_stock.product_id
+      manage_filial_stock.filial_id = @filial_stock.filial_id
+      manage_filial_stock.quantity = @filial_stock.quantity
+      manage_filial_stock.action_type = params[:filial_stock][:action_type]
+      manage_filial_stock.save
+    else
+      @filial_stock.filial_id = params[:filial_stock][:filial_id]
+      @filial_stock.product_id = params[:filial_stock][:product_id]
+    end
+
     respond_to do |format|
-      if @filial_stock.update_attributes(params[:filial_stock])
-        format.html { redirect_to @filial_stock, notice: 'Filial stock was successfully updated.' }
+      if @filial_stock.save
+        format.html { redirect_to @filial_stock, notice: 'Estoque das Filials Atualizados Com Sucesso' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @filial_stock.errors, status: :unprocessable_entity }
+        flash[:error] = "Erro ao atualizar estoque das filiais"
+        format.html {redirect_to filial_stocks_path}
       end
     end
   end
@@ -127,5 +139,10 @@ class FilialStocksController < ApplicationController
       format.html { redirect_to filial_stocks_url }
       format.json { head :no_content }
     end
+  end
+
+  def remove_from_stock
+    @filial_stock = FilialStock.find(params[:filial_stock_id])
+    
   end
 end

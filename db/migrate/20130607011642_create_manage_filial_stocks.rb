@@ -4,7 +4,7 @@ class CreateManageFilialStocks < ActiveRecord::Migration
       t.integer :quantity
       t.belongs_to :product
       t.belongs_to :filial
-      t.string :type
+      t.string :action_type
 
       t.timestamps
     end
