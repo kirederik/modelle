@@ -214,6 +214,7 @@ pt_BR:
       customer_stock: Estoque de clientes
       user: Funcionário
       production_item: Fila de Produção
+      product: Produto
     attributes:
       customer:
         name: Nome
@@ -265,3 +266,9 @@ pt_BR:
       production_item:
         production_status: Status
         order: Pedido
+      product:
+        name: Nome
+        color: Cor
+        size: Tamanho
+        linha: Linha
+        description: Descrição

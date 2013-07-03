@@ -5,7 +5,6 @@
     <p>Cliente: <%= @order.customer.name %></p>
     <%= unless @order.order_status != nil 
       f.association :order_status
-      f.association :order_type
     end %>
     <%= f.input :customer_id, :as => :hidden, :input_html => {:value => @order.customer_id} %>
     <%= f.input :user_id, :as => :hidden, :input_html => {:value => @order.user_id} %>

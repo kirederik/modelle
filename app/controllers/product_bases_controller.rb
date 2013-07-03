@@ -45,7 +45,7 @@ class ProductBasesController < ApplicationController
 
     respond_to do |format|
       if @product_basis.save
-        format.html { redirect_to @product_basis, notice: 'Product base was successfully created.' }
+        format.html { redirect_to @product_basis, notice: 'Produto Base criado com sucesso.' }
         format.json { render json: @product_basis, status: :created, location: @product_basis }
       else
         format.html { render action: "new" }
@@ -61,7 +61,7 @@ class ProductBasesController < ApplicationController
 
     respond_to do |format|
       if @product_basis.update_attributes(params[:product_base])
-        format.html { redirect_to @product_basis, notice: 'Product base was successfully updated.' }
+        format.html { redirect_to @product_basis, notice: 'Produto Base atualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
