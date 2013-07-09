@@ -4,7 +4,7 @@
   <div class="form-inputs">
     <%= f.input :product_base_id, :as => :hidden %>
 
-    <div class="control-group string required">
+    <!-- <div class="control-group string required">
       <label class="string optional control-label" for="product_nome">* Nome</label>
       <div class="controls">
         <div class="input-prepend">
@@ -12,11 +12,22 @@
           <%= text_field_tag :name, @product.name, :id => "product_name", :name => "product[name]" %>
         </div>
       </div>
-    </div>
-    <%= f.input :color %>
-    <%= f.input :size %>
-    <%= f.input :line, :as => :select, :collection => 1..2 %>
-    <%= f.input :description %>
+    </div> -->
+    <label class="check_boxes required control-label"><abbr title="obrigatório">*</abbr> Cores</label>
+    <% ProductColor.all.each do |c| %>
+      <label class="checkbox">
+        <%= check_box_tag 'product[product_color_id][]', c.id%>
+        <%= c.name %>
+      </label>
+    <% end %>
+
+    <label class="check_boxes required control-label"><abbr title="obrigatório">*</abbr> Tamanhos</label>
+    <% ProductSize.all.each do |s| %>
+      <label class="checkbox">
+        <%= check_box_tag 'product[product_size_id][]', s.id %>
+        <%= s.name %>
+      </label>
+    <% end %>
   </div>
 
   <div class="form-actions">

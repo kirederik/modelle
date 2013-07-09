@@ -26,20 +26,14 @@
 
 <table class="table table-hover">
   <thead>
-    <th>Nome</th>
     <th>Tamanho</th>
     <th>Cor</th>
-    <th>Linha</th>
-    <th>Descrição</th>
   </thead>
   <tbody>
     <% @product_basis.products.each do |product| %>
       <tr>
-        <td><%= product.name %></td>
-        <td><%= product.size %></td>
-        <td><%= product.color %></td>
-        <td><%= product.line %></td>
-        <td><%= product.description %></td>
+        <td><%= product.product_color.name unless product.product_color == nil %></td>
+        <td><%= product.product_size.name unless product.product_size == nil%></td>
       </tr>
     <% end %>
   </tbody>

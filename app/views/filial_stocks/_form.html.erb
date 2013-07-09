@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.association :filial, :include_blank => false %>
-    <%= f.association :product, :include_blank => false, label_method: :name_with_informations, class: "input-xlarge" %>
+    <%= f.association :product, :include_blank => false, label_method: :name, class: "input-xlarge" %>
     <%= f.input :quantity %>
     <%= hidden_field_tag "[filial_stock][action_type]", "add" %>
   </div>

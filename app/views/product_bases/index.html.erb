@@ -26,8 +26,8 @@
                 <% product_base.products.each do |product| %>
                   <tr>
                     <td><%= product.name %></td>
-                    <td><%= product.size %></td>
-                    <td><%= product.color %></td>
+                    <td><%= product.product_size.name unless product.product_size == nil %></td>
+                    <td><%= product.product_color unless product.product_color == nil %></td>
                     <td><%= product.line %></td>
                     <td><%= product.description %></td>
                   </tr>
@@ -58,3 +58,6 @@
 
 <br>
 <%= link_to 'Novo produto base', new_product_basis_path, :class => "link" %>
+<legend></legend>
+<%= link_to 'Cores', product_colors_path, :class => "link" %>
+<%= link_to 'Tamanhos', product_sizes_path, :class => "link" %>

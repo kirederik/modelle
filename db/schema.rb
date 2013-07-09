@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130607011642) do
+ActiveRecord::Schema.define(:version => 20130709002545) do
 
   create_table "customer_prices", :force => true do |t|
     t.integer  "customer_id"
@@ -167,6 +167,12 @@ ActiveRecord::Schema.define(:version => 20130607011642) do
     t.string   "code"
   end
 
+  create_table "product_colors", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "product_order_outs", :force => true do |t|
     t.integer  "product_order_id"
     t.integer  "quantity"
@@ -191,6 +197,12 @@ ActiveRecord::Schema.define(:version => 20130607011642) do
 
   add_index "product_orders", ["order_id"], :name => "index_product_orders_on_order_id"
   add_index "product_orders", ["product_id"], :name => "index_product_orders_on_product_id"
+
+  create_table "product_sizes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "product_stocks", :force => true do |t|
     t.integer  "product_id"
@@ -219,13 +231,13 @@ ActiveRecord::Schema.define(:version => 20130607011642) do
 
   create_table "products", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.string   "color"
-    t.string   "size"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "line"
     t.string   "description"
     t.integer  "product_base_id"
+    t.integer  "product_color_id"
+    t.integer  "product_size_id"
   end
 
   create_table "transactions", :force => true do |t|

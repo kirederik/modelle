@@ -12,7 +12,7 @@
 <% @product_stocks.each do |product_stock| %>
   <% p = product_stock.product %>
   <tr>
-    <td><%= product_stock.product.name_with_informations %></td>
+    <td><%= product_stock.product.name %></td>
     <td><%= product_stock.quantity %></td>
     <td><%= link_to 'Ver', product_stock %></td>
     <td><%= link_to 'Editar', edit_product_stock_path(product_stock) %></td>

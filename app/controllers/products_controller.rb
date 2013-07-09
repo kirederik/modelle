@@ -48,17 +48,45 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(params[:product])
-    @product.name = @product.product_base.name +  " " +  @product.name
+    #@product = Product.new(params[:product])
 
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: 'Produto cadastrado com sucesso.' }
-        format.json { render json: @product, status: :created, location: @product }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+    if params[:product][:product_size_id] && params[:product][:product_color_id]
+      params[:product][:product_size_id].each do |s|
+        size = ProductSize.find(s)
+        params[:product][:product_color_id].each do |c|
+          color = ProductColor.find(c)
+          @product = Product.new
+          @product.product_base_id = params[:product][:product_base_id]
+          @product.product_color_id = c
+          @product.product_size_id = s
+          @product.save
+        end
       end
+
+    elsif params[:product][:product_size_id]
+      params[:product][:product_size_id].each do |s|
+        size = ProductSize.find(s)
+        @product = Product.new
+        @product.product_base_id = params[:product][:product_base_id]
+        @product.product_size_id = s
+        @product.save
+
+      end
+
+    elsif params[:product][:product_color_id]
+      params[:product][:product_color_id].each do |c|
+        color = ProductColor.find(c)
+        @product = Product.new
+        @product.product_base_id = params[:product][:product_base_id]
+        @product.product_size_id = c
+        @product.save
+      end 
+    end
+    #@product.name = @product.product_base.name +  " " +  @product.name
+
+    respond_to do |format|    
+      format.html { redirect_to @product.product_base, notice: 'Produto cadastrado com sucesso.' }
+      format.json { render json: @product, status: :created, location: @product }
     end
   end
 

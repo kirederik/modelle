@@ -6,7 +6,7 @@
 
 <% @production_item.product_order_outs.each do |product_order_out| %>
   <tr>
-    <td><%= product_order_out.product.name_with_informations %></td>
+    <td><%= product_order_out.product.name %></td>
     <td><%= product_order_out.quantity %></td>
   </tr>
 <% end %>

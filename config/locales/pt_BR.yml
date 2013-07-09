@@ -216,6 +216,8 @@ pt_BR:
       production_item: Fila de Produção
       product: Produto
       filial_stock: Estoque Das Filiais
+      product_color: Cores
+      product_size: Tamanhos
     attributes:
       customer:
         name: Nome
@@ -273,7 +275,13 @@ pt_BR:
         size: Tamanho
         linha: Linha
         description: Descrição
+        product_color: Cores
+        product_size: Tamanhos
       filial_stock:
         quantity: Quantidade
         filial: Filial
         product: Produto
+      product_color:
+        name: Nome
+      product_size:
+        name: Nome

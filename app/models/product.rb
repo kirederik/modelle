@@ -1,14 +1,22 @@
 #encoding: utf-8
 class Product < ActiveRecord::Base
-  attr_accessible :name, :color, :line, :size, :description, :product_base_id
+  attr_accessible :product_base_id, :product_color_id, :product_size_id
 
   has_many :product_orders
   belongs_to :product_base
+  belongs_to :product_color
+  belongs_to :product_size
   
-  validates_presence_of :name
+  #validates_presence_of :product_color_id, :product_size_id
 
-  def name_with_informations
-    "#{product_base.code} #{name} #{color} #{size}"
+  def name
+    if product_color && product_size
+      "#{product_base.code} #{product_base.name} #{product_color.name} #{product_size.name}"
+    elsif product_color
+      "#{product_base.code} #{product_base.name} #{product_color.name}"
+    elsif product_size
+      "#{product_base.code} #{product_base.name} #{product_size.name}"
+    end
   end
 
   def verify_feedstock

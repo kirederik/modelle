@@ -1,0 +1,23 @@
+<h1>Cores dos Produtos</h1>
+
+<table class="table table-stripe table-hover">
+  <tr>
+    <th>Nome</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @product_colors.each do |product_color| %>
+  <tr>
+    <td><%= product_color.name %></td>
+    <td><%= link_to 'Ver', product_color %></td>
+    <td><%= link_to 'Editar', edit_product_color_path(product_color) %></td>
+    <td><%= link_to 'Apagar', product_color, method: :delete, data: { confirm: 'Tem Certeza?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Cadastrar Cor', new_product_color_path %>

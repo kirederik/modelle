@@ -1,0 +1,16 @@
+<legend>Remover do Estoque</legend>
+
+<label><strong>Filial: </strong> <%= @filial_stock.filial.name %></label>
+<label><strong>Produto: </strong> <%= @filial_stock.product.name %></label>
+
+<%= simple_form_for(@filial_stock, :html => {class: "form-search"}) do |f| %>
+  <%= f.error_notification %>
+    <div class="filial_remove">
+      <%= f.input :quantity, label: "Quantidade a ser removida", :input_html => {value: 0} %>
+      <%= hidden_field_tag "[filial_stock][action_type]", "remove" %>
+    </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

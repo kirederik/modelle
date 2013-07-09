@@ -3,10 +3,10 @@
     <%= f.fields_for :product_orders, product_order do |product_order_form| %>
       <p class="product_attributes">
         <% if product_order.status != nil %>
-          <%= product_order_form.collection_select :product_id, Product.all, :id, :name_with_informations, {}, {:disabled => "disabled", class: "input-xlarge"} %>
+          <%= product_order_form.collection_select :product_id, Product.all, :id, :name, {}, {:disabled => "disabled", class: "input-xlarge"} %>
           <%= product_order_form.number_field :quantity, {:disabled => "disabled"} %>
         <% else %>
-          <%= product_order_form.collection_select :product_id, Product.all, :id, :name_with_informations, {}, {class: "input-xlarge"} %>
+          <%= product_order_form.collection_select :product_id, Product.all, :id, :name, {}, {class: "input-xlarge"} %>
           <%= product_order_form.number_field :quantity %>
           <%= link_to_function "Remover Produto", "remove_fields(this)", class: "btn btn-danger btn-small" %>
         <% end %>
