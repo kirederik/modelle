@@ -79,11 +79,9 @@ Modelle::Application.routes.draw do
 
   resources :functions
 
-
   devise_for :users
 
   resources :users
-
 
   get "site/index"
 
