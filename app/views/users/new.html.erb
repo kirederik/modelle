@@ -1,5 +1,19 @@
 <legend>Cadastrar novo Funcionário</legend>
 
+<div class="alert alert-block">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4>Atenção, Campos Obrigatórios:</h4>
+  <p></p>
+  <p><strong>Login</strong></p>
+  <p><strong>Nome</strong></p>
+  <p><strong>Data de Contratação</strong></p>
+  <p><strong>RG</strong></p>
+  <p><strong>CPF</strong></p>
+  <p><strong>Data de Nascimento</strong></p>
+  <p><strong>Endereço</strong></p>
+</div>
+
 <%= render 'form' %>
 
 <%= link_to 'Voltar', users_path %>
+

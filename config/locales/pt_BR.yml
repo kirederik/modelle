@@ -266,6 +266,8 @@ pt_BR:
         observations: Observações
         login: Login
         dateofbirth: Data de Nascimento
+        password: Senha
+        password_confirmation: Confirmação da senha
       production_item:
         production_status: Status
         order: Pedido

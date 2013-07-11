@@ -44,7 +44,7 @@ class ProductColorsController < ApplicationController
 
     respond_to do |format|
       if @product_color.save
-        format.html { redirect_to @product_color, notice: 'Product color was successfully created.' }
+        format.html { redirect_to @product_color, notice: 'Cor cadastrada com sucesso.' }
         format.json { render json: @product_color, status: :created, location: @product_color }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class ProductColorsController < ApplicationController
 
     respond_to do |format|
       if @product_color.update_attributes(params[:product_color])
-        format.html { redirect_to @product_color, notice: 'Product color was successfully updated.' }
+        format.html { redirect_to @product_color, notice: 'Cor atualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
