@@ -10,7 +10,8 @@ Modelle::Application.routes.draw do
   # resources :product_descriptions
 
 
-  get "transactions/report" => "transactions#report", :as => "transactions_report"
+  get "transactions/report" =>  "transactions#report", :as => "transactions_report"
+  get "transactions/new/:id" => "transactions#new_from_customer", :as => "new_transaction_from_customer"
   resources :transactions
 
   resources :production_items

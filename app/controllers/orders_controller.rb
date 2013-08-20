@@ -125,7 +125,6 @@ class OrdersController < ApplicationController
         return
       end
     end
-
     respond_to do |format|
       if @order.save
 

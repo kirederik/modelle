@@ -24,9 +24,9 @@ class CustomerStocksController < ApplicationController
     @transaction = Transaction.new
     respond_to do |format|
       if !@customer_stock.product.product_base.price
+        format.html { render "reckoning_update.html.erb"}
         format.html { redirect_to customer_stocks_reckoning_list_path, :notice => "Cadastre o custo deste produto para este cliente"}            
       else
-        format.html { render "reckoning_update.html.erb"}
         format.json { render json: @customer_stock }
       end
     end

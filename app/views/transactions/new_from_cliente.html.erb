@@ -1,0 +1,37 @@
+<h1>Acerto</h1>
+
+<h3>Cliente:  <%= @customer.name %></h3>
+
+
+
+<table class="table table-hover table-stripped">
+	<thead>
+		<th>Código</th>
+		<th>Est. Ant</th>
+		<th>Qtd Env</th>
+		<th>Devolução</th>
+		<th>Total</th>
+		<th>Devolução</th>
+		<th>Est. Atual</th>
+		<th>A pagar</th>
+		<th>R$ Unit **</th>
+		<th>R$ Total</th>
+	</thead>
+  
+  	<tbody>
+  	<% @customer_stock.each do |customer_stock| %>
+      <tr>
+        <td><%= customer_stock.product.product_base.code %></td>
+        <td><%= customer_stock.product.name %></td>
+        <td><%= customer_stock.quantity %></td>
+      </tr>
+    <% end %>
+	</tbody>
+</table>
+
+<% @transaction.each do |transaction| %>
+<p><%= transaction.customer_stock.product.product_base.name %>
+	    <%= transaction.customer_stock.product.name %>
+	    <%= transaction.quantity %>
+	    <%= transaction.value %></p>
+<% end %>

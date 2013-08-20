@@ -32,6 +32,16 @@ class TransactionsController < ApplicationController
     end
   end
 
+  # GET /transactions/new/1
+  def new_from_customer
+    @customer = Customer.find(params[:id])
+    @customer_stock = CustomerStock.where("customer_id = ?", params[:id])
+    @transaction = Transaction.joins(:customer_stock).where("customer_id = ?", params[:id])
+    respond_to do |format|
+      format.html { render "new_from_cliente.html.erb" }
+    end
+  end
+
   # GET /transactions/1/edit
   def edit
     @transaction = Transaction.find(params[:id])
