@@ -13,6 +13,7 @@
     <![endif]-->
 
     <%= stylesheet_link_tag "application", :media => "all" %>
+
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "autocomplete-rails.js" %>
 
@@ -24,7 +25,7 @@
 
     <div class="wrapper">
       
-      <div class="navbar navbar-fluid-top">
+      <div id="navbar-top" class="navbar navbar-fluid-top">
         <div class="navbar-inner">
           <div class="container-fluid">
             <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
@@ -48,21 +49,20 @@
 
       <div class="container-fluid">
         <div class="row-fluid">
-          <div class="span3">
+          <div id="sidenavbar" class="span3">
             <div class="well sidebar-nav">
               <ul class="nav nav-list nav-stacked nav-pills ">
                 <li class="nav-header">Menu Rápido</li>
                 <li><%= link_to "Funções", functions_path  %></li>
                 <li><%= link_to "Usuários", users_path  %></li>
-                <li><%= link_to "Cadastrar Cliente", new_customer_path %></li>
                 <li><%= link_to "Novo pedido de Cliente", customers_path  %></li>
                 <ul class="nav nav-list">
                   <li> <%= link_to "- Pedidos", orders_path %></li>
                   <li> <%= link_to "- Estoque do cliente", customer_stocks_path %></li>
                   <li> <%= link_to "- Transações", transactions_path %></li>
                   <ul class="nav nav-list">
-                    <li> <%= link_to "+ Novo acertos", customer_stocks_reckoning_list_path %></li>
-                    <li> <%= link_to "+ Nova devolução", customer_stocks_devolution_list_path %></li>
+                    <li> <%= link_to "+ Novo acerto", customer_stocks_reckoning_list_path %></li>
+                    <!-- <li> <%= link_to "+ Nova devolução", customer_stocks_devolution_list_path %></li> -->
                   </ul>
                 </ul>
                 <li>Produção</li>
@@ -78,7 +78,7 @@
               </ul>
             </div><!--/.well -->
           </div><!--/span-->
-          <div class="span9">
+          <div class="span9" id="mainArea">
             <%= bootstrap_flash %>
             <%= yield %>
           </div>
@@ -86,7 +86,7 @@
       </div>
       <div class="push"></div>
     </div> <!-- /container -->
-    <div class="footer">
+    <div id="footer" class="footer">
       <p>&copy; Modelle 2013 & Powered By <a href="mailto:rhdeandrade@gmail.com">Raphael de Andrade</a> - <a href="mailto:kirederik@gmail.com">Derik Evangelista</a>  </p>
     </div>
 

@@ -125,7 +125,6 @@ class OrdersController < ApplicationController
         return
       end
     end
-
     respond_to do |format|
       if @order.save
 
@@ -165,5 +164,10 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def coupon
+    @order = Order.find(params[:id])
+  end
+
 end
 

@@ -36,4 +36,6 @@
 
 
 <%= link_to 'Editar', edit_order_path(@order), class: "btn" %> |
-<%= link_to 'Pedidos', orders_path, class: "btn" %>
+<%= link_to 'Pedidos', orders_path, class: "btn" %> | 
+<%= link_to 'Emitir Cupom Fiscal', orders_coupon_path(@order), class: "btn"%> 
+<%= link_to "Download Invoice (PDF)", orders_coupon_path(@order, :format => "pdf"), class: "btn" %>

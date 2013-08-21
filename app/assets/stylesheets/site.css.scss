@@ -31,3 +31,42 @@ a {
 		color: blue;
 	}
 }
+
+.coupon {
+	border: 1px solid black;
+	padding: 20px;
+	img {
+		width: 30%;
+	}
+	h4 {
+		&.client {
+			margin-bottom: 30px;
+		}
+		.normal {
+			font-weight: normal;
+		}
+	}
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-right {
+	text-align: right!important;
+	font-weight: bold;
+}
+
+@media print {
+  #navbar-top,
+  #sidenavbar,
+  #footer,
+  #printButton {
+  	display: none
+  } 
+  
+  #mainArea {
+    display: block;
+  }
+}
+

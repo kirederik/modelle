@@ -1,13 +1,5 @@
 Modelle::Application.routes.draw do
-  resources :product_sizes
-
-
-  resources :product_colors
-
-
-  resources :filial_stocks do
-    get :remove_from_stock
-  end
+  resources :filial_stocks
 
 
   resources :product_bases do
@@ -18,7 +10,8 @@ Modelle::Application.routes.draw do
   # resources :product_descriptions
 
 
-  get "transactions/report" => "transactions#report", :as => "transactions_report"
+  get "transactions/report" =>  "transactions#report", :as => "transactions_report"
+  get "transactions/new/:id" => "transactions#new_from_customer", :as => "new_transaction_from_customer"
   resources :transactions
 
   resources :production_items
@@ -47,6 +40,7 @@ Modelle::Application.routes.draw do
     resources :production_items
   end
   get "order/:id/close" => "orders#close", :as =>"order_close"
+  get "order/coupon/:id" => "orders#coupon", :as =>"orders_coupon"
 
 
 
@@ -79,9 +73,11 @@ Modelle::Application.routes.draw do
 
   resources :functions
 
+
   devise_for :users
 
   resources :users
+
 
   get "site/index"
 
