@@ -1,0 +1,37 @@
+<div class="coupon">
+	
+	<div class="page-header">
+		<h3>Cupom Fiscal <span class="pull-right">Pedido #<%= @order.id %></span></h3>
+	</div>
+	
+	<p class="text-center"><%= image_tag("logo.png") %></p>
+
+	<h4 class='client'>Cliente: <span class="normal"><%= @order.customer.name %></span></h4>
+
+	<h4>Produtos</h4>
+
+	<table class="table">
+	  <tr>
+	    <th>Item</th>
+	    <th>Quantidade</th>
+	    <th>Preço</th>
+	  </tr>
+	  <% total = 0 %>
+	  <% @order.product_orders.each do |product_order| %>
+	    <% total = total + product_order.product.product_base.price %>
+	    <tr>
+	      <td><%= product_order.product.name %></td>
+	      <td><%= product_order.quantity %></td>
+	      <td><%= number_to_currency(product_order.product.product_base.price, :unit => "R$") %></td>
+	    </tr>
+	  <% end %>
+	  <tr>
+	  	<td></td>
+	  	<td class="text-right">Total</td>
+	  	<td> <%= number_to_currency(total, :unit => "R$") %></td>
+	  </tr>
+	</table>
+	<div>
+		<input id="printButton" type="button" value="Imprimir Cupom" onclick="window.print()" />
+	</div>
+</div>
