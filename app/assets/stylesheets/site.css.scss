@@ -46,6 +46,21 @@ a {
 			font-weight: normal;
 		}
 	}
+
+	h6 {
+		font-size: 14px;
+		&.client {
+			font-weight: bold;
+			// margin-bottom: 10px;
+			line-height: 15px;
+		}
+		&.normal {
+			font-weight: normal;
+		}
+		.normal {
+			font-weight: normal;
+		}
+	}
 }
 
 .text-center {

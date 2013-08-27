@@ -1,36 +1,71 @@
 <div class="coupon">
 	
 	<div class="page-header">
-		<h3>Cupom Fiscal <span class="pull-right">Pedido #<%= @order.id %></span></h3>
+		<h3>Cupom Fiscal <span class="pull-right"> Pedido #<%= @order.id %></span></h3>
 	</div>
 	
 	<p class="text-center"><%= image_tag("logo.png") %></p>
 
-	<h4 class='client'>Cliente: <span class="normal"><%= @order.customer.name %></span></h4>
+	<h6 class="client">Modelle Skin</h6>
+	<h6 class="client">Claudioneia Dadas de Oliveira Confecções</h6>
+	<h6 class="client">Rua Alferes Poli, 1343 - Rebouças - 41 3079-7125</h6>
+	<h6 class="client">Data: <span class="normal"> <%= @order.created_at.strftime("%d/%m/%Y") %></span> </h6>
+	<h6 class="client">Funcionário Resposável: <span class="normal"><%= current_user.name %></span></h6>
 
+	<hr>
+
+	<h6 class="client">Cliente:  <span class="normal"><%= @order.customer.name %></span> </h6>
+	<h6 class="client">Endereço: <span class="normal"><%= @order.customer.addres %></span> </h6>
+	<h6 class="client">Telefone: <span class="normal"><%= @order.customer.phone1 %></span> </h6>
+
+	<hr>
 	<h4>Produtos</h4>
-
 	<table class="table">
 	  <tr>
 	    <th>Item</th>
 	    <th>Quantidade</th>
-	    <th>Preço</th>
+	    <% if @showPrice %>
+	    	<th>Preço</th>
+	    <% end %>
 	  </tr>
 	  <% total = 0 %>
 	  <% @order.product_orders.each do |product_order| %>
 	    <% total = total + product_order.product.product_base.price %>
 	    <tr>
-	      <td><%= product_order.product.name %></td>
+	      <td><%= product_order.product.product_base.name %>  
+	      	<%= product_order.product.product_color.name unless product_order.product.product_color == nil %>
+	      	<%= product_order.product.product_size.name unless product_order.product.product_size == nil %>
+	      </td>
 	      <td><%= product_order.quantity %></td>
-	      <td><%= number_to_currency(product_order.product.product_base.price, :unit => "R$") %></td>
+	      <% if @showPrice %>
+	      	<td><%= number_to_currency(product_order.product.product_base.price, :unit => "R$") %></td>
+	      <% end %>
 	    </tr>
 	  <% end %>
-	  <tr>
-	  	<td></td>
-	  	<td class="text-right">Total</td>
-	  	<td> <%= number_to_currency(total, :unit => "R$") %></td>
-	  </tr>
+	  <% if @showPrice %>	
+  	  	<tr>
+	  		<td></td>
+	  		<td class="text-right">Total</td>
+	  		<td> <%= number_to_currency(total, :unit => "R$") %></td>
+	  	</tr>
+	  	<tr>
+	  		<td></td>
+	  		<td class="text-right">Desconto</td>
+	  		<td> <%= number_to_percentage(@order.customer.discount, :precision => 0) %> </td>
+	  	</tr>	  	
+	  	<tr>
+	  		<td></td>
+	  		<td class="text-right">Total com desconto</td>
+	  		<% total = total - (total * @order.customer.discount/100)  %>
+	  		<td> <%= number_to_currency(total, :unit => "R$") %></td>
+	  	</tr>
+	  <% end %>
 	</table>
+	<p class="text-center">
+		
+		__________________________________ <br>
+		Assinatura do Cliente
+	</p>
 	<div>
 		<input id="printButton" type="button" value="Imprimir Cupom" onclick="window.print()" />
 	</div>

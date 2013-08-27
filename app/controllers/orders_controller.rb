@@ -167,6 +167,7 @@ class OrdersController < ApplicationController
 
   def coupon
     @order = Order.find(params[:id])
+    @showPrice = params[:showPrice]
   end
 
 end
