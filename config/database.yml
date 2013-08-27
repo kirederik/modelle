@@ -3,8 +3,8 @@ connection: &connection
   encoding: unicode
   database: modelle_development
   pool: 5
-  username: derik
-  # username: raphael
+#  username: derik
+  username: raphael
   # host: localhost
 
 
