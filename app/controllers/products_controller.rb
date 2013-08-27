@@ -2,6 +2,8 @@
 class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
+  
+  caches_action :index, :show
   def index
     @products = Product.all
 
