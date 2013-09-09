@@ -2,6 +2,8 @@ class Transaction < ActiveRecord::Base
   belongs_to :customer_stock
   attr_accessible :create_at, :is_devolution, :quantity, :value, :customer_stock_id
 
+  
+
   	def self.searchReport(customer, type, startdate, enddate)
 	  	query_obj =  joins(:customer_stock => :customer)
 	  	query_obj =  query_obj.where('customer_id = ? ', customer) unless customer.blank?

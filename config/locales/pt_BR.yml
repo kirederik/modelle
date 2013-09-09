@@ -298,3 +298,6 @@ pt_BR:
       feedstock:
         name: Nome
         unity: Unidade de Medida
+      feedstock_stock:
+        feedstock: Matéria Prima
+        quantity: Quantidade

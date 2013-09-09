@@ -2,6 +2,8 @@
 class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
+  caches_page :new, :create
+  caches_action :new, :index, :create
   def index
     @orders = Order.all
 
