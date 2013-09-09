@@ -1,15 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b>Nome:</b>
   <%= @feedstock.name %>
 </p>
 
 <p>
-  <b>Unity:</b>
+  <b>Unidade de Medida:</b>
   <%= @feedstock.unity %>
 </p>
 
 
-<%= link_to 'Edit', edit_feedstock_path(@feedstock) %> |
-<%= link_to 'Back', feedstocks_path %>
+<%= link_to 'Editar', edit_feedstock_path(@feedstock), class: "link" %> |
+<%= link_to 'Voltar', feedstocks_path, class: "link" %>
+ 

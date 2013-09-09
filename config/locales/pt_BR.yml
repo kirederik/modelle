@@ -225,6 +225,7 @@ pt_BR:
       filial_stock: Estoque Das Filiais
       product_color: Cores
       product_size: Tamanhos
+      feedstock: Matéria-Prima
     attributes:
       customer:
         name: Nome
@@ -294,3 +295,6 @@ pt_BR:
         name: Nome
       product_size:
         name: Nome
+      feedstock:
+        name: Nome
+        unity: Unidade de Medida
