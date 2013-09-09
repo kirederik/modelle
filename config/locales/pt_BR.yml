@@ -294,3 +294,6 @@ pt_BR:
         name: Nome
       product_size:
         name: Nome
+      feedstock_stock:
+        feedstock: Matéria Prima
+        quantity: Quantidade

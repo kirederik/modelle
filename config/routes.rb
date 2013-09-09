@@ -73,6 +73,9 @@ Modelle::Application.routes.draw do
 
   resources :functions
 
+  resources :product_colors
+
+  resources :product_sizes
 
   devise_for :users
 

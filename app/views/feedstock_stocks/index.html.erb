@@ -1,9 +1,9 @@
-<h1>Listing feedstock_stocks</h1>
+<h1>Estoque de matéria prima</h1>
 
 <table>
   <tr>
-    <th>Feedstock</th>
-    <th>Quantity</th>
+    <th>Matéria Prima</th>
+    <th>Quantidade</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,13 +13,13 @@
   <tr>
     <td><%= feedstock_stock.feedstock.name %></td>
     <td><%= feedstock_stock.quantity %></td>
-    <td><%= link_to 'Show', feedstock_stock %></td>
-    <td><%= link_to 'Edit', edit_feedstock_stock_path(feedstock_stock) %></td>
-    <td><%= link_to 'Destroy', feedstock_stock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Ver', feedstock_stock, :class => "btn" %></td>
+    <td><%= link_to 'Editar', edit_feedstock_stock_path(feedstock_stock), :class => "btn" %></td>
+    <td><%= link_to 'Apagar', feedstock_stock, method: :delete, data: { confirm: 'Tem certeza?' }, :class => "btn btn-danger" %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Feedstock stock', new_feedstock_stock_path %>
+<%= link_to 'Novo Estoque de Matéria Prima', new_feedstock_stock_path %>

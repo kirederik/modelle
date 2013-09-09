@@ -13,19 +13,11 @@
   <tr>
     <th>Nome</th>
     <th>CPF/CNPJ</th>
-    <th>Incrição municipal</th>
-    <th>Suframa</th>
-    <th>Tributação</th>
-    <th>Endereço</th>
     <th>Cidade</th>
     <th>Estado</th>
     <th>Telefone 1</th>
-    <th>Telefone 2</th>
-    <th>Fax</th>
     <th>Celular</th>
     <th>Email</th>
-    <th>Criador (Usuário)</th>
-    <th>Observações</th>
     <th></th>
     <th></th>
     <th></th>
@@ -35,19 +27,11 @@
   <tr>
     <td><%= customer.name %></td>
     <td><%= customer.cpf_cnpj %></td>
-    <td><%= customer.municipal_number %></td>
-    <td><%= customer.suframa %></td>
-    <td><%= customer.tribute %></td>
-    <td><%= customer.addres %></td>
     <td><%= customer.city %></td>
     <td><%= customer.state %></td>
     <td><%= customer.phone1 %></td>
-    <td><%= customer.phone2 %></td>
-    <td><%= customer.fax %></td>
     <td><%= customer.mobile %></td>
     <td><%= customer.email %></td>
-    <td><%= customer.user.name %></td>
-    <td><%= customer.observations %></td>
     <td><%= link_to 'Ver', customer %></td>
     <td><%= link_to 'Editar', edit_customer_path(customer) %></td>
     <td><%= link_to 'Apagar', customer, method: :delete, data: { confirm: 'Tem certeza?' } %></td>

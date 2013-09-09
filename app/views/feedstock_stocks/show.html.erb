@@ -1,15 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Feedstock:</b>
+  <b>Matéria prima:</b>
   <%= @feedstock_stock.feedstock.name %>
 </p>
 
 <p>
-  <b>Quantity:</b>
+  <b>Quantidade:</b>
   <%= @feedstock_stock.quantity %>
 </p>
 
 
-<%= link_to 'Edit', edit_feedstock_stock_path(@feedstock_stock) %> |
-<%= link_to 'Back', feedstock_stocks_path %>
+<%= link_to 'Editar', edit_feedstock_stock_path(@feedstock_stock) %> |
+<%= link_to 'Todos os itens do estoque', feedstock_stocks_path %>
