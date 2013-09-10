@@ -225,6 +225,7 @@ pt_BR:
       filial_stock: Estoque Das Filiais
       product_color: Cores
       product_size: Tamanhos
+      feedstock_stock: Estoque de Matéria Prima
     attributes:
       customer:
         name: Nome

@@ -56,8 +56,9 @@
                 <li><%= link_to "Funções", functions_path  %></li>
                 <li><%= link_to "Usuários", users_path  %></li>
                 <li><%= link_to "Cadastrar Cliente", new_customer_path %></li>
-                <li><%= link_to "Novo pedido de Cliente", customers_path  %></li>
+                <li><%= link_to "Novo pedido de Cliente", orders_prepare_order_path  %></li>
                 <ul class="nav nav-list">
+                  <li> <%= link_to "- Todos os Clientes", customers_path %></li>
                   <li> <%= link_to "- Pedidos", orders_path %></li>
                   <li> <%= link_to "- Estoque do cliente", customer_stocks_path %></li>
                   <li> <%= link_to "- Transações", transactions_path %></li>

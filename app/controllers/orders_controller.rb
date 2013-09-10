@@ -172,5 +172,9 @@ class OrdersController < ApplicationController
     @showPrice = params[:showPrice]
   end
 
+  def prepare_order
+    
+  end
+
 end
 

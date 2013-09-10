@@ -1,0 +1,8 @@
+<h1>Adicionar Pedidos</h1>
+
+<%= form_tag "new", :class => "form-search", :method => :get do %>
+    <legend>Procure o cliente pelo nome</legend>
+    <%= autocomplete_field_tag 'customer', '', autocomplete_customer_name_customers_path, :update_elements => {:id => '#customer_id' }, :class => "input-xlarge search-query", :placeholder => "Nome do cliente" %>
+    <%= hidden_field_tag "customer_id" %>
+    <%= submit_tag 'Adicionar Pedido', :class => "btn btn-primary"%>
+<% end %>
