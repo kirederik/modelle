@@ -2,7 +2,7 @@ class ProductBasesController < ApplicationController
   # GET /product_bases
   # GET /product_bases.json
   def index
-    @product_bases = ProductBase.all
+    @product_bases = ProductBase.order("created_at").page(params[:page]).per(20)
 
     respond_to do |format|
       format.html # index.html.erb
