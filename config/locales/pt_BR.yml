@@ -226,6 +226,7 @@ pt_BR:
       product_color: Cores
       product_size: Tamanhos
       feedstock_stock: Estoque de Matéria Prima
+      feedstock: Matéria-Prima
     attributes:
       customer:
         name: Nome
@@ -295,6 +296,9 @@ pt_BR:
         name: Nome
       product_size:
         name: Nome
+      feedstock:
+        name: Nome
+        unity: Unidade de Medida
       feedstock_stock:
         feedstock: Matéria Prima
         quantity: Quantidade

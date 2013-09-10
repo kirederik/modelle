@@ -1,9 +1,9 @@
-<h1>Listing feedstocks</h1>
+<h1>Materias-primas</h1>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Unity</th>
+    <th>Nome</th>
+    <th>Unidade</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,13 +13,13 @@
   <tr>
     <td><%= feedstock.name %></td>
     <td><%= feedstock.unity %></td>
-    <td><%= link_to 'Show', feedstock %></td>
-    <td><%= link_to 'Edit', edit_feedstock_path(feedstock) %></td>
-    <td><%= link_to 'Destroy', feedstock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Ver', feedstock %></td>
+    <td><%= link_to 'Editar', edit_feedstock_path(feedstock) %></td>
+    <td><%= link_to 'Remover', feedstock, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Feedstock', new_feedstock_path %>
+<%= link_to 'Cadastrar nova matéria prima', new_feedstock_path, :class => "link"  %>
