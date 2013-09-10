@@ -5,7 +5,7 @@ class CustomersController < ApplicationController
   autocomplete :customer, :name, :extra_data => [:id]
   
   def index
-    @customers = Customer.order("created_at").page(params[:page]).per(20)
+    @customers = Customer.order("created_at").page(params[:page]).per(35)
 
     respond_to do |format|
       format.html # index.html.erb
