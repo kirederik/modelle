@@ -1,0 +1,15 @@
+<legend>Remover do Estoque</legend>
+
+<label><strong>Matéria prima: </strong> <%= @feedstock_stock.feedstock.name %></label>
+
+<%= simple_form_for(@feedstock_stock, :html => {class: "form-search"}) do |f| %>
+  <%= f.error_notification %>
+    <div class="filial_remove">
+      <%= f.input :quantity, label: "Quantidade a ser removida", :input_html => {value: 0} %>
+      <%= hidden_field_tag "[feedstock_stock][action_type]", "remove" %>
+    </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

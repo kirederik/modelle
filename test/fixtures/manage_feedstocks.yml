@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  feedstock: 
+  quantity: 1
+  action_type: MyString
+
+two:
+  feedstock: 
+  quantity: 1
+  action_type: MyString

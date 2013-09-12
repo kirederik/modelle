@@ -143,6 +143,5 @@ class FilialStocksController < ApplicationController
 
   def remove_from_stock
     @filial_stock = FilialStock.find(params[:filial_stock_id])
-    
   end
 end

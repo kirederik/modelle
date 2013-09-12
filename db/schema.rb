@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709002545) do
+ActiveRecord::Schema.define(:version => 20130911234439) do
 
   create_table "customer_prices", :force => true do |t|
     t.integer  "customer_id"
@@ -120,6 +120,16 @@ ActiveRecord::Schema.define(:version => 20130709002545) do
     t.integer "user_id"
     t.integer "function_id"
   end
+
+  create_table "manage_feedstocks", :force => true do |t|
+    t.integer  "feedstock_id"
+    t.integer  "quantity"
+    t.string   "action_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "manage_feedstocks", ["feedstock_id"], :name => "index_manage_feedstocks_on_feedstock_id"
 
   create_table "manage_filial_stocks", :force => true do |t|
     t.integer  "quantity"
