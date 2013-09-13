@@ -170,6 +170,10 @@ class OrdersController < ApplicationController
   def coupon
     @order = Order.find(params[:id])
     @showPrice = params[:showPrice]
+    @discount = 0
+    if @order.customer.discount
+      @discount =  @order.customer.discount
+    end
   end
 
   def prepare_order
