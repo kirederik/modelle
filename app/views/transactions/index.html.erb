@@ -1,6 +1,6 @@
-<%= form_tag "transactions/report", :class => "form-search", :method => :get do %>
+<%= form_tag "transactions/report", :class => "form-search", :method => :get do%>
     <legend>Procure o cliente pelo nome</legend>
-    <%= autocomplete_field_tag 'customer', '', autocomplete_customer_name_customers_path, :update_elements => {:id => '#customer_id' }, :class => "input-xlarge search-query", :placeholder => "Nome do cliente" %>
+    <%= autocomplete_field_tag 'customer', '', autocomplete_customer_name_customers_path, :update_elements => {:id => '#customer_id' }, :class => "input-xlarge search-query", :placeholder => "Nome do cliente", :required => "required" %>
     <%= hidden_field_tag "customer_id" %>
     <%= label_tag(:type, "Tipo:") %>
     <%= select_tag(:type, options_for_select([['Todas', 0], ['Acerto', 1], ['Devolução', 2]], 0), :class => "input-small" ) %>
@@ -11,8 +11,6 @@
 
     <%= submit_tag 'Filtrar', :class => "btn btn-primary"%>
 <% end %>
-
-
 <h2>Lista das Últimas Transações</h2>
 
 <table class="table table-hover">
@@ -24,16 +22,14 @@
           <th>Valor obtido</th>
           <th>Tipo de Transação</th>
           <th>Data</th>
-          <th></th>
-          <th></th>
-          <th></th>
+          <th>Ações</th>
         </tr>
     </thead>
     <tbody>
         <% @transactions.each do |transaction| %>
               <tr>
                 <td><%= transaction.customer_stock.customer.name unless transaction.customer_stock == nil %></td>
-                <td><%= transaction.customer_stock.product.name unless transaction.product == nil %></td>
+                <td><%= transaction.customer_stock.product.product_base.id unless transaction.customer_stock.product == nil %></td>
                 <td><%= transaction.quantity %></td>
                 <td><%= number_to_currency(transaction.value) %></td>
                 <td>
@@ -43,10 +39,11 @@
                         <p>Acerto</p> 
                     <% end %>
                 </td>
-                <td><%= transaction.created_at %></td>
-                <td><%= link_to 'Ver', transaction, :class => "btn"  %></td>
-                <td><%= link_to 'Editar', edit_transaction_path(transaction), :class => "btn" %></td>
-                <td><%= link_to 'Apagar', transaction, method: :delete, data: { confirm: 'Tem certeza?' }, :class => "btn btn-danger" %></td>
+                <td><%= transaction.created_at.to_time.strftime("%d/%m/%Y") %></td>
+                <td><%= link_to 'Ver', transaction, :class => "btn"  %>
+                <%= link_to 'Editar', edit_transaction_path(transaction), :class => "btn" %>
+                <%= link_to 'Apagar', transaction, method: :delete, data: { confirm: 'Tem certeza?' }, :class => "btn btn-danger" %>
+                </td>
               </tr>
         <% end %>
     </tbody>

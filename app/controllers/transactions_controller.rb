@@ -21,6 +21,18 @@ class TransactionsController < ApplicationController
     end
   end
 
+
+  # GET /transactions/1
+  # GET /transactions/1.json
+  def new_from_customer
+    @transactions = Transaction.searchReport(params[:customer_id], params[:type], params[:startdate], params[:enddate])
+    @customer_stocks = CustomerStock.joins(:customer).where('customer_id = ?', params[:customer_id])
+    respond_to do |format|
+        format.html # report.html.erb
+        format.json { render json: @transactions }
+    end
+  end
+
   # GET /transactions/new
   # GET /transactions/new.json
   def new
@@ -64,25 +76,25 @@ class TransactionsController < ApplicationController
     end
     respond_to do |format|
       if @transaction.quantity < 0 or @customer_stock.quantity < @transaction.quantity
-          format.html { redirect_to customer_stocks_reckoning_path(@customer_stock.id), notice: 'A quantidade de itens deve ser menor que a do estoque.' }
+        format.html { redirect_to customer_stocks_reckoning_path(@customer_stock.id), notice: 'A quantidade de itens deve ser menor que a do estoque.' }
       else
         if @transaction.save
-            @customer_stock.update_attributes(:quantity => @customer_stock.quantity - @transaction.quantity)
-            if @transaction.is_devolution
-              product = Product.find(@customer_stock.product.id)
-              pr_stock = ProductStock.where('product_id = ?', product.id)[0]
-              if pr_stock == nil
-                ProductStock.new(
-                  customer_id: @order.customer_id, 
-                  product_id: po.product_id, 
-                  quantity: po.quantity
+          @customer_stock.update_attributes(:quantity => @customer_stock.quantity - @transaction.quantity)
+          if @transaction.is_devolution
+            product = Product.find(@customer_stock.product.id)
+            pr_stock = ProductStock.where('product_id = ?', product.id)[0]
+            if pr_stock == nil
+              ProductStock.new(
+                customer_id: @order.customer_id, 
+                product_id: po.product_id, 
+                quantity: po.quantity
                 ).save
-              else 
-                pr_stock.update_attributes(:quantity => pr_stock.quantity + @transaction.quantity)
-              end
+            else 
+              pr_stock.update_attributes(:quantity => pr_stock.quantity + @transaction.quantity)
             end
-            format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-            format.json { render json: @transaction, status: :created, location: @transaction }
+          end
+          format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+          format.json { render json: @transaction, status: :created, location: @transaction }
         else
           format.html { render action: "new" }
           format.json { render json: @transaction.errors, status: :unprocessable_entity }

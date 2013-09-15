@@ -26,3 +26,15 @@
 </div>
 
 
+<%= form_tag "/transactions/reckoning", :class => "form-search", :method => :get do%>
+    <legend>Procure o cliente pelo nome</legend>
+    <%= autocomplete_field_tag 'customer', '', autocomplete_customer_name_customers_path, :update_elements => {:id => '#customer_id' }, :class => "input-xlarge search-query", :placeholder => "Nome do cliente", :required => "required" %>
+    <%= hidden_field_tag "customer_id" %>
+    
+    <%= label_tag(:startdate, "Inicio:") %>
+    <%= text_field_tag :startdate, nil, :class => "input-small" %>
+    <%= label_tag(:enddate, "Fim:") %>
+    <%= text_field_tag :enddate, nil, :class => "input-small"  %>
+
+    <%= submit_tag 'Filtrar', :class => "btn btn-primary"%>
+<% end %>

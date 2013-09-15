@@ -1,4 +1,6 @@
 <% price = @customer_stock.product.product_base.price * ( 1 - @customer_stock.customer.discount/100) %>
+
+
 <p>
   <b>Customer:</b>
   <%= @customer_stock.customer.name %>
