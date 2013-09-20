@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
     if (params[:customer_id] == nil || params[:customer_id] == "")
       respond_to do |format|
         flash[:notice] = "Selecione um cliente antes de prosseguir"
-        format.html {redirect_to action: "index", controller: "customers" }
+        format.html {redirect_to action: "prepare_order" }
       end
     else
         
@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
       @order.customer = customer
       @order.user = current_user
 
-      3.times { @order.product_orders.build }
+      6.times { @order.product_orders.build }
       respond_to do |format|
         format.html # new.html.erb
         format.json { render json: @order }
@@ -113,11 +113,10 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    
     @order = Order.new(params[:order])
     has_all_products = true
 
-
+    
     @order.product_orders.each do |po|
       stock_item = ProductStock.where(product_id: po.product_id).first
       if stock_item == nil
@@ -129,7 +128,6 @@ class OrdersController < ApplicationController
     end
     respond_to do |format|
       if @order.save
-
         format.html { redirect_to @order, notice: 'Pedido criado com sucesso.' }
         format.json { render json: @order, status: :created, location: @order }
       else
