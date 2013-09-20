@@ -28,5 +28,6 @@ function ordersCtrl($scope, $http) {
 
   };
 
-
 }
+
+ordersCtrl.$inject = ['$scope', '$http'];
