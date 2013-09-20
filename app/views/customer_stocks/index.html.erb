@@ -17,7 +17,7 @@
   <tbody><% @customer_stocks.each do |customer_stock| %>
       <tr>
         <td><%= customer_stock.customer.name %></td>
-        <td><%= customer_stock.product.name %></td>
+        <td><%= customer_stock.product.product_base.code %></td>
         <td><%= customer_stock.quantity %></td>
         <td><%= link_to 'Ver', customer_stock %></td>
         <td><%= link_to 'Editar', edit_customer_stock_path(customer_stock) %></td>

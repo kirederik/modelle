@@ -16,7 +16,7 @@
     <tbody>
         <% @transactions.each do |transaction| %>
               <tr>
-                <td><%= transaction.customer_stock.product.product_base.id %> 
+                <td><%= transaction.customer_stock.product.product_base.code %> 
                     <%= transaction.customer_stock.product.product_base.name %>  
                     <%= transaction.customer_stock.product.product_color.name unless transaction.customer_stock.product.product_color == nil %>
                     <%= transaction.customer_stock.product.product_size.name unless transaction.customer_stock.product.product_size == nil %>
@@ -55,7 +55,7 @@
   
   <tbody><% @customer_stocks.each do |customer_stock| %>
       <tr>
-        <td><%= customer_stock.product.product_base.id %> 
+        <td><%= customer_stock.product.product_base.code %> 
             <%= customer_stock.product.product_base.name %>  
             <%= customer_stock.product.product_color.name unless customer_stock.product.product_color == nil %>
             <%= customer_stock.product.product_size.name unless customer_stock.product.product_size == nil %></td>

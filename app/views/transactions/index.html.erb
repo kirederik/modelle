@@ -29,7 +29,7 @@
         <% @transactions.each do |transaction| %>
               <tr>
                 <td><%= transaction.customer_stock.customer.name unless transaction.customer_stock == nil %></td>
-                <td><%= transaction.customer_stock.product.product_base.id unless transaction.customer_stock.product == nil %></td>
+                <td><%= transaction.customer_stock.product.product_base.code unless transaction.customer_stock.product == nil %></td>
                 <td><%= transaction.quantity %></td>
                 <td><%= number_to_currency(transaction.value) %></td>
                 <td>

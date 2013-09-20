@@ -26,7 +26,7 @@
 </div>
 
 
-<%= form_tag "/transactions/reckoning", :class => "form-search", :method => :get do%>
+<%= form_tag "/transactions/newAll", :class => "form-search", :method => :get do %>
     <legend>Procure o cliente pelo nome</legend>
     <%= autocomplete_field_tag 'customer', '', autocomplete_customer_name_customers_path, :update_elements => {:id => '#customer_id' }, :class => "input-xlarge search-query", :placeholder => "Nome do cliente", :required => "required" %>
     <%= hidden_field_tag "customer_id" %>

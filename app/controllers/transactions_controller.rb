@@ -22,14 +22,17 @@ class TransactionsController < ApplicationController
   end
 
 
-  # GET /transactions/1
-  # GET /transactions/1.json
-  def new_from_customer
-    @transactions = Transaction.searchReport(params[:customer_id], params[:type], params[:startdate], params[:enddate])
-    @customer_stocks = CustomerStock.joins(:customer).where('customer_id = ?', params[:customer_id])
+  # GET /transactions/new/1
+  def newAll
+    @customer = Customer.find(params[:customer_id])
+    @customer_stock = CustomerStock.where("customer_id = ?", params[:customer_id])
+    @transaction = Transaction.joins(:customer_stock).where("customer_id = ?", params[:customer_id]).last
+    @discount = 0
+    if @customer.discount
+      @discount =  @customer.discount
+    end
     respond_to do |format|
-        format.html # report.html.erb
-        format.json { render json: @transactions }
+      format.html { render "new_from_customer.html.erb" }
     end
   end
 

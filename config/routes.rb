@@ -15,6 +15,7 @@ Modelle::Application.routes.draw do
 
   get "transactions/report" =>  "transactions#report", :as => "transactions_report"
   get "transactions/new/:id" => "transactions#new_from_customer", :as => "new_transaction_from_customer"
+  get "transactions/newAll" => "transactions#newAll", :as => "new_all_transaction"
   resources :transactions
 
   resources :production_items

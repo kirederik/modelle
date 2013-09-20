@@ -8,9 +8,9 @@
 	<thead>
 		<th>Código</th>
 		<th>Est. Ant</th>
-		<th>Qtd Env</th>
+		<!-- <th>Qtd Env</th>
 		<th>Devolução</th>
-		<th>Total</th>
+		<th>Total</th> -->
 		<th>Devolução</th>
 		<th>Est. Atual</th>
 		<th>A pagar</th>
@@ -19,19 +19,97 @@
 	</thead>
   
   	<tbody>
-  	<% @customer_stock.each do |customer_stock| %>
-      <tr>
+  	<% @customer_stock.each_with_index do |customer_stock, index| %>
+      <tr id="<%= index %>">
         <td><%= customer_stock.product.product_base.code %></td>
-        <td><%= customer_stock.product.name %></td>
-        <td><%= customer_stock.quantity %></td>
+        <td id="stock<%= index %>" ><%= customer_stock.quantity %></td>
+        <td>
+            <%= form_tag "/transactions/new", :class => "myform", :method => :post do %>
+                <%= hidden_field_tag "transaction[customer_stock_id]", customer_stock.id %>
+                <%= hidden_field_tag "transaction[is_devolution]", 1 %>
+                <%= number_field_tag "transaction[quantity]", 0, 
+                    :class => "input-mini",
+                    :id => "dev" + index.to_s , 
+                    :min => 0, :max => customer_stock.quantity, 
+                    :onChange => "updateFields(" + index.to_s + ", 1)" %>                
+            <% end %>
+        </td>
+        <td>
+            <%= form_tag "/transactions/new", :class => "myform", :method => :post do %>
+                <%= hidden_field_tag "transaction[customer_stock_id]", customer_stock.id %>
+                <%= hidden_field_tag "transaction[is_devolution]", 0 %>
+                <%= number_field_tag "transaction[quantity]", customer_stock.quantity, 
+                    :class => "input-mini", 
+                    :id => "pay"+ index.to_s, 
+                    :min => 0, :max => customer_stock.quantity,
+                    :onChange => "updateFields(" + index.to_s + ")" %>
+            <% end %>
+        </td>
+        <td>
+            <span id="toPay<%= index %>">0</span> 
+        </td>
+        <td>
+            <span id="value<%= index %>" data-value="<%= customer_stock.product.product_base.price - customer_stock.product.product_base.price * @discount / 100  %>">
+                <%= number_to_currency(customer_stock.product.product_base.price - customer_stock.product.product_base.price * @discount / 100) %></span>
+        </td>
+        <td>
+            <span id="total<%= index %>">R$ 0,00</span>
+        </td>
       </tr>
     <% end %>
 	</tbody>
 </table>
 
-<% @transaction.each do |transaction| %>
-<p><%= transaction.customer_stock.product.product_base.name %>
-	    <%= transaction.customer_stock.product.name %>
-	    <%= transaction.quantity %>
-	    <%= transaction.value %></p>
-<% end %>
+<script>
+    $(document).ready(function() {
+        Number.prototype.formatMoney = function(c, d, t){
+        var n = this, 
+            c = isNaN(c = Math.abs(c)) ? 2 : c, 
+            d = d == undefined ? "," : d, 
+            t = t == undefined ? "." : t, 
+            s = n < 0 ? "-" : "", 
+            i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", 
+            j = (j = i.length) > 3 ? j % 3 : 0;
+           return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+         };
+    })
+    var devUpdate = function(id) {
+        var devAmount = new Number($("#dev" + id).val()).valueOf();
+        var payAmount = new Number($("#pay" + id).val()).valueOf();
+        var stockAmount = new Number($("#stock" + id).html()).valueOf();
+        var prodValue = new Number($("#value" + id).data("value")).valueOf()
+        var totalPay = 0;
+        payAmount = stockAmount - devAmount;
+        totalPay = (stockAmount - (payAmount + devAmount)) * prodValue;
+        $("#pay" + id).val(payAmount);
+        $("#toPay" + id).html(0);
+        $("#total" + id).html("R$ " + totalPay.formatMoney());
+
+    };
+    var payUpdate = function(id) {
+        var devAmount = new Number($("#dev" + id).val()).valueOf();
+        var payAmount = new Number($("#pay" + id).val()).valueOf();
+        var stockAmount = new Number($("#stock" + id).html()).valueOf();
+        var prodValue = new Number($("#value" + id).data("value")).valueOf()
+        var totalPay = 0;
+        var toPay = 0;
+        totalPay = (stockAmount - (payAmount + devAmount)) * prodValue;
+        toPay = stockAmount - (payAmount + devAmount);
+        $("#toPay" + id).html(toPay);
+        $("#total" + id).html("R$ " + totalPay.formatMoney());
+    };
+
+    var updateFields = function(id, devolution) {
+        if (devolution) {
+            return devUpdate(id);
+        } else {
+            return payUpdate(id);
+        }
+    }
+</script>
+
+<p>** Peças com desconto de <%= number_to_percentage(@discount, :precision => 0) %></p>
+<p><%= @transaction.customer_stock.product.product_base.name %>
+	    <%= @transaction.customer_stock.product.name %>
+	    <%= @transaction.quantity %>
+	    <%= @transaction.value %></p>
