@@ -1,6 +1,7 @@
 #encoding: utf-8
 class Product < ActiveRecord::Base
-  attr_accessible :product_base_id, :product_color_id, :product_size_id
+  attr_accessible :product_base_id, :product_color_id, :product_size_id, :color, :size
+  attr_accessor :color, :size
 
   has_many :product_orders
   belongs_to :product_base
@@ -17,6 +18,14 @@ class Product < ActiveRecord::Base
     elsif product_size
       "#{product_base.code} #{product_base.name} #{product_size.name}"
     end
+  end
+
+  def color
+    "#{product_color.name}" unless self.product_color == nil
+  end
+
+  def size
+    "#{product_size.name}" unless self.product_size == nil
   end
 
   def verify_feedstock

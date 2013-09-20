@@ -1,6 +1,8 @@
 class ProductBasesController < ApplicationController
   # GET /product_bases
   # GET /product_bases.json
+
+  autocomplete :product_base, :code, :extra_data => [:id]
   def index
     @product_bases = ProductBase.order("created_at").page(params[:page]).per(35)
 

@@ -6,6 +6,7 @@ Modelle::Application.routes.draw do
 
 
   resources :product_bases do
+    get :autocomplete_product_base_code, :on => :collection
     resources :products
   end
 

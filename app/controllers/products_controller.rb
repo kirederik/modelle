@@ -3,13 +3,15 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   
+  respond_to :html, :json
   caches_action :index, :show
+
   def index
     @products = Product.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @products }
+      format.json {render :json => @products.to_json(:methods => [:color, :size]) }
     end
   end
 
@@ -18,9 +20,11 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
 
+
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @product }
+      #format.json { respond_with @product.to_json(:method => ['color', 'size']) }
+      format.json {render :json => @product.to_json(:methods => [:color, :size])}
     end
   end
 

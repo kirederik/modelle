@@ -4,11 +4,11 @@
   <div class="form-inputs">
     <p>Cliente: <%= @order.customer.name %></p>
     <%= unless @order.order_status != nil 
-      f.association :order_status
+      f.association :order_status, :include_blank => false
     end %>
     <%= f.input :customer_id, :as => :hidden, :input_html => {:value => @order.customer_id} %>
     <%= f.input :user_id, :as => :hidden, :input_html => {:value => @order.user_id} %>
-    <%= f.association :order_type %>
+    <%= f.association :order_type, :include_blank => false %>
     <%= f.input :created_at %>
     <%= f.input :updated_at %>
 
@@ -26,5 +26,6 @@
 <% end %>
 
 <script type="text/javascript">
-  $("#number_products_type").val($(".products_fields").children().size() / 2);
+  console.log($(".products_fields").children().size());
+  $("#number_products_type").val($(".products_fields").children().size());
 </script>
