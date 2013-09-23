@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   # GET /products.json
   
   respond_to :html, :json
-  caches_action :index, :show
+  # caches_action :index, :show
 
   def index
     @products = Product.all
