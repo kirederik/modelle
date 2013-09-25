@@ -1,4 +1,4 @@
-<div class="products_fields" ng-controller="ordersCtrl">
+<div class="products_fields" >
   <% @order.product_orders.each.with_index do |product_order, index| %>
     <%= f.fields_for :product_orders, product_order do |product_order_form| %>
       <p class="product_attributes">
@@ -16,7 +16,7 @@
 
           
           <%= text_field_tag "code_filder", nil, :"ng-model" => "a[#{index}].name", :placeholder => "Código do Produto", :class => "input input-small", :name => "code_#{index}" %>
-          <%= text_field_tag "color_filder", nil, :"ng-model" => "a[#{index}].color", :placeholder => "Côr", :class => "input input-small", :name => "color_#{index}" %>
+          <%= text_field_tag "color_filder", nil, :"ng-model" => "a[#{index}].color", :placeholder => "Cor", :class => "input input-small", :name => "color_#{index}" %>
           <%= text_field_tag "color_filder", nil, :"ng-model" => "a[#{index}].size", :placeholder => "Tamanho", :class => "input input-small", :name => "size_#{index}" %>
 
           <%= select_tag "product_id_#{index}", nil, include_blank: false, :"ng-model" => "product_id[#{index}]", :"ng-options" => "p.name for p in products | filter : a[#{index}] ", :"ng-change" => "updateProductId(product_id[#{index}], #{index})" %>
@@ -24,6 +24,7 @@
           <%= product_order_form.hidden_field :product_id %>
           <%= product_order_form.number_field :quantity, :class => "input input-small", :placeholder => "Quantidade" %>
           <%= link_to_function "Remover Produto", "remove_fields(this)", class: "btn btn-danger btn-small" %>
+
         <% end %>
       </p>
     <% end %>

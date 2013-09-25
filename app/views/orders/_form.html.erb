@@ -1,7 +1,7 @@
 <%= simple_form_for(@order) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
+  <div class="form-inputs" ng-controller="ordersCtrl">
     <p>Cliente: <%= @order.customer.name %></p>
     <%= unless @order.order_status != nil 
       f.association :order_status, :include_blank => false
@@ -14,7 +14,7 @@
 
     <%= render "product_orders", :f => f %>
 
-    <p><%= link_to_function "Adicionar Produtos", "add_fields(this)", class: "btn" %></p>
+    <p><%= link_to_function "Adicionar Produtos", nil, class: "btn", :"ng-click" => "addProduct()"  %></p>
 
   </div>
 
@@ -26,6 +26,5 @@
 <% end %>
 
 <script type="text/javascript">
-  console.log($(".products_fields").children().size());
   $("#number_products_type").val($(".products_fields").children().size());
 </script>

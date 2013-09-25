@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
       @order.customer = customer
       @order.user = current_user
 
-      6.times { @order.product_orders.build }
+      3.times { @order.product_orders.build }
       respond_to do |format|
         format.html # new.html.erb
         format.json { render json: @order }

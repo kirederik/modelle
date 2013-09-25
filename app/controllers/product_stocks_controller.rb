@@ -44,7 +44,7 @@ class ProductStocksController < ApplicationController
 
     respond_to do |format|
       if @product_stock.save
-        format.html { redirect_to @product_stock, notice: 'Product stock was successfully created.' }
+        format.html { redirect_to @product_stock, notice: 'Estoque de Produto atualizado' }
         format.json { render json: @product_stock, status: :created, location: @product_stock }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class ProductStocksController < ApplicationController
 
     respond_to do |format|
       if @product_stock.update_attributes(params[:product_stock])
-        format.html { redirect_to @product_stock, notice: 'Product stock was successfully updated.' }
+        format.html { redirect_to @product_stock, notice: 'Estoque atualizado' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
