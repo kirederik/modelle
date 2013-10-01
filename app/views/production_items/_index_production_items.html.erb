@@ -15,8 +15,8 @@
 
 <% @production_items.each do |production_item| %>
   <tr>
-    <td><%= production_item.production_status.name %></td>
-    <td><%= production_item.order.id %></td>
+    <td><%= production_item.production_status.name unless production_item.production_status.nil %></td>
+    <td><%= production_item.order.id unless production_item.order.nil %></td>
     <td><%= production_item.id %></td>
     <td><%= link_to 'Abrir', production_item %></td>
     <td><%= link_to 'Deletar', production_item, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
