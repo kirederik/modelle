@@ -7,6 +7,7 @@
   <tr>
     <th>Status</th>
     <th>Pedido</th>
+    <th>Cliente</th>
     <th>Lote</th>
     <th></th>
     <th></th>
@@ -17,9 +18,10 @@
   <tr>
     <td><%= production_item.production_status.name unless production_item.production_status == nil %></td>
     <td><%= production_item.order.id unless production_item.order == nil %></td>
+    <td><%= production_item.order.customer.name unless production_item.order == nil || production_item.order.customer == nil %></td>
     <td><%= production_item.id %></td>
-    <td><%= link_to 'Abrir', production_item %></td>
-    <td><%= link_to 'Deletar', production_item, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+    <td><%= link_to 'Abrir', production_item, :class => "btn btn-small" %></td>
+    <td><%= link_to 'Deletar', production_item, method: :delete, data: { confirm: 'Tem certeza?' }, :class => "btn btn-small"  %></td>
   </tr>
 <% end %>
 </table>

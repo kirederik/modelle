@@ -38,7 +38,7 @@ class ProductionItemsController < ApplicationController
       order.product_orders.each do |po|
         if po.status == nil 
           @production_item.product_order_outs.build
-          @production_item.product_order_outs.last.quantity = po.quantity
+          @production_item.product_order_outs.last.quantity = po.products_missing
           @production_item.product_order_outs.last.product = po.product
         end
       end

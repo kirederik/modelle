@@ -66,6 +66,7 @@ function ordersCtrl($scope, $http, $compile) {
 
       input.attr("id", "order_product_orders_attributes_" + (new Number(number_of_products.val()) - 1) +  "_quantity");
       input.attr("name", "order[product_orders_attributes][" + (new Number(number_of_products.val()) - 1) + "][quantity]");
+      input.removeAttr("disabled");
       input.val('');
     
       code = $compile(code)($scope);

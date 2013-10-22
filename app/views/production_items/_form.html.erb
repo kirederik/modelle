@@ -14,8 +14,7 @@
           <%= po.product.name %>
           <%= product_form.hidden_field :product_id %>          
           <b>Quantidade: </b>
-          <%= product_form.hidden_field :quantity %>
-          <%= po.quantity %>
+          <%= product_form.number_field :quantity, :class => "input input-small" %>
           <%= link_to_function "remove", "remove_fields(this)", :class => "btn btn-danger btn-small" %>
           
           
