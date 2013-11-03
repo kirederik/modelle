@@ -67,6 +67,38 @@
         Assinatura do Cliente
     </p>
     <div>
-        <input id="printButton" type="button" value="Imprimir Cupom" onclick="window.print()" />
+        <!-- <input id="printButton" type="button" value="Imprimir Cupom" onclick="closeAndPrint(@order.id);" /> -->
+        <%= link_to 'Imprimir Cupom',
+            '#',
+            :id => 'printButton',
+            :data => { :order => @order.id },
+            :class => 'btn btn-default' %>
     </div>
 </div>
+
+
+<script>
+    $(document).ready(function() {
+        $("#printButton").click(function() {
+            // alert('Hooray!');
+            var close = confirm("Deseja fechar este pedido?");
+            if (close) {
+                $.ajax({
+                  url: '/order/' + $(this).data('order') + '/close',
+                  type: 'GET',
+                  success: function(data, textStatus, xhr) {
+                    //called when successful
+                  },
+                  error: function(xhr, textStatus, errorThrown) {
+                    alert('Ocorreu algum erro. Pedido não pode ser fechado.');
+                  }
+                });
+                
+            }
+            window.print();
+            event.preventDefault();
+            return false;
+        });
+    });
+
+</script>
