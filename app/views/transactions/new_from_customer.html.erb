@@ -17,32 +17,32 @@
 		<th>R$ Unit **</th>
 		<th>R$ Total</th>
 	</thead>
-  
-  	<tbody>
-  	<% @customer_stock.each_with_index do |customer_stock, index| %>
-      <tr id="<%= index %>">
+
+ <tbody>
+     <% @customer_stock.each_with_index do |customer_stock, index| %>
+     <tr id="<%= index %>">
         <td><%= customer_stock.product.product_base.code %></td>
         <td id="stock<%= index %>" ><%= customer_stock.quantity %></td>
         <td>
-            <%= form_tag "/transactions/new", :class => "myform", :method => :post do %>
-                <%= hidden_field_tag "transaction[customer_stock_id]", customer_stock.id %>
-                <%= hidden_field_tag "transaction[is_devolution]", 1 %>
-                <%= number_field_tag "transaction[quantity]", 0, 
-                    :class => "input-mini",
-                    :id => "dev" + index.to_s , 
-                    :min => 0, :max => customer_stock.quantity, 
-                    :onChange => "updateFields(" + index.to_s + ", 1)" %>                
+            <%= form_tag "/transactions", :class => "myform", :remote => true, :method => :post do %>
+            <%= hidden_field_tag "transaction[customer_stock_id]", customer_stock.id %>
+            <%= hidden_field_tag "transaction[is_devolution]", 1 %>
+            <%= number_field_tag "transaction[quantity]", 0, 
+            :class => "input-mini",
+            :id => "dev" + index.to_s , 
+            :min => 0, :max => customer_stock.quantity, 
+            :onChange => "updateFields(" + index.to_s + ", 1)" %>                
             <% end %>
         </td>
         <td>
-            <%= form_tag "/transactions/new", :class => "myform", :method => :post do %>
-                <%= hidden_field_tag "transaction[customer_stock_id]", customer_stock.id %>
-                <%= hidden_field_tag "transaction[is_devolution]", 0 %>
-                <%= number_field_tag "transaction[quantity]", customer_stock.quantity, 
-                    :class => "input-mini", 
-                    :id => "pay"+ index.to_s, 
-                    :min => 0, :max => customer_stock.quantity,
-                    :onChange => "updateFields(" + index.to_s + ")" %>
+            <%= form_tag "/transactions", :class => "myform", :remote => true, :method => :post do %>
+            <%= hidden_field_tag "transaction[customer_stock_id]", customer_stock.id %>
+            <%= hidden_field_tag "transaction[is_devolution]", 0 %>
+            <%= number_field_tag "transaction[quantity]", customer_stock.quantity, 
+            :class => "input-mini", 
+            :id => "pay"+ index.to_s, 
+            :min => 0, :max => customer_stock.quantity,
+            :onChange => "updateFields(" + index.to_s + ")" %>
             <% end %>
         </td>
         <td>
@@ -51,28 +51,64 @@
         <td>
             <span id="value<%= index %>" data-value="<%= customer_stock.product.product_base.price - customer_stock.product.product_base.price * @discount / 100  %>">
                 <%= number_to_currency(customer_stock.product.product_base.price - customer_stock.product.product_base.price * @discount / 100) %></span>
-        </td>
-        <td>
-            <span id="total<%= index %>">R$ 0,00</span>
-        </td>
-      </tr>
-    <% end %>
-	</tbody>
+            </td>
+            <td>
+                <span class="total" id="total<%= index %>">R$ 0,00</span>
+            </td>
+        </tr>
+        <% end %>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><strong>Total</strong></td>
+            <td><span id="mainTotal">R$ 0,00</span></td>
+        </tr>
+
+    </tbody>
 </table>
+
+<button class="btn btn-default" id="multiSubmit">Salvar</button>
 
 <script>
     $(document).ready(function() {
         Number.prototype.formatMoney = function(c, d, t){
-        var n = this, 
+            var n = this, 
             c = isNaN(c = Math.abs(c)) ? 2 : c, 
             d = d == undefined ? "," : d, 
             t = t == undefined ? "." : t, 
             s = n < 0 ? "-" : "", 
             i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", 
             j = (j = i.length) > 3 ? j % 3 : 0;
-           return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-         };
-    })
+            return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+        };
+        $("#multiSubmit").click( function() {
+            var time = 0;
+            $('form').each(function(i, item) {
+                setTimeout(function() { 
+                    console.log("fired");
+                    $(item).trigger('submit.rails');
+                }, time);
+                time += 500;
+
+            });
+
+        });
+        // $("form").submit(function() {
+        //     var valuesToSubmit = $(this).serialize();
+        //     $.ajax({
+        //         url: $(this).attr('action'), //sumbits it to the given url of the form
+        //         data: valuesToSubmit,
+        //         dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+        //     }).success(function(json){
+        //         console.log("sucesso");                        
+        //     });
+        //     return false;
+        // })
+    });
+
     var devUpdate = function(id) {
         var devAmount = new Number($("#dev" + id).val()).valueOf();
         var payAmount = new Number($("#pay" + id).val()).valueOf();
@@ -97,6 +133,17 @@
         toPay = stockAmount - (payAmount + devAmount);
         $("#toPay" + id).html(toPay);
         $("#total" + id).html("R$ " + totalPay.formatMoney());
+        mainTotalUpdate();
+    };
+
+    var mainTotalUpdate = function() {
+        var totalPay = 0;
+        $(".total").each(function(i, el) {
+            // console.log(i, v);
+            var value = new Number($(el).html().replace("R$ ", "").replace(",", "."));
+            totalPay += value;
+        })
+        $("#mainTotal").html("R$ " + totalPay.formatMoney());
     };
 
     var updateFields = function(id, devolution) {
@@ -105,11 +152,7 @@
         } else {
             return payUpdate(id);
         }
-    }
+    };
 </script>
 
 <p>** Peças com desconto de <%= number_to_percentage(@discount, :precision => 0) %></p>
-<p><%= @transaction.customer_stock.product.product_base.name %>
-	    <%= @transaction.customer_stock.product.name %>
-	    <%= @transaction.quantity %>
-	    <%= @transaction.value %></p>
