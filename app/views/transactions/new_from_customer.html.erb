@@ -18,8 +18,9 @@
 		<th>R$ Total</th>
 	</thead>
 
- <tbody>
-     <% @customer_stock.each_with_index do |customer_stock, index| %>
+<tbody>
+    <% @customer_stock.each_with_index do |customer_stock, index| %>
+    <% if customer_stock.quantity > 0 %>
      <tr id="<%= index %>">
         <td><%= customer_stock.product.product_base.code %></td>
         <td id="stock<%= index %>" ><%= customer_stock.quantity %></td>
@@ -38,6 +39,7 @@
             <%= form_tag "/transactions", :class => "myform", :remote => true, :method => :post do %>
             <%= hidden_field_tag "transaction[customer_stock_id]", customer_stock.id %>
             <%= hidden_field_tag "transaction[is_devolution]", 0 %>
+            <%= hidden_field_tag "transaction[value]", customer_stock.product.product_base.price - customer_stock.product.product_base.price * @discount / 100 %>
             <%= number_field_tag "transaction[quantity]", customer_stock.quantity, 
             :class => "input-mini", 
             :id => "pay"+ index.to_s, 
@@ -57,6 +59,7 @@
             </td>
         </tr>
         <% end %>
+    <% end %>
         <tr>
             <td></td>
             <td></td>
@@ -70,7 +73,9 @@
     </tbody>
 </table>
 
-<button class="btn btn-default" id="multiSubmit">Salvar</button>
+<div class="form-actions">
+    <%= link_to "Salvar", transactions_path, :class => 'btn btn-default', :id => "multiSubmit" %>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -87,26 +92,14 @@
         $("#multiSubmit").click( function() {
             var time = 0;
             $('form').each(function(i, item) {
-                setTimeout(function() { 
-                    console.log("fired");
-                    $(item).trigger('submit.rails');
-                }, time);
-                time += 500;
+                // setTimeout(function() { 
+                    // console.log("fired");
+                    $(item).submit();
+                // }, time);
 
             });
 
         });
-        // $("form").submit(function() {
-        //     var valuesToSubmit = $(this).serialize();
-        //     $.ajax({
-        //         url: $(this).attr('action'), //sumbits it to the given url of the form
-        //         data: valuesToSubmit,
-        //         dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
-        //     }).success(function(json){
-        //         console.log("sucesso");                        
-        //     });
-        //     return false;
-        // })
     });
 
     var devUpdate = function(id) {

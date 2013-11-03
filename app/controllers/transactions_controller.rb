@@ -75,10 +75,11 @@ class TransactionsController < ApplicationController
     if @transaction.is_devolution 
       @transaction.value = 0
     else
+      @transaction.quantity = @customer_stock.quantity - @transaction.quantity
       @transaction.value = @transaction.value * @transaction.quantity
     end
     respond_to do |format|
-      if @transaction.quantity < 0 or @customer_stock.quantity < @transaction.quantity
+      if @transaction.quantity <= 0 or @customer_stock.quantity < @transaction.quantity
         format.html { redirect_to customer_stocks_reckoning_path(@customer_stock.id), notice: 'A quantidade de itens deve ser menor que a do estoque.' }
       else
         if @transaction.save
