@@ -104,4 +104,12 @@ class ProductStocksController < ApplicationController
       end
     end
   end
+
+  def reset_stock
+    ProductStock.all.map { |p|
+      p.destroy
+    }
+    flash[:success] = "Estoque removido com sucesso"
+    redirect_to product_stocks_path
+  end
 end

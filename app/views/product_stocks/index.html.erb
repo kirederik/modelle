@@ -23,4 +23,6 @@
 
 <br />
 
-<%= link_to 'Adicionar item ao estoque', new_product_stock_path, class: "btn" %>
+<%= link_to 'Adicionar item ao estoque', new_product_stock_path, class: "btn btn-primary" %>
+
+<%= link_to 'Zerar estoque', product_stock_reset_stock_path, method: :delete, data: { confirm: 'Remover todo o estque?'}, class: "btn btn-danger" %>

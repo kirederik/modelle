@@ -59,10 +59,12 @@ Modelle::Application.routes.draw do
   resources :customer_prices
 
 
+  delete "product_stocks/reset_stock" => "product_stocks#reset_stock", :as => "product_stock_reset_stock"
   resources :product_stocks
 
   #Atualiza estoque
   get "product_stocks/:product_order_id/remove_from_stock" => "product_stocks#remove_from_stock", :as => "product_stocks_remove_from_stock"
+
 
   #resources :feedstock_by_products
 
