@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131126111918) do
+ActiveRecord::Schema.define(:version => 20140110151210) do
 
   create_table "customer_prices", :force => true do |t|
     t.integer  "customer_id"
@@ -159,10 +159,12 @@ ActiveRecord::Schema.define(:version => 20131126111918) do
     t.integer  "customer_id"
     t.integer  "user_id"
     t.integer  "order_status_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "order_type_id"
     t.string   "patient"
+    t.string   "delivery_address"
+    t.date     "delivery_date"
   end
 
   add_index "orders", ["customer_id"], :name => "index_orders_on_customer_id"

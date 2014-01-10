@@ -49,11 +49,10 @@
 
       <div class="container-fluid">
         <div class="row-fluid">
-          <div id="sidenavbar" class="span3">
-            <div class="well sidebar-nav">
-              <ul class="nav nav-list nav-stacked nav-pills ">
+          <div id="sidenavbar" class="span2 well sidebar-nav">
+              <ul class="nav nav-pills nav-stacked sidebar-left">
                 <li class="nav-header">Menu Rápido</li>
-                <li><b>Funções</b></li>
+                <li ><b>Funções</b></li>
                 <ul class="nav nav-list">
                   <li><%= link_to "Cadastrar Funções", functions_path  %></li>  
                 </ul>
@@ -71,11 +70,6 @@
                 <ul class="nav nav-list">
                   <li><%= link_to "- Novo pedido de Cliente", orders_prepare_order_path  %></li>
                   <li><%= link_to "- Pedidos", orders_path %></li>
-                  <li><%= link_to "- Listar Acertos", transactions_path %></li>
-                </ul>
-                <ul class="nav nav-list">
-                  <li> <%= link_to "- Novo acerto", customer_stocks_reckoning_list_path %></li>
-                  <!-- <li> <%= link_to "+ Nova devolução", customer_stocks_devolution_list_path %></li> -->
                 </ul>
                 <li><b>Produção</b></li>
                 <ul class="nav nav-list">
@@ -95,14 +89,19 @@
                   <li><%= link_to "- Cadastro Matéria Prima", feedstocks_path  %></li>
                   <li><%= link_to "- Estoque de Matéria Prima", feedstock_stocks_path  %></li>  
                 </ul>
+                <li><b>Acertos</b></li>
+                <ul class="nav nav-list">
+                  <li> <%= link_to "- Novo acerto", customer_stocks_reckoning_list_path %></li>
+                  <li><%= link_to "- Listar Acertos", transactions_path %></li>
+                  <!-- <li> <%= link_to "+ Nova devolução", customer_stocks_devolution_list_path %></li> -->
+                </ul>
                 <li><b>Filias</b></li>
                 <ul class="nav nav-list">
                   <li><%= link_to "Estoque das Filiais", filial_stocks_path  %></li>  
                 </ul>
               </ul>
-            </div><!--/.well -->
           </div><!--/span-->
-          <div class="span9" id="mainArea">
+          <div class="span10" id="mainArea">
             <%= bootstrap_flash %>
             <%= yield %>
           </div>

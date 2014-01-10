@@ -2,9 +2,6 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-require 'barby'
-require 'barby/outputter/rmagick_outputter'
-
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
@@ -67,5 +64,7 @@ module Modelle
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.time_zone = "Brasilia"
   end
 end
