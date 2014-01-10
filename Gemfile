@@ -29,6 +29,8 @@ gem 'kaminari'
 gem 'jquery-ui-rails'
 gem 'rails3-jquery-autocomplete'
 gem 'thin'
+gem 'barby', '>= 0.5.1'
+gem 'rmagick'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

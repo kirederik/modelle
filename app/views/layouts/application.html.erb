@@ -53,30 +53,52 @@
             <div class="well sidebar-nav">
               <ul class="nav nav-list nav-stacked nav-pills ">
                 <li class="nav-header">Menu Rápido</li>
-                <li><%= link_to "Funções", functions_path  %></li>
-                <li><%= link_to "Usuários", users_path  %></li>
-                <li><%= link_to "Cadastrar Cliente", new_customer_path %></li>
-                <li><%= link_to "Novo pedido de Cliente", orders_prepare_order_path  %></li>
+                <li><b>Funções</b></li>
                 <ul class="nav nav-list">
-                  <li> <%= link_to "- Todos os Clientes", customers_path %></li>
-                  <li> <%= link_to "- Pedidos", orders_path %></li>
-                  <li> <%= link_to "- Estoque do cliente", customer_stocks_path %></li>
-                  <li> <%= link_to "- Transações", transactions_path %></li>
-                  <ul class="nav nav-list">
-                    <li> <%= link_to "+ Novo acerto", customer_stocks_reckoning_list_path %></li>
-                    <!-- <li> <%= link_to "+ Nova devolução", customer_stocks_devolution_list_path %></li> -->
-                  </ul>
+                  <li><%= link_to "Cadastrar Funções", functions_path  %></li>  
                 </ul>
-                <li>Produção</li>
-                  <ul class="nav nav-list">
-                    <li><%= link_to "- Fila de produção", production_items_path %></li>
-                  </ul>
-                <li><%= link_to "Produtos", product_bases_path  %></li>
-                <li><%= link_to "Estoque de Produtos", product_stocks_path  %></li>
-                <li><%= link_to "Tabela de Preços", product_bases_path  %></li>
-                <li><%= link_to "Matéria Prima", feedstocks_path  %></li>
-                <li><%= link_to "Estoque de Matéria Prima", feedstock_stocks_path  %></li>
-                <li><%= link_to "Estoque das Filiais", filial_stocks_path  %></li>
+                <li><b>Usuários</b></li>
+                <ul class="nav nav-list">
+                  <li><%= link_to "Cadastrar Usuários", users_path  %></li>
+                </ul>
+                <li><b>Clientes</b></li>
+                <ul class="nav nav-list">
+                  <li><%= link_to "- Cadastrar Cliente", new_customer_path %></li>
+                  <li><%= link_to "- Listar Clientes", customers_path %></li>
+                  <li><%= link_to "- Estoque do cliente", customer_stocks_path %></li>
+                </ul>
+                <li><b>Pedidos</b></li>
+                <ul class="nav nav-list">
+                  <li><%= link_to "- Novo pedido de Cliente", orders_prepare_order_path  %></li>
+                  <li><%= link_to "- Pedidos", orders_path %></li>
+                  <li><%= link_to "- Listar Acertos", transactions_path %></li>
+                </ul>
+                <ul class="nav nav-list">
+                  <li> <%= link_to "- Novo acerto", customer_stocks_reckoning_list_path %></li>
+                  <!-- <li> <%= link_to "+ Nova devolução", customer_stocks_devolution_list_path %></li> -->
+                </ul>
+                <li><b>Produção</b></li>
+                <ul class="nav nav-list">
+                  <li><%= link_to "- Fila de produção", production_items_path %></li>
+                </ul>
+                <li><b>Produtos</b></li>
+                <ul class="nav nav-list">
+                  <li><%= link_to "- Cadastro de Produtos", product_bases_path  %></li>
+                  <li><%= link_to "- Estoque de Produtos", product_stocks_path  %></li>
+                </ul>
+                <li><b>Tabela de Preços</b></li>
+                <ul class="nav nav-list">
+                  <li><%= link_to "Tabela de Preços", product_bases_path  %></li>  
+                </ul>
+                <li><b>Matéria Prima</b></li>
+                <ul class="nav nav-list">
+                  <li><%= link_to "- Cadastro Matéria Prima", feedstocks_path  %></li>
+                  <li><%= link_to "- Estoque de Matéria Prima", feedstock_stocks_path  %></li>  
+                </ul>
+                <li><b>Filias</b></li>
+                <ul class="nav nav-list">
+                  <li><%= link_to "Estoque das Filiais", filial_stocks_path  %></li>  
+                </ul>
               </ul>
             </div><!--/.well -->
           </div><!--/span-->

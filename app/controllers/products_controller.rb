@@ -1,8 +1,7 @@
 #encoding: utf-8
 class ProductsController < ApplicationController
   # GET /products
-  # GET /products.json
-  
+  # GET /products.json  
   respond_to :html, :json
   # caches_action :index, :show
 
