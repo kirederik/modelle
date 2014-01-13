@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   # caches_action :new, :index, :create
 
   def index
-    @orders = Order.all
+    @orders = Order.page(params[:page]).per(2)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -7,5 +7,7 @@
     remote:        data-remote
 -%>
 <li>
-  <%= link_to_unless current_page.first?, raw(t 'views.pagination.first'), url, :remote => remote %>
+	
+  <%= link_to_unless current_page.first?, raw('<span class="glyphicon glyphicon-backward" title="Anterior"></span>'), url, :remote => remote %>
+  
 </li>
