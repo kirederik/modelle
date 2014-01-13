@@ -2,7 +2,7 @@ class ProductStocksController < ApplicationController
   # GET /product_stocks
   # GET /product_stocks.json
   def index
-    @product_stocks = ProductStock.all
+    @product_stocks = ProductStock.page(params[:page]).per(35)
 
     respond_to do |format|
       format.html # index.html.erb
