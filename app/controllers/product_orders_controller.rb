@@ -73,6 +73,13 @@ class ProductOrdersController < ApplicationController
   # DELETE /product_orders/1.json
   def destroy
     @product_order = ProductOrder.find(params[:id])
+
+    if @product_order.status == 'estoque'
+      product_stock = ProductStock.where(:product_id, @product_order.product_id)
+      if product_stock
+        product_stock.quantity += product_stock.quantity
+      end
+    end
     @product_order.destroy
 
     respond_to do |format|

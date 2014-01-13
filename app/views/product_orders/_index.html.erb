@@ -18,7 +18,6 @@
     <th>Quantidade</th>
     <th>Status</th>
     <th>Ação</th>
-    <th></th>
   </tr>
 
   <% product_orders.each do |product_order| %>
@@ -40,16 +39,21 @@
             <p class="success <%= product_order.id %>">Já enviado produção</p>    
           <% end %>
         </td>
-        <td><%= link_to 'Usar estoque', product_stocks_remove_from_stock_path(product_order), id: product_order.id, class: "btn btn-small" %> 
+        <!-- <td><%= link_to 'Usar estoque', product_stocks_remove_from_stock_path(product_order), id: product_order.id, class: "btn btn-small" %>  -->
          </td>
        <% elsif product_order.status == 'producao'%>
         <td><p class="warm">Enviado Produção</p></td>
         <td><%= link_to "Ver andamento", "#", class: "btn btn-small" %></td>
       <% else %>
-        <td><p class="warm <%= product_order.id %>">Faltando: <%= product_order.products_missing %> </p></td>
-        <td></td>
+        <td>
+          <p class="warm <%= product_order.id %>">Faltando: <%= product_order.products_missing %> </p>
+        </td>
       <% end %>
-      <td><%= link_to 'Apagar', product_order, method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn btn-danger" %></td>
+      <td>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_order_<%= product_order.id %>">Usar estoque</button>
+        <%= render "product_orders/modal", :product_order => product_order %>
+        <%= link_to 'Apagar', product_order, method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn btn-danger" %>
+      </td>
     </tr>
   <% end %>
 </table>

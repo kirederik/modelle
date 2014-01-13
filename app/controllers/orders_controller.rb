@@ -54,6 +54,12 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
+    if @order.order_status.name == 'Fechado'
+      flash[:notice] = "Pedido já esta'fechado, não é possível editá-lo!"
+      redirect_to @order
+    else
+      @order
+    end
   end
 
   def close

@@ -247,6 +247,8 @@ pt_BR:
         updated_at: Data de Atualização
         order_status: Estado do Pedido
         patient: Paciente
+        delivery_date: Data de entrega
+        delivery_address: Endereço de Entrega
       product_stock:
         product: Produto
         quantity: Quantidade

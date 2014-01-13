@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
   has_many :product_orders, :dependent => :destroy
   has_many :production_items
   
-  attr_accessible :created_at, :updated_at, :order_status_id, :customer_id, :user_id, :product_orders_attributes, :order_type_id, :patient
+  attr_accessible :created_at, :updated_at, :order_status_id, :customer_id, :user_id, :product_orders_attributes, :order_type_id, :patient, :delivery_address, :delivery_date
   
   accepts_nested_attributes_for :product_orders
 
