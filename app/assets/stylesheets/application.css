@@ -26,7 +26,16 @@
 }
 
 .sidebar-left {
-	width: 110%
+	width: 110%;
+}
+
+.modal_order {
+  width: 48%!important;
+  margin-right: 10px!important;
+}
+
+.modal_order_div {
+  width: 93%!important;
 }
 
 @font-face {

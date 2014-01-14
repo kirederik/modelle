@@ -1,18 +1,43 @@
 <!-- Modal body -->
-    <div class="modal fade" id="product_order_<%= product_order.id %>" tabindex="-1" role="dialog" aria-labelledby="Produtos do pedido" aria-hidden="false">
+    <div class="modal fade" id="product_order_<%= product_order.id %>" tabindex="-1" role="dialog" aria-labelledby="Produtos do pedido" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Usar Estoque em Pedido</h4>
+            <h4 class="modal-title" id="myModalLabel">Resumo do produto</h4>
           </div>
-          <div class="modal-body">
-            Total em estoque <%= product_order.product.name %>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+
+          <%= form_tag product_stocks_remove_from_stock_path(product_order) do %>
+            <div class="modal-body">
+               
+            <dl class="dl-horizontal">
+              <dt class="modal_order"><strong>Total em estoque:</strong></dt>
+              <dd><%= product_order.stock_total %></dd>
+              <dt class="modal_order"><strong>Quantidade Enviada a Produção:</strong></dt>
+              <dd><%= (product_order.quantity_production) ? product_order.quantity_production : 0%></dd>
+              <dt class="modal_order"><strong>Quantidade usada do Estqoue:</strong></dt>
+              <dd><%= (product_order.quantity_stock) ? product_order.quantity_stock : 0 %></dd>
+            </dl>
+
+          
+
+            <div class="row-fluid well modal_order_div">
+              <div class="text-center">
+                <p><strong>Quantidade a ser usada do estoque</strong></p>
+              </div>                  
+              <dl class="dl-horizontal">
+                <%= hidden_field_tag "id", product_order.id %>
+                <dt>Quantidade: </dt>
+                <dd><%= text_field_tag "quantity", product_order.quantity_stock %></dd>
+              </dl>
+            </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+            </div>
+
+          <% end %>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

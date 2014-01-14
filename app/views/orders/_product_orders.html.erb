@@ -14,7 +14,8 @@
           <%= product_order_form.number_field :quantity, {:disabled => "disabled"} %>
         <% else %>
 
-          
+          <%= hidden_field_tag  "product_name_id[#{index}]", product_order.product.name %>
+
           <%= text_field_tag "code_filder", nil, :"ng-model" => "a[#{index}].name", :placeholder => "Código do Produto", :class => "input input-small", :name => "code_#{index}" %>
           <%= text_field_tag "color_filder", nil, :"ng-model" => "a[#{index}].color", :placeholder => "Cor", :class => "input input-small", :name => "color_#{index}" %>
           <%= text_field_tag "color_filder", nil, :"ng-model" => "a[#{index}].size", :placeholder => "Tamanho", :class => "input input-small", :name => "size_#{index}" %>

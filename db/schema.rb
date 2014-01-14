@@ -203,9 +203,11 @@ ActiveRecord::Schema.define(:version => 20140113151518) do
     t.integer  "order_id"
     t.integer  "product_id"
     t.integer  "quantity"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.string   "status"
+    t.integer  "quantity_stock"
+    t.integer  "quantity_production"
   end
 
   add_index "product_orders", ["order_id"], :name => "index_product_orders_on_order_id"
@@ -220,10 +222,8 @@ ActiveRecord::Schema.define(:version => 20140113151518) do
   create_table "product_stocks", :force => true do |t|
     t.integer  "product_id"
     t.integer  "quantity"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-    t.integer  "quantity_stock"
-    t.integer  "quantity_production"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "product_stocks", ["product_id"], :name => "index_product_stocks_on_product_id"

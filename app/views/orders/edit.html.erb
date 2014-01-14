@@ -1,6 +1,35 @@
 <h1>Editar pedido</h1>
 
-<%= render 'form' %>
+<%= simple_form_for(@order) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs" ng-controller="ordersCtrl">
+    <p>Cliente: <%= @order.customer.name %></p>
+    <%= unless @order.order_status != nil 
+      f.association :order_status, :include_blank => false
+    end %>
+    <%= f.input :updated_at %>
+    <%= f.input :patient %>
+    <%= f.input :delivery_address %>
+    <%= f.input :delivery_date %>
+
+    <%= render "product_orders", :f => f %>
+
+    <p><%= link_to_function "Adicionar Produtos", nil, class: "btn", :"ng-click" => "addProduct()"  %></p>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-large btn-primary" %>
+  </div>
+
+  <input type="hidden" id="number_products_type" value="3"></input>
+<% end %>
+
+<script type="text/javascript">
+  $("#number_products_type").val($(".products_fields").children().size());
+</script>
+
 
 <%= link_to 'Ver', @order %> |
 <%= link_to 'Pedidos', orders_path %>

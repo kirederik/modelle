@@ -125,6 +125,8 @@ class OrdersController < ApplicationController
 
     
     @order.product_orders.each do |po|
+      po.quantity_stock = 0
+      po.quantity_production = 0
       stock_item = ProductStock.where(product_id: po.product_id).first
       if stock_item == nil
         respond_to do |format|

@@ -15,10 +15,24 @@ function ordersCtrl($scope, $http, $compile) {
   // $scope.filter = {}
   // $scope.filter.code_filter = [];
   // $scope.filter.color_filter = [];
+
+  
   
   $http({method: 'GET', url: '/products'}).success(function(data, status, headers, config) {
     $scope.products = data
   });
+
+  console.log($(".product_attributes").children("select").first());
+
+  // var selects = $(".product_attributes").children("select");
+  // var product_ids = $(".product_attributes").children("[name*=product_name_id]");
+  // for(i = 0; i < selects.length; i++) {
+  //   console.log(product_ids[i].value);
+    
+  //   $scope.product_id[i] = product_ids[i].value
+  //   console.log($scope.product_id);
+  //   console.log(selects[i].value);
+  // }
 
   $scope.updateProductId = function(param, index) {
     //order_product_orders_attributes_1_product_id
