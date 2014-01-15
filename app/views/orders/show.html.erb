@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Cliente:</b>
   <%= @order.customer.name %>
@@ -35,6 +33,15 @@
   <%= @order.patient %>
 </p>
 
+<p>
+  <b>Local de Entrega:</b>
+  <%= @order.delivery_address %>
+</p>
+
+<p>
+  <b>Data de entrega:</b>
+  <%= @order.delivery_date %>
+</p>
 <%= render "product_orders/index", :product_orders => @order.product_orders %>
 
 <%= link_to 'Enviar produção', new_order_production_item_path(@order), class: "btn btn-primary" %> 

@@ -1,11 +1,13 @@
-
-<% if flash[:notice] %>
-  $('#message').html("<p class='error'><b><%= flash[:notice] %></b></p>")
-  <% flash[:notice] = nil # evitar ficar mensagem na seção %> 
+<% if flash[:error] %>
+	$('#message').html("<p class='error'><b><%= flash[:error] %></b></p>")
+  <% flash[:error] = nil # evitar ficar mensagem na seção %> 
+  $('#modal_update_stock').modal('toggle')
+  $('#product_order_<%= @product_order.id %>').modal('toggle')
 <% else %>
-  $('#message').html("<b><%= @stock.product.name %></b> Atualizado. Quantidade atual: <b><%= @stock.quantity %></b>")
-  $('#<%= @product_order.id %>').remove();
-  $('.warm*.<%= @product_order.id %>').html("<p class='success'>Utilizado estoque</p>");
+
+  $('#product_order_<%= @product_order.id %>').modal('toggle')
+  location.reload();
 <% end %>
 
-$('#modal_update_stock').modal('toggle')
+
+

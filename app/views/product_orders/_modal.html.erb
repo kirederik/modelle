@@ -7,34 +7,34 @@
             <h4 class="modal-title" id="myModalLabel">Resumo do produto</h4>
           </div>
 
-          <%= form_tag product_stocks_remove_from_stock_path(product_order) do %>
+          <%= form_tag product_stocks_remove_from_stock_path(product_order), method: :post, remote: true do %>
             <div class="modal-body">
                
             <dl class="dl-horizontal">
-              <dt class="modal_order"><strong>Total em estoque:</strong></dt>
+              <dt class="modal_order">Total em estoque:</dt>
               <dd><%= product_order.stock_total %></dd>
-              <dt class="modal_order"><strong>Quantidade Enviada a Produção:</strong></dt>
+              <dt class="modal_order">Quantidade Enviada a Produção:</dt>
               <dd><%= (product_order.quantity_production) ? product_order.quantity_production : 0%></dd>
-              <dt class="modal_order"><strong>Quantidade usada do Estqoue:</strong></dt>
+              <dt class="modal_order">Quantidade usada do Estqoue:</dt>
               <dd><%= (product_order.quantity_stock) ? product_order.quantity_stock : 0 %></dd>
+              <dt class="modal_order warm">Quantidade do pedido:</dt>
+              <dd><%= (product_order.quantity) ? product_order.quantity : 0 %></dd>
             </dl>
-
-          
 
             <div class="row-fluid well modal_order_div">
               <div class="text-center">
                 <p><strong>Quantidade a ser usada do estoque</strong></p>
               </div>                  
               <dl class="dl-horizontal">
-                <%= hidden_field_tag "id", product_order.id %>
+                <%= hidden_field_tag "product_order_id", product_order.id %>
                 <dt>Quantidade: </dt>
-                <dd><%= text_field_tag "quantity", product_order.quantity_stock %></dd>
+                <dd><%= number_field_tag "quantity", product_order.quantity_stock %></dd>
               </dl>
             </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+              <%= submit_tag "Salvar", class: "btn btn-primary"%>
             </div>
 
           <% end %>

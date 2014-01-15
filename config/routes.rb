@@ -63,7 +63,7 @@ Modelle::Application.routes.draw do
   resources :product_stocks
 
   #Atualiza estoque
-  get "product_stocks/:product_order_id/remove_from_stock" => "product_stocks#remove_from_stock", :as => "product_stocks_remove_from_stock"
+  post "product_stocks/:product_order_id/remove_from_stock" => "product_stocks#remove_from_stock", :as => "product_stocks_remove_from_stock"
 
 
   #resources :feedstock_by_products

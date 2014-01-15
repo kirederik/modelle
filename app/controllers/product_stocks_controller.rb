@@ -1,3 +1,4 @@
+#encoding: utf-8
 class ProductStocksController < ApplicationController
   # GET /product_stocks
   # GET /product_stocks.json
@@ -85,22 +86,40 @@ class ProductStocksController < ApplicationController
     @product_order = ProductOrder.find(params[:product_order_id])
     @stock = ProductStock.where(product_id: @product_order.product_id).first
 
+    quantity = params[:quantity]
 
-    if (@stock.quantity - @product_order.quantity) >= 0
-      @stock.quantity = @stock.quantity - @product_order.quantity
+    if (quantity.empty? || quantity.to_i == 0)
+      respond_to do |format|
+        flash[:error] = "Quantidade deve ser maior que 0"
+        format.html { redirect_to @product_order.order }
+        format.js
+      end
+
+    elsif (@product_order.quantity_stock + quantity.to_i) > @product_order.quantity
+      respond_to do |format|
+        flash[:error] = "Quantidade já usada: #{@product_order.quantity_stock} + #{quantity} é maior do que o necessário para o pedido."
+        format.html { redirect_to @product_order.order }
+        format.js
+      end        
+    elsif (@stock.quantity - quantity.to_i) >= 0
+      @stock.quantity = @stock.quantity - quantity.to_i
+      @product_order.quantity_stock = @product_order.quantity_stock + quantity.to_i
+      @product_order.quantity = @product_order.quantity - quantity.to_i
       @stock.save
 
-      @product_order.status = 'estoque'
+      #@product_order.status = 'estoque'
       @product_order.save
 
       respond_to do |format|
         flash[:notice] = "#{@stock.product.name} Atualizado. Quantidade atual: #{@stock.quantity}"
         format.html { redirect_to @product_order.order }
+        format.js
       end
     else
       respond_to do |format|
-        flash[:notice] = "Quantidade no estoque insuficiente"
+        flash[:error] = "Quantidade no estoque insuficiente"
         format.html { redirect_to @product_order.order }
+        format.js
       end
     end
   end

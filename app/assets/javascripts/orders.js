@@ -2,6 +2,7 @@
 // All this logic will automatically be available in application.js.
 
 
+
 function ordersCtrl($scope, $http, $compile) {
 //	$scope.size_id ;
   $scope.a = [{}]; 

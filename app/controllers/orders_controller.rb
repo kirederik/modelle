@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   # caches_action :new, :index, :create
 
   def index
-    @orders = Order.page(params[:page]).per(2)
+    @orders = Order.page(params[:page]).per(25)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,7 +42,7 @@ class OrdersController < ApplicationController
       @order.customer = customer
       @order.user = current_user
 
-      3.times { @order.product_orders.build }
+      @order.product_orders.build
       respond_to do |format|
         format.html # new.html.erb
         format.json { render json: @order }
@@ -54,6 +54,7 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
+    @order.product_orders.build
     if @order.order_status.name == 'Fechado'
       flash[:notice] = "Pedido já esta'fechado, não é possível editá-lo!"
       redirect_to @order
