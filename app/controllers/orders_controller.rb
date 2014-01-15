@@ -77,7 +77,7 @@ class OrdersController < ApplicationController
       # Verifica se existe algum produto que não está com o status adequado para fechar o pedido
       pro_ors.each do |po| 
         puts po.status
-        if po.status != "estoque" and po.status != "produzido"
+        if po.status_full == "not ready"
           finished = false
           break
         end
@@ -103,10 +103,10 @@ class OrdersController < ApplicationController
               CustomerStock.new(
                 customer_id: @order.customer_id, 
                 product_id: po.product_id, 
-                quantity: po.quantity
+                quantity: po.quantity_stock
               ).save
             else
-              cus_stock.update_attributes(:quantity => cus_stock.quantity + po.quantity)
+              cus_stock.update_attributes(:quantity => cus_stock.quantity + po.quantity_stock)
             end
           end
         end

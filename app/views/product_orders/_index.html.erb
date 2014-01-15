@@ -26,7 +26,7 @@
     <tr>
       <td><%= product_order.order.id %></td>
       <td><%= product_order.product.name %></td>
-      <td><%= product_order.quantity %></td>
+      <td><%= product_order.quantity + product_order.quantity_stock %></td>
       <td><%= product_order.quantity_stock %></td>
       <td><%= product_order.quantity_production %></td>
       <td>

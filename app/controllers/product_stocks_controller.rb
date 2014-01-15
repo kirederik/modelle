@@ -95,7 +95,7 @@ class ProductStocksController < ApplicationController
         format.js
       end
 
-    elsif (@product_order.quantity_stock + quantity.to_i) > @product_order.quantity
+    elsif (@product_order.quantity_stock + quantity.to_i) > (@product_order.quantity + @product_order.quantity_stock)
       respond_to do |format|
         flash[:error] = "Quantidade já usada: #{@product_order.quantity_stock} + #{quantity} é maior do que o necessário para o pedido."
         format.html { redirect_to @product_order.order }

@@ -20,7 +20,6 @@
               <dt class="modal_order warm">Quantidade do pedido:</dt>
               <dd><%= (product_order.quantity) ? product_order.quantity : 0 %></dd>
             </dl>
-
             <div class="row-fluid well modal_order_div">
               <div class="text-center">
                 <p><strong>Quantidade a ser usada do estoque</strong></p>
@@ -28,7 +27,7 @@
               <dl class="dl-horizontal">
                 <%= hidden_field_tag "product_order_id", product_order.id %>
                 <dt>Quantidade: </dt>
-                <dd><%= number_field_tag "quantity", product_order.quantity_stock %></dd>
+                <dd><%= number_field_tag "quantity", product_order.quantity %></dd>
               </dl>
             </div>
             </div>

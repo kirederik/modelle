@@ -34,4 +34,12 @@ class ProductOrder < ActiveRecord::Base
     end
   end
 
+  def status_full
+    if self.quantity == 0
+      "ready"
+    else
+      "not ready"
+    end
+  end
+
 end
