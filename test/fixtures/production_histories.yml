@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  production_item: 
+  status_from_id: 1
+  status_to_id: 1
+
+two:
+  production_item: 
+  status_from_id: 1
+  status_to_id: 1

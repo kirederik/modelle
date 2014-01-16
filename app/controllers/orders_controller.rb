@@ -6,7 +6,8 @@ class OrdersController < ApplicationController
   # caches_action :new, :index, :create
 
   def index
-    @orders = Order.page(params[:page]).per(25)
+    order_status = OrderStatus.where(name: "Fechado").first
+    @orders = Order.where("order_status_id <> ?", order_status.id).page(params[:page]).per(25)
 
     respond_to do |format|
       format.html # index.html.erb

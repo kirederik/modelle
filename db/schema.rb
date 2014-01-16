@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140113151518) do
+ActiveRecord::Schema.define(:version => 20140116222943) do
 
   create_table "customer_prices", :force => true do |t|
     t.integer  "customer_id"
@@ -227,6 +227,16 @@ ActiveRecord::Schema.define(:version => 20140113151518) do
   end
 
   add_index "product_stocks", ["product_id"], :name => "index_product_stocks_on_product_id"
+
+  create_table "production_histories", :force => true do |t|
+    t.integer  "production_item_id"
+    t.integer  "status_from_id"
+    t.integer  "status_to_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "production_histories", ["production_item_id"], :name => "index_production_histories_on_production_item_id"
 
   create_table "production_items", :force => true do |t|
     t.integer  "production_status_id"

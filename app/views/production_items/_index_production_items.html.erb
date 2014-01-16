@@ -20,8 +20,11 @@
     <td><%= production_item.order.id unless production_item.order == nil %></td>
     <td><%= production_item.order.customer.name unless production_item.order == nil || production_item.order.customer == nil %></td>
     <td><%= production_item.id %></td>
+    <% if production_item.production_status.name == "Corte" %>
+      <td><%= link_to "Imprimir Ficha", "#", class: "btn btn-primary btn-small" %></td>
+    <% end %>
     <td><%= link_to 'Abrir', production_item, :class => "btn btn-small" %></td>
-    <td><%= link_to 'Deletar', production_item, method: :delete, data: { confirm: 'Tem certeza?' }, :class => "btn btn-small"  %></td>
+    <td><%= link_to 'Deletar', production_item, method: :delete, data: { confirm: 'Tem certeza?' }, :class => "btn btn-small btn-danger"  %></td>
   </tr>
 <% end %>
 </table>

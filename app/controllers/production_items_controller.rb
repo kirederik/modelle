@@ -106,6 +106,12 @@ class ProductionItemsController < ApplicationController
     @production_item = ProductionItem.find(params[:id])
 
     production_status = ProductionStatus.find(params[:production_item][:production_status_id])
+
+    production_history = ProductionHistory.new
+    production_history.status_from = @production_item.production_status
+    production_history.status_to = production_status
+    production_history.production_item = @production_item
+
     if production_status.name == "Estoque" && @production_item.production_status.name != "Estoque"
       @production_item.product_order_outs.each do |p|
         stock = ProductStock.where(product_id: p.product_id).first
@@ -118,6 +124,7 @@ class ProductionItemsController < ApplicationController
 
     respond_to do |format|
       if @production_item.update_attributes(params[:production_item])
+        production_history.save
         format.html { redirect_to @production_item, notice: 'Atualizado com sucesso.' }
         format.json { head :no_content }
       else
