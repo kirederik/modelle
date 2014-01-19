@@ -43,4 +43,5 @@ class Product < ActiveRecord::Base
     end
     status
   end
+
 end
