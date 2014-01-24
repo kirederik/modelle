@@ -1,0 +1,123 @@
+<div class="form-production-items">
+
+	<div class="page-header">
+		<p class="text-center"><%= image_tag("logo.png") %></p>
+		<h5>Ficha de Pedido<span class="pull-right"> Número do pedido #<%= @production_item.order.id %></span></h5>
+	</div>
+
+	<table class="table table-bordered">
+		<tr>
+			<th></th>
+			<th>Data Entrada</th>
+			<th>Data Saída</th>
+			<th>Ass.</th>
+		</tr>
+		<tr>
+			<td>Vendas</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Estoque Sep.</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Corte</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Preparo</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Costura</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Acabamento</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Estoque Lib</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+
+		<h6 class="client">Cliente:  <span class="normal"><%= @production_item.order.customer.name %></span> </h6>
+    <h6 class="client">Endereço de Entrega: <span class="normal"><%= (@production_item.order.delivery_address == nil) ? "______________________________" : @production_item.order.delivery_address %></span> </h6>
+    <h6 class="client">Forma de Envio: <span class="normal"><%= "______________________________" %></span> </h6>
+    <h6 class="client">Data de entrada em produção:  <span class="normal"><%= @production_item.created_at %></span> </h6>
+    <h6 class="client">Data prevista de Saída em produção: <span class="normal">______/______/______</span> </h6>
+    <h6 class="client">Forma de Pagamento: <span class="normal">______________________________</span> </h6>
+    <h6 class="client">Resposável pela liberação do Pedido:  <span class="normal">______________________________</span> </h6>
+    <h6 class="client">Liberação Financeiro: <span class="normal">______________________________</span> </h6>
+    <h6 class="client">Telefone: <span class="normal">______________________________</span> </h6>
+
+	<table class="table table-bordered table-striped">
+		<thead>
+      <tr>
+        <th>Quantidade</th>
+        <th>Referência</th>
+        <th>Tamanho</th>
+        <th>Cor</th>
+        <th>Valor</th>
+        <th>Valor total</th>
+      </tr>
+    </thead>
+    <tbody>
+    	<% @production_item.product_order_outs.each do |po| %>
+    	<tr>
+        <td><%= po.quantity %></td>
+        <td><%= po.product.product_base.code %></td>
+        <td><%= po.product.size %></td>
+        <td><%= po.product.color %></td>
+        <td>R$<%= po.product.product_base.price %></td>
+        <td>R$<%= po.quantity * po.product.product_base.price %></td>
+      </tr>
+      <% end %>
+    </tbody>
+	</table>
+
+	<div class="row-fluid">
+		<div class="span5">
+			<p class="text-center">CLAUDIONEIA DADAS DE OLIVEIRA CONFECÇÕES</p>
+			<p class="text-center">Fone/Fax (41) 3079-7125 / 3093-7301</p>
+			<p class="text-center">Rua Alferes Póli, 1243 - Rebouças, Curitiba - PR</p>
+		</div>
+		<div class="span7">
+			<p class="text-center">CNPJ: 07.864.441/0001-80</p>
+			<p class="text-center">Email: vendas@modelleskin.com.br</p>
+			<p class="text-center">CEP: 80.230-090</p>
+		</div>
+	</div>
+
+	<%= link_to 'Imprimir Ficha',
+            '#',
+            :id => 'printButton',
+            :data => { :production_item => @production_item.id },
+            :class => 'btn btn-primary' %>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#printButton").click(function() {
+            window.print();
+            event.preventDefault();
+            return false;
+        });
+    });
+
+</script>

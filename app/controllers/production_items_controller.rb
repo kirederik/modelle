@@ -145,4 +145,8 @@ class ProductionItemsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def print_form
+    @production_item = ProductionItem.find(params[:production_item_id])
+  end
 end

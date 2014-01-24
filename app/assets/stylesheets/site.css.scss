@@ -63,6 +63,38 @@ a {
 	}
 }
 
+.form-production-items {
+	border: 1px solid black;
+	padding: 20px;
+	img {
+		width: 20%;
+	}
+	h4 {
+		&.client {
+			margin-bottom: 30px;
+		}
+		.normal {
+			font-weight: normal;
+		}
+	}
+
+	h6 {
+		font-size: 14px;
+		&.client {
+			font-weight: bold;
+			// margin-bottom: 10px;
+			line-height: 15px;
+		}
+		&.normal {
+			font-weight: normal;
+		}
+		.normal {
+			font-weight: normal;
+		}
+	}
+}
+
+
 .text-center {
 	text-align: center;
 }

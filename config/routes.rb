@@ -19,7 +19,9 @@ Modelle::Application.routes.draw do
   get "transactions/newAll" => "transactions#newAll", :as => "new_all_transaction"
   resources :transactions
 
-  resources :production_items
+  resources :production_items do
+    get :print_form
+  end
 
 
   resources :production_statuses
