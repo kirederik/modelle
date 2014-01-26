@@ -1,9 +1,5 @@
 class ProductBase < ActiveRecord::Base
 
-  require 'barby'
-  require 'barby/outputter/rmagick_outputter'
-  require 'barby/barcode/code_128' 
-
   attr_accessible :name, :code, :price
   
   has_many :products, dependent: :destroy

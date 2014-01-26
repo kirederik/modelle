@@ -12,16 +12,6 @@
 				<span class="divider"></span><%= link_to 'Editar este produto', edit_product_basis_path(@product_basis), :class => "link" %>
 			</p>
 		</div>
-		<div class="span6">
-			<div class="media">
-				<a class="pull-left" href="<%= @product_basis.barcode %>" target="_blank">
-					<img class="img-thumbnail" src="<%= @product_basis.barcode %>" alt="Código de Barras">
-				</a>
-				<div class="media-body">
-					<h4 class="media-heading">Código de Barras</h4>
-				</div>
-			</div>
-		</div>
 	</div>
 </div>
 
@@ -48,6 +38,11 @@
 		<tr>
 			<td><%= product.product_color.name unless product.product_color == nil %></td>
 			<td><%= product.product_size.name unless product.product_size == nil%></td>
+			<td>
+					<a href="<%= product.barcode %>" target="_blank">
+						<img class="barcode" src="<%= product.barcode %>" alt="Código de Barras">
+					</a>
+			</td>
 		</tr>
 		<% end %>
 	</tbody>
