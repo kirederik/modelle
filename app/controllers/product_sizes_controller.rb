@@ -41,7 +41,7 @@ class ProductSizesController < ApplicationController
   # POST /product_sizes.json
   def create
     @product_size = ProductSize.new(params[:product_size])
-
+    @product_size.name = @product_size.name.upcase
     respond_to do |format|
       if @product_size.save
         format.html { redirect_to @product_size, notice: 'Tamanho cadastrado com sucesso.' }

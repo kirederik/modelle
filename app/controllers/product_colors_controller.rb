@@ -41,7 +41,7 @@ class ProductColorsController < ApplicationController
   # POST /product_colors.json
   def create
     @product_color = ProductColor.new(params[:product_color])
-
+    @product_color.name = @product_color.name.upcase
     respond_to do |format|
       if @product_color.save
         format.html { redirect_to @product_color, notice: 'Cor cadastrada com sucesso.' }
