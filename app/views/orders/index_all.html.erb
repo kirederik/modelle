@@ -1,0 +1,27 @@
+<h1>Listando Pedidos</h1>
+
+<div class="order_filter">
+  <span class="label label-info">Filtros</span>
+  <%= form_tag orders_index_all_path, class: "form-inline", method: "get" do %>
+    <div class="form-group">
+      <%= hidden_field_tag "filter", 1 %>
+      <label class="sr-only" for="order_status_id">Status:</label>
+      <%= select_tag "order_status_id", options_from_collection_for_select(OrderStatus.all, "id", "name"), include_blank: true%>
+      <%= text_field_tag "customer_name", nil, placeholder: "Cliente" %>
+      <%= text_field_tag "startdate", nil, placeholder: "Data Início", class: "input" %>
+      <%= text_field_tag "enddate", nil, placeholder: "Data Fim", class: "input" %>
+      <%= submit_tag "Filtrar", class: "btn btn-primary" %>
+    </div>
+    
+  <% end %>
+</div>
+
+<%= render "index" %>
+
+
+<script>
+  $(function() {
+    $( "#enddate" ).datepicker();
+    $( "#startdate" ).datepicker();
+  })
+</script>

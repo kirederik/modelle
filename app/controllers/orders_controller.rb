@@ -4,14 +4,41 @@ class OrdersController < ApplicationController
   # GET /orders.json
   # caches_page :new, :create
   # caches_action :new, :index, :create
+  include OrdersHelper
 
-  def index
+  def index  
     order_status = OrderStatus.where(name: "Fechado").first
     @orders = Order.where("order_status_id <> ?", order_status.id).page(params[:page]).per(25)
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @orders }
+    end
+  end
+
+  def index_all
+
+    @orders = nil
+    
+    if params[:filter] == '1'
+      customers = Customer.where('lower(name) like lower(?)', "%#{params[:customer_name]}%")
+      
+      customers_id = []
+      customers.map { |e| customers_id << e.id }
+
+      if customers
+        @orders = Order.where("customer_id in (#{customers_id.join(",")}) #{build_criteria(params)} ").page(params[:page]).per(25)
+      else
+        @orders = Order.where("1 = 1 #{build_criteria(params)} ").page(params[:page]).per(25)
+      end
+      puts @orders
+    else
+      @orders = Order.page(params[:page]).per(25)
+    end
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @order }
     end
   end
 

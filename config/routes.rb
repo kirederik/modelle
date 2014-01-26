@@ -47,6 +47,7 @@ Modelle::Application.routes.draw do
 
 
   get "orders/prepare_order" => "orders#prepare_order", :as =>"orders_prepare_order"
+  get "orders/index_all" => "orders#index_all", :as => "orders_index_all"
   resources :orders do
     resources :production_items
   end

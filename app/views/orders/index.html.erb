@@ -1,40 +1,5 @@
 <h1>Listando Pedidos</h1>
 
-<table class="table table-hover">
-  <thead>
-      <tr>
-        <th>Nº Pedido</th>
-        <th>Cliente</th>
-        <th>Usuários</th>
-        <th>Status</th>
-        <th>Criado em</th>
-        <th>Paciente</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-  </thead>
-
-<% @orders.each do |order| %>
-  <tbody>
-      <tr>
-        <td><%= order.id %></td>
-        <td><%= order.customer.name %></td>
-        <td><%= order.user.name %></td>
-        <td><%= order.order_status.name %></td>
-        <td><%= order.created_at %></td>
-        <td><%= order.patient %></td>
-        <td><%= link_to 'Fechar Pedido', order_close_path(order), :class => "btn btn-primary btn-small" %></td>
-        <td><%= link_to 'Ver', order, :class => "btn btn-small" %></td>
-        <td><%= link_to 'Editar', edit_order_path(order), :class => "btn btn-small" %></td>
-        <td><%= link_to 'Apagar', order, method: :delete, data: { confirm: 'Tem certeza?' }, :class => "btn btn-danger btn-small" %></td>
-      </tr>
-  </tbody>
-<% end %>
-</table>
-
-
-<%= paginate @orders %>
-<br />
+<%= render "index" %>
 
 <%= link_to 'Novo Pedido', new_order_path, class: "btn btn-primary" %>
