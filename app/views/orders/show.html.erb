@@ -44,10 +44,10 @@
 </p>
 <%= render "product_orders/index", :product_orders => @order.product_orders %>
 
-<%= link_to 'Enviar produção', new_order_production_item_path(@order), class: "btn btn-primary" %> 
+<%= link_to 'Enviar produção', new_order_production_item_path(@order), class: "btn btn-primary" unless @order.order_status.name == "Fechado" %> 
+<%= link_to 'Finalizar Pedido', order_close_path(@order), :class => "btn btn-primary" unless @order.order_status.name == "Fechado"  %>
 
-
-<%= link_to 'Editar', edit_order_path(@order), class: "btn" %> |
+<%= link_to 'Editar', edit_order_path(@order), class: "btn" unless @order.order_status.name == "Fechado" %> |
 <%= link_to 'Pedidos', orders_path, class: "btn" %> 
 
 <section>

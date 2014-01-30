@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140116222943) do
+ActiveRecord::Schema.define(:version => 20140128234106) do
 
   create_table "customer_prices", :force => true do |t|
     t.integer  "customer_id"
@@ -243,6 +243,7 @@ ActiveRecord::Schema.define(:version => 20140116222943) do
     t.integer  "order_id"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.boolean  "printed"
   end
 
   add_index "production_items", ["order_id"], :name => "index_production_items_on_order_id"

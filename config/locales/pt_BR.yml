@@ -227,6 +227,7 @@ pt_BR:
       product_size: Tamanhos
       feedstock_stock: Estoque de Matéria Prima
       feedstock: Matéria-Prima
+      transaction: Acerto
     attributes:
       customer:
         name: Nome
@@ -305,3 +306,5 @@ pt_BR:
       feedstock_stock:
         feedstock: Matéria Prima
         quantity: Quantidade
+      transaction:
+        quantity: Quatidade de produtos

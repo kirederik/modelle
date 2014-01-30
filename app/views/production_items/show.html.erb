@@ -37,6 +37,7 @@
   <% end %>
 <% end %>
 
+<%= link_to "Ir para Pedido", order_path(@production_item.order), class: "btn btn-primary" %>
 
 <%= form_tag production_items_path, :method => :get do %>
   <%= hidden_field_tag "production_status_id", @production_item.production_status_id %> 

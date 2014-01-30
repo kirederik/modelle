@@ -1,28 +1,28 @@
-<% price = @customer_stock.product.product_base.price * ( 1 - @customer_stock.customer.discount/100) %>
-
+<% puts @customer_stock.customer.apply_discount %>
+<% price = @customer_stock.product.product_base.price * ( 1 - @customer_stock.customer.apply_discount / 100) %>
 
 <p>
-  <b>Customer:</b>
+  <b>Cliente:</b>
   <%= @customer_stock.customer.name %>
 </p>
 
 <p>
-  <b>Product:</b>
+  <b>Produto:</b>
   <%= @customer_stock.product.name %>
 </p>
 
 <p>
-  <b>Quantity:</b>
+  <b>Quantidade:</b>
   <%= @customer_stock.quantity %>
 </p>
 
 <p>
-  Preço base: <%= number_to_currency(@customer_stock.product.product_base.price) %>
+  <strong>Preço base:</strong> <%= number_to_currency(@customer_stock.product.product_base.price) %>
 </p>
 <p>
-  Desconto do cliente: <%= @customer_stock.customer.discount %> %
+  <strong>Desconto do cliente:</strong> <%= @customer_stock.customer.apply_discount %> %
 </p>
-<p>Valor sendo cobrado: <%= number_to_currency(price) %> por unidade</p> 
+<p><strong>Valor sendo cobrado:</strong> <%= number_to_currency(price) %> por unidade</p> 
 
 <%= simple_form_for(@transaction) do |f| %>
   <%= f.error_notification %>
@@ -31,7 +31,7 @@
     <%= f.input :customer_stock_id, :as => :hidden, :input_html => {:value => @customer_stock.id} %>
     <%= f.input :value, :as => :hidden, :input_html => {:value => price } %>
     <%= f.input :is_devolution, :as => :hidden, :input_html => {:value => false} %>
-	<%= f.input :quantity, :input_html => { :max => @customer_stock.quantity } %>
+	 <%= f.input :quantity, :input_html => { :max => @customer_stock.quantity } %>
   </div>
   <div class="form-actions">
   	<%= f.button :submit %>

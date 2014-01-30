@@ -12,7 +12,7 @@
     <%= f.input :created_at %>
     <%= f.input :updated_at %>
     <%= f.input :patient %>
-    <%= f.input :delivery_address %>
+    <%= f.input :delivery_address, :input_html => {:class => "input-xlarge"} %>
     <%= f.input :delivery_date %>
 
     <%= render "product_orders", :f => f %>
