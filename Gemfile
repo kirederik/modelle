@@ -16,7 +16,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem "rake", "0.8.7"
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
 gem 'therubyracer'
