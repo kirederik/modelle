@@ -14,6 +14,7 @@
 		<th>Devolução</th>
 		<th>Est. Atual</th>
 		<th>A pagar</th>
+        <th>Desconto</th>
 		<th>R$ Unit **</th>
 		<th>R$ Total</th>
 	</thead>
@@ -26,41 +27,45 @@
         <td id="stock<%= index %>" ><%= customer_stock.quantity %></td>
         <td>
             <%= form_tag "/transactions", :class => "myform", :remote => true, :method => :post do %>
-            <%= hidden_field_tag "transaction[customer_stock_id]", customer_stock.id %>
-            <%= hidden_field_tag "transaction[is_devolution]", 1 %>
-            <%= number_field_tag "transaction[quantity]", 0, 
+            <%= hidden_field_tag "transaction[customer_stock_id]", customer_stock.id, :id => "customer" + index.to_s %>
+            <%= hidden_field_tag "transaction[is_devolution]", 1, :id => "is_dev" + index.to_s %>
+            <%= number_field_tag "transaction[quantity]", 0,
             :class => "input-mini",
-            :id => "dev" + index.to_s , 
-            :min => 0, :max => customer_stock.quantity, 
-            :onChange => "updateFields(" + index.to_s + ", 1)" %>                
+            :id => "dev" + index.to_s ,
+            :min => 0, :max => customer_stock.quantity,
+            :onChange => "updateFields(" + index.to_s + ", 1)" %>
             <% end %>
         </td>
         <td>
             <%= form_tag "/transactions", :class => "myform", :remote => true, :method => :post do %>
-            <%= hidden_field_tag "transaction[customer_stock_id]", customer_stock.id %>
-            <%= hidden_field_tag "transaction[is_devolution]", 0 %>
-            <%= hidden_field_tag "transaction[value]", customer_stock.product.product_base.price - customer_stock.product.product_base.price * @discount / 100 %>
-            <%= number_field_tag "transaction[quantity]", customer_stock.quantity, 
-            :class => "input-mini", 
-            :id => "pay"+ index.to_s, 
+            <%= hidden_field_tag "transaction[customer_stock_id]", customer_stock.id, :id => "customer" + index.to_s %>
+            <%= hidden_field_tag "transaction[is_devolution]", 0, :id => "is_dev" + index.to_s %>
+            <%= hidden_field_tag "transaction[value]", customer_stock.product.product_base.price - customer_stock.product.product_base.price * @discount / 100, :id => "desc" + index.to_s %>
+            <%= number_field_tag "transaction[quantity]", customer_stock.quantity,
+            :class => "input-mini",
+            :id => "pay"+ index.to_s,
             :min => 0, :max => customer_stock.quantity,
             :onChange => "updateFields(" + index.to_s + ")" %>
             <% end %>
         </td>
         <td>
-            <span id="toPay<%= index %>">0</span> 
+            <span id="toPay<%= index %>">0</span>
         </td>
         <td>
-            <span id="value<%= index %>" data-value="<%= customer_stock.product.product_base.price - customer_stock.product.product_base.price * @discount / 100  %>">
+            <input data-target="desc<%= index.to_s %>" type="number" class="input-mini manualDiscount" value="<%= @discount %>" onchange="updateDiscount('<%= index.to_s %>', this)">
+        </td>
+        <td>
+            <span id="value<%= index %>" data-value="<%= customer_stock.product.product_base.price %>" data-discount="<%= @discount %>">
                 <%= number_to_currency(customer_stock.product.product_base.price - customer_stock.product.product_base.price * @discount / 100) %></span>
-            </td>
-            <td>
-                <span class="total" id="total<%= index %>">R$ 0,00</span>
-            </td>
-        </tr>
-        <% end %>
+        </td>
+        <td>
+            <span class="total" id="total<%= index %>">R$ 0,00</span>
+        </td>
+    </tr>
+    <% end %>
     <% end %>
         <tr>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -80,19 +85,19 @@
 <script>
     $(document).ready(function() {
         Number.prototype.formatMoney = function(c, d, t){
-            var n = this, 
-            c = isNaN(c = Math.abs(c)) ? 2 : c, 
-            d = d == undefined ? "," : d, 
-            t = t == undefined ? "." : t, 
-            s = n < 0 ? "-" : "", 
-            i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", 
+            var n = this,
+            c = isNaN(c = Math.abs(c)) ? 2 : c,
+            d = d == undefined ? "," : d,
+            t = t == undefined ? "." : t,
+            s = n < 0 ? "-" : "",
+            i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
             j = (j = i.length) > 3 ? j % 3 : 0;
             return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
         };
         $("#multiSubmit").click( function() {
             var time = 0;
             $('form').each(function(i, item) {
-                // setTimeout(function() { 
+                // setTimeout(function() {
                     // console.log("fired");
                     $(item).submit();
                 // }, time);
@@ -103,10 +108,14 @@
     });
 
     var devUpdate = function(id) {
-        var devAmount = new Number($("#dev" + id).val()).valueOf();
-        var payAmount = new Number($("#pay" + id).val()).valueOf();
-        var stockAmount = new Number($("#stock" + id).html()).valueOf();
-        var prodValue = new Number($("#value" + id).data("value")).valueOf()
+        var devAmount =  Number($("#dev" + id).val()).valueOf();
+        var payAmount =  Number($("#pay" + id).val()).valueOf();
+        var stockAmount =  Number($("#stock" + id).html()).valueOf();
+        var prodValue =  Number($("#value" + id).data("value")).valueOf()
+        var discountValue =  Number($("#value" + id).data("discount")).valueOf()
+        prodValue = prodValue - prodValue * (discountValue / 100);
+        $("#value" + id).html("R$ " + prodValue.formatMoney());
+        $("#desc" + id).val(prodValue);
         var totalPay = 0;
         payAmount = stockAmount - devAmount;
         totalPay = (stockAmount - (payAmount + devAmount)) * prodValue;
@@ -116,10 +125,14 @@
 
     };
     var payUpdate = function(id) {
-        var devAmount = new Number($("#dev" + id).val()).valueOf();
-        var payAmount = new Number($("#pay" + id).val()).valueOf();
-        var stockAmount = new Number($("#stock" + id).html()).valueOf();
-        var prodValue = new Number($("#value" + id).data("value")).valueOf()
+        var devAmount =  Number($("#dev" + id).val()).valueOf();
+        var payAmount =  Number($("#pay" + id).val()).valueOf();
+        var stockAmount =  Number($("#stock" + id).html()).valueOf();
+        var prodValue =  Number($("#value" + id).data("value")).valueOf()
+        var discountValue =  Number($("#value" + id).data("discount")).valueOf()
+        prodValue = prodValue - prodValue * (discountValue / 100);
+        $("#value" + id).html("R$ " + prodValue.formatMoney());
+        $("#desc" + id).val(prodValue);
         var totalPay = 0;
         var toPay = 0;
         totalPay = (stockAmount - (payAmount + devAmount)) * prodValue;
@@ -133,7 +146,8 @@
         var totalPay = 0;
         $(".total").each(function(i, el) {
             // console.log(i, v);
-            var value = new Number($(el).html().replace("R$ ", "").replace(",", "."));
+            var value =  Number($(el).html().replace("R$ ", "").replace(".", "").replace(",", "."));
+            // console.log($(el).html().replace("R$ ", "").replace(",", "."));
             totalPay += value;
         })
         $("#mainTotal").html("R$ " + totalPay.formatMoney());
@@ -146,6 +160,13 @@
             return payUpdate(id);
         }
     };
+
+    var updateDiscount = function(target, el) {
+        $("#value" + target).data("discount", $(el).val());
+        // updateFields(target, true);
+        updateFields(target, false);
+
+    }
 </script>
 
 <p>** Peças com desconto de <%= number_to_percentage(@discount, :precision => 0) %></p>

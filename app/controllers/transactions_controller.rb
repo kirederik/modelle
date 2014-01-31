@@ -2,7 +2,7 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.find(:all, :order => "created_at desc", :limit => 30)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -72,7 +72,7 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(params[:transaction])
     @customer_stock = CustomerStock.find(@transaction.customer_stock_id)
-    if @transaction.is_devolution 
+    if @transaction.is_devolution
       @transaction.value = 0
     else
       @transaction.quantity = @customer_stock.quantity - @transaction.quantity
@@ -89,11 +89,11 @@ class TransactionsController < ApplicationController
             pr_stock = ProductStock.where('product_id = ?', product.id)[0]
             if pr_stock == nil
               ProductStock.new(
-                customer_id: @order.customer_id, 
-                product_id: po.product_id, 
+                customer_id: @order.customer_id,
+                product_id: po.product_id,
                 quantity: po.quantity
                 ).save
-            else 
+            else
               pr_stock.update_attributes(:quantity => pr_stock.quantity + @transaction.quantity)
             end
           end
