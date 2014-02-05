@@ -15,7 +15,7 @@
 		<th>Est. Atual</th>
 		<th>A pagar</th>
         <th>Desconto</th>
-		<th>R$ Unit **</th>
+		<th>R$ Unid **</th>
 		<th>R$ Total</th>
 	</thead>
 
@@ -23,7 +23,7 @@
     <% @customer_stock.each_with_index do |customer_stock, index| %>
     <% if customer_stock.quantity > 0 %>
      <tr id="<%= index %>">
-        <td><%= customer_stock.product.product_base.code %></td>
+        <td><%= customer_stock.product.name %></td>
         <td id="stock<%= index %>" ><%= customer_stock.quantity %></td>
         <td>
             <%= form_tag "/transactions", :class => "myform", :remote => true, :method => :post do %>
